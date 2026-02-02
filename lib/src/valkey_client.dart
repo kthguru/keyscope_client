@@ -27,29 +27,50 @@ import '../valkey_client_base.dart';
 import '../valkey_pool.dart' show ValkeyPool;
 // Import the top-level function from the parser file
 import 'cluster_slots_parser.dart' show parseClusterSlotsResponse;
+// ========================================================================
+// Redis/Valkey Commands
 // ------------------------------------------------------------------------
 // 1. Import `Commands` below.
 // 2. Add `Commands` to `ValkeyClient class with`.
 // 3. Export `Commands` in `lib/valkey_client.dart`.
 // ------------------------------------------------------------------------
-// Redis/Valkey Commands
+import 'commands/bitmap/commands.dart' show BitmapCommands;
+import 'commands/bloom_filter/commands.dart' show BloomFilterCommands;
+import 'commands/cluster/commands.dart' show ClusterCommands;
+import 'commands/connection/commands.dart' show ConnectionCommands;
+import 'commands/count_min_sketch/commands.dart' show CountMinSketchCommands;
+import 'commands/cuckoo_filter/commands.dart' show CuckooFilterCommands;
 import 'commands/generic/commands.dart' show GenericCommands;
 import 'commands/generic/commands/del.dart' show DelCommand;
+import 'commands/geospatial_indices/commands.dart'
+    show GeospatialIndicesCommands;
 import 'commands/hash/commands.dart' show HashCommands;
 import 'commands/hash/commands/h_get.dart' show HGetCommand;
 import 'commands/hash/commands/h_get_all.dart' show HGetAllCommand;
 import 'commands/hash/commands/h_set.dart' show HSetCommand;
-// Redis JSON and Valkey JSON
+import 'commands/hyper_log_log/commands.dart' show HyperLogLogCommands;
 import 'commands/json/commands.dart' show JsonCommands;
 import 'commands/list/commands.dart' show ListCommands;
-import 'commands/transactions/commands.dart' show TransactionCommands;
+import 'commands/pubsub/commands.dart' show PubsubCommands;
+import 'commands/scripting_and_functions/commands.dart'
+    show ScriptingAndFunctionsCommands;
+import 'commands/search/commands.dart' show SearchCommands;
+import 'commands/server/commands.dart' show ServerCommands;
+import 'commands/set/commands.dart' show SetCommands;
+import 'commands/sorted_set/commands.dart' show SortedSetCommands;
+import 'commands/stream/commands.dart' show StreamCommands;
+import 'commands/string/commands.dart' show StringCommands;
+import 'commands/t_digest_sketch/commands.dart' show TDigestSketchCommands;
+import 'commands/time_series/commands.dart' show TimeSeriesCommands;
+import 'commands/top_k_sketch/commands.dart' show TopKSketchCommands;
+import 'commands/transactions/commands.dart' show TransactionsCommands;
 import 'commands/transactions/commands/discard.dart' show DiscardCommand;
 import 'commands/transactions/commands/exec.dart' show ExecCommand;
 import 'commands/transactions/commands/multi.dart' show MultiCommand;
-// Import the new exceptions file
+import 'commands/vector_set/commands.dart' show VectorSetCommands;
+// ========================================================================
 import 'exceptions.dart';
-// Built-in Logger
-import 'logging.dart';
+import 'logging.dart'; // Built-in Logger
 
 // Re-export ValkeyMessage from the main library file
 export 'package:valkey_client/valkey_client_base.dart'
@@ -136,11 +157,35 @@ class _IncompleteDataException implements Exception {
 /// The main client implementation for communicating with a Valkey server.
 class ValkeyClient
     with
+        BitmapCommands,
+        BloomFilterCommands,
+        ClusterCommands,
+        ConnectionCommands,
         GenericCommands,
         HashCommands,
+        ServerCommands,
         JsonCommands,
         ListCommands,
-        TransactionCommands
+        TransactionsCommands,
+        VectorSetCommands,
+        TopKSketchCommands,
+        TimeSeriesCommands,
+        TDigestSketchCommands,
+        StringCommands,
+        StreamCommands,
+        SortedSetCommands,
+        SetCommands,
+        SearchCommands,
+        ScriptingAndFunctionsCommands,
+        PubsubCommands,
+        HyperLogLogCommands,
+        GeospatialIndicesCommands,
+        CuckooFilterCommands,
+        CountMinSketchCommands,
+        ConnectionCommands,
+        ClusterCommands,
+        BloomFilterCommands,
+        BitmapCommands
     implements ValkeyClientBase {
   static final _log = ValkeyLogger('ValkeyClient');
 

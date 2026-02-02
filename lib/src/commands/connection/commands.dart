@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-mixin ConnectionClientCommands {
-  // CLIENT LIST
+export 'extensions.dart';
+
+mixin ConnectionCommands {
+  Future<dynamic> execute(List<String> command);
 }

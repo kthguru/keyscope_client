@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
-mixin ServerCommandCommands {
-  // COMMAND
+export 'extensions.dart';
+
+mixin PubsubCommands {
+  Future<dynamic> execute(List<String> command);
 }

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show TransactionCommands;
+import '../commands.dart' show TransactionsCommands;
 
-extension UnwatchCommand on TransactionCommands {
+extension UnwatchCommand on TransactionsCommands {
   /// UNWATCH
   ///
   /// Flushes all the watched keys.

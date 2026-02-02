@@ -57,7 +57,75 @@ void main() {
       expect((elementMemory as List).isNotEmpty, isTrue);
     });
 
+    test('JSON.DEBUG MEMORY - handles Restricted and Enhanced syntax',
+        () async {
+      const key = 'test:debug:memory';
+      // Data from the spec example:
+      // {"firstName":"John", ... "phoneNumbers": [...]}
+      const data =
+          '{"firstName":"John","lastName":"Smith","age":27,"weight":135.25, '
+          '"isAlive":true,"address":{"street":"21 2nd Street", '
+          '"city":"New York","state":"NY","zipcode":"10021-3100"}, '
+          '"phoneNumbers":[{"type":"home","number":"212 555-1234"}, '
+          '{"type":"office","number":"646 555-4567"}], '
+          '"children":[],"spouse":null}';
+
+      await client.jsonSet(key: key, path: '.', data: data);
+
+      // 1. Restricted Syntax (No path) -> Returns int
+      // Expect: (integer) 632 (approximate, depends on implementation)
+      final totalMem = await client.jsonDebugMemory(key: key);
+      expect(totalMem, isA<int>());
+      expect(totalMem, greaterThan(0));
+
+      // 2. Restricted Syntax (Path starts with '.') -> Returns int
+      // Expect: (integer) 166 (approximate)
+      final phoneMem =
+          await client.jsonDebugMemory(key: key, path: '.phoneNumbers');
+      expect(phoneMem, isA<int>());
+      expect(phoneMem, greaterThan(0));
+
+      // 3. Enhanced Syntax (Path starts with '$') -> Returns List<int>
+      // Expect: Array of integers
+      final enhancedMem =
+          await client.jsonDebugMemory(key: key, path: r'$..phoneNumbers');
+      expect(enhancedMem, isA<List>());
+      expect((enhancedMem as List).isNotEmpty, isTrue);
+      expect(enhancedMem.first, isA<int>());
+
+      // 4. Non-existent Key Behavior
+      // Restricted -> null
+      final missingRestricted =
+          await client.jsonDebugMemory(key: 'missing_key');
+
+      if (await client.isValkeyServer()) {
+        expect(missingRestricted, isNull); // Valkey
+      }
+      if (await client.isRedisServer()) {
+        expect(missingRestricted, 0); // Redis
+      }
+
+      // Enhanced -> Empty List
+      final missingEnhanced =
+          await client.jsonDebugMemory(key: 'missing_key', path: r'$');
+
+      if (await client.isRedisServer()) {
+        expect(missingEnhanced, isA<List>()); // []
+        expect((missingEnhanced as List).isEmpty, isTrue);
+      }
+      if (await client.isValkeyServer()) {
+        expect(missingEnhanced, isNull); // null
+        expect((missingEnhanced as List?)?.isEmpty ?? true, isTrue);
+      }
+    });
+
     test('JSON.DEBUG FIELDS - handles int and List return types', () async {
+      // Skip test if running on Redis
+      if (await client.isRedisServer()) {
+        markTestSkipped('Skipping: This feature is only supported on Valkey.');
+        return;
+      }
+
       const key = 'test:debug:data';
 
       // 1. Without path -> Returns int (Total recursive fields count)
@@ -116,6 +184,12 @@ void main() {
     });
 
     test('JSON.DEBUG DEPTH', () async {
+      // Skip test if running on Redis
+      if (await client.isRedisServer()) {
+        markTestSkipped('Skipping: This feature is only supported on Valkey.');
+        return;
+      }
+
       const key = 'test:debug:data';
       final depth = await client.jsonDebugDepth(key: key);
       expect(depth, isA<int>());
@@ -125,11 +199,21 @@ void main() {
 
     test('JSON.DEBUG HELP', () async {
       final help = await client.jsonDebugHelp();
+      // 1) "MEMORY <key> [path] - reports memory usage"
+      // 2) "HELP                - this message"
+
       expect(help, isNotEmpty);
       expect(help, contains(contains('MEMORY')));
+      expect(help, contains(contains('HELP')));
     });
 
     test('JSON.DEBUG Dangerous Commands (Smoke Test)', () async {
+      // Skip test if running on Redis
+      if (await client.isRedisServer()) {
+        markTestSkipped('Skipping: This feature is only supported on Valkey.');
+        return;
+      }
+
       // These print "DANGER..." to console.
       // We just check if the command is sent successfully without client-side
       // error.

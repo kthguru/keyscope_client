@@ -14,28 +14,44 @@
  * limitations under the License.
  */
 
-/// A modern, production-ready Dart client for Valkey (9.0.0+).
-/// Fully Redis 7.x compatible.
+/// A modern, production-ready Dart client for Valkey (7.x/8.x/9.0.0+).
+/// Fully Redis 7.x/8.* compatible.
 library;
 
 // Export cluster info data classes (v1.2.0)
 export 'src/cluster_info.dart';
+export 'src/commands/bitmap/extensions.dart';
+export 'src/commands/bloom_filter/extensions.dart';
+export 'src/commands/cluster/extensions.dart';
+export 'src/commands/connection/extensions.dart';
+export 'src/commands/count_min_sketch/extensions.dart';
+export 'src/commands/cuckoo_filter/extensions.dart';
 export 'src/commands/generic/commands.dart' show ScanResult;
 export 'src/commands/generic/commands/scan.dart' show ScanResult;
 export 'src/commands/generic/extensions.dart';
+export 'src/commands/geospatial_indices/extensions.dart';
 export 'src/commands/hash/extensions.dart';
-// Helpers for jsonMSet
+export 'src/commands/hyper_log_log/extensions.dart';
 export 'src/commands/json/commands.dart'
     show Config, JsonCommands, JsonMSetEntry;
 export 'src/commands/json/extensions.dart';
 export 'src/commands/list/extensions.dart';
+export 'src/commands/pubsub/extensions.dart';
+export 'src/commands/scripting_and_functions/extensions.dart';
+export 'src/commands/search/extensions.dart';
+export 'src/commands/server/extensions.dart';
+export 'src/commands/set/extensions.dart';
+export 'src/commands/sorted_set/extensions.dart';
+export 'src/commands/stream/extensions.dart';
+export 'src/commands/string/extensions.dart';
+export 'src/commands/t_digest_sketch/extensions.dart';
+export 'src/commands/time_series/extensions.dart';
+export 'src/commands/top_k_sketch/extensions.dart';
 export 'src/commands/transactions/extensions.dart';
-// Export public exception classes (v1.0.0)
+export 'src/commands/vector_set/extensions.dart';
 export 'src/exceptions.dart';
 export 'src/logging.dart' show ValkeyLogLevel, ValkeyLogger;
-// Export the concrete *standalone* implementation
 export 'src/valkey_client.dart';
-// Export the concrete *cluster* implementation
 export 'src/valkey_cluster_client.dart';
 // Export the public API interface and related classes
 export 'valkey_client_base.dart';
@@ -45,5 +61,4 @@ export 'valkey_client_base.dart' show Subscription, ValkeyMessage;
 export 'valkey_cluster_client_base.dart';
 // Export the common command interface
 export 'valkey_commands_base.dart';
-// Export the connection pool (v1.1.0)
 export 'valkey_pool.dart';

@@ -22,7 +22,7 @@ export 'extensions.dart';
 
 /// This mixin ensures compatibility with the existing `execute` method
 /// by converting all parameters to Strings before sending.
-mixin TransactionCommands {
+mixin TransactionsCommands {
   // [Interface Definition]
   // The class using this mixin must implement these methods and getters.
 

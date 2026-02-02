@@ -14,23 +14,6 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show TransactionsCommands;
-// import '../utils/helpers.dart';
+import '../commands.dart' show TimeSeriesCommands;
 
-extension DiscardCommand on TransactionsCommands {
-  Future<String> discard() async {
-    if (!isInTransaction) {
-      throw Exception('Cannot call DISCARD without MULTI.');
-    }
-
-    try {
-      final response = await execute(['DISCARD']);
-
-      // Server responds '+OK'
-      return response as String;
-    } finally {
-      setTransactionStateInternal(false);
-      clearTransactionQueueInternal();
-    }
-  }
-}
+extension TSTemplateCommand on TimeSeriesCommands {}

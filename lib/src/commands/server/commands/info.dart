@@ -14,24 +14,29 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show TransactionsCommands;
+import '../commands.dart' show ServerCommands;
 
-extension WatchCommand on TransactionsCommands {
-  /// WATCH key [key ...]
+extension InfoCommand on ServerCommands {
+  /// INFO [section [section ...]]
   ///
-  /// Marks the given [keys] to be watched for conditional execution of
-  /// a transaction.
-  /// If any of the watched keys are modified by another client between
-  /// the WATCH and the EXEC,
-  /// the transaction will fail (EXEC returns a null reply).
+  /// Get information and statistics about the server.
   ///
-  /// Returns "OK" on success.
-  Future<String> watch(List<String> keys) async {
-    if (keys.isEmpty) return 'OK';
+  /// Parameters:
+  /// - [section]: A list of sections to retrieve (e.g., 'server', 'clients',
+  ///              'memory').
+  ///   If not provided, the default set of sections is returned.
+  ///
+  /// Return value:
+  /// - Returns a [String] containing the information.
+  ///
+  Future<String> info({List<String>? section}) async {
+    final cmd = <String>['INFO'];
+    if (section != null) {
+      cmd.addAll(section);
+    }
 
-    final cmd = <String>['WATCH', ...keys];
+    // The INFO command returns a Bulk String.
     final result = await execute(cmd);
-
     return result.toString();
   }
 }

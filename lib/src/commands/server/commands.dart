@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show TransactionsCommands;
-// import '../utils/helpers.dart';
+export 'extensions.dart';
 
-extension DiscardCommand on TransactionsCommands {
-  Future<String> discard() async {
-    if (!isInTransaction) {
-      throw Exception('Cannot call DISCARD without MULTI.');
-    }
+mixin ServerCommands {
+  // COMMAND
 
-    try {
-      final response = await execute(['DISCARD']);
+  /// Sends a command to the server.
+  /// The interface for sending commands to the Redis/Valkey server.
+  Future<dynamic> execute(List<String> command);
 
-      // Server responds '+OK'
-      return response as String;
-    } finally {
-      setTransactionStateInternal(false);
-      clearTransactionQueueInternal();
-    }
-  }
+  /// Checks if the connected server is Redis.
+  Future<bool> isRedisServer();
+
+  /// Checks if the connected server is Valkey.
+  Future<bool> isValkeyServer();
 }
