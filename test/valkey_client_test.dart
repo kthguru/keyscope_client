@@ -64,7 +64,7 @@ Future<void> main() async {
         await client.connect();
 
         // Clean the database before running command tests
-        await client.execute(['FLUSHDB']);
+        await client.flushDb();
       }
     });
 
@@ -489,7 +489,7 @@ Future<void> main() async {
           publisherClient.connect(),
         ]);
         // Clean DB
-        await publisherClient.execute(['FLUSHDB']);
+        await publisherClient.flushDb();
       }
     });
 
@@ -747,7 +747,7 @@ Future<void> main() async {
     setUp(() async {
       client = ValkeyClient(host: noAuthHost, port: noAuthPort);
       await client.connect();
-      await client.execute(['FLUSHDB']);
+      await client.flushDb();
       // Ensure we are not in a transaction state from a failed test
       try {
         await client.discard();
@@ -909,7 +909,7 @@ Future<void> main() async {
       client = ValkeyClient(host: noAuthHost, port: noAuthPort);
       subClient = ValkeyClient(host: noAuthHost, port: noAuthPort);
       await Future.wait([client.connect(), subClient.connect()]);
-      await client.execute(['FLUSHDB']);
+      await client.flushDb();
     });
 
     tearDown(() async {

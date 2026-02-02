@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension BLMPopCommand on ListCommands {
   /// BLMPOP timeout numkeys key [key ...] `<LEFT | RIGHT>` [COUNT count]

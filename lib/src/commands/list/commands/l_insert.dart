@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension LInsertCommand on ListCommands {
   /// LINSERT key `<BEFORE | AFTER>` pivot element

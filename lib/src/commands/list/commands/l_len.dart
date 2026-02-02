@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension LLenCommand on ListCommands {
   /// LLEN key

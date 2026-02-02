@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension LMPopCommand on ListCommands {
   /// LMPOP numkeys key [key ...] `<LEFT | RIGHT>` [COUNT count]

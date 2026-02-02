@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension LPushCommand on ListCommands {
   /// LPUSH key element [element ...]

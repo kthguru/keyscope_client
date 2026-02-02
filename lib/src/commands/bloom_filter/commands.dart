@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import '../commands.dart' show Commands;
+
 export 'extensions.dart';
 
-mixin BloomFilterCommands {
-  Future<dynamic> execute(List<String> command);
-}
+mixin BloomFilterCommands on Commands {}

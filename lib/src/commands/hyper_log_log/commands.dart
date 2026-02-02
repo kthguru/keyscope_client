@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import '../commands.dart' show Commands;
+
 export 'extensions.dart';
 
-mixin HyperLogLogCommands {
-  Future<dynamic> execute(List<String> command);
-}
+mixin HyperLogLogCommands on Commands {}

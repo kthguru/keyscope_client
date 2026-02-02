@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension LMoveCommand on ListCommands {
   /// LMOVE source destination `<LEFT | RIGHT>` `<LEFT | RIGHT>`

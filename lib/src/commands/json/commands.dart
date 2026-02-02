@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import '../commands.dart' show Commands;
+
 export 'extensions.dart';
 
 class Config {
@@ -59,20 +61,7 @@ class JsonMSetEntry {
 /// Mixin to support Redis-JSON and Valkey-JSON commands.
 /// This mixin ensures compatibility with the existing `execute` method
 /// by converting all parameters to Strings before sending.
-mixin JsonCommands {
-  // [Interface Definition]
-  // The class using this mixin must implement these methods and getters.
-
-  /// Sends a command to the server.
-  /// The interface for sending commands to the Redis/Valkey server.
-  Future<dynamic> execute(List<String> command);
-
-  /// Checks if the connected server is Redis.
-  Future<bool> isRedisServer();
-
-  /// Checks if the connected server is Valkey.
-  Future<bool> isValkeyServer();
-
+mixin JsonCommands on Commands {
   /// Configuration to determine if JSON.MERGE (Redis-only) is allowed.
   /// This getter must be implemented by the main client class.
   bool get allowRedisOnlyJsonMerge;
@@ -183,24 +172,6 @@ mixin JsonCommands {
       // Redis), assume false or handle error as needed.
       return false;
     }
-  }
-
-  /// Helper to execute a command that is expected to return an Integer.
-  ///
-  /// Useful for commands like HDEL, HLEN, HINCRBY, etc.
-  /// Handles type casting and parsing safely.
-  Future<int> executeInt(List<String> command) async {
-    final result = await execute(command);
-
-    if (result is int) return result;
-    if (result == null) return 0; // or throw depending on strictness
-
-    // Sometimes servers might return integer-like strings
-    if (result is String) {
-      return int.tryParse(result) ?? 0;
-    }
-
-    throw Exception('Expected integer response but got ${result.runtimeType}');
   }
 
   void printDebugWarning() {

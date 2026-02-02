@@ -16,4 +16,25 @@
 
 import '../commands.dart' show ServerCommands;
 
-extension FlushAllCommand on ServerCommands {}
+extension FlushAllCommand on ServerCommands {
+  /// FLUSHALL [ASYNC | SYNC]
+  ///
+  /// Delete all the keys of all the existing databases, not just the currently
+  /// selected one.
+  /// By default, FlushAll will synchronously flush all the databases.
+  ///
+  /// Options:
+  /// - [async]: If true, the flush will be done asynchronously (non-blocking).
+  ///
+  /// Complexity: O(N) where N is the total number of keys in all databases.
+  ///
+  /// Returns:
+  /// - 'OK'.
+  Future<String> flushAll({bool async = false}) async {
+    final cmd = <String>['FLUSHALL'];
+    if (async) {
+      cmd.add('ASYNC');
+    }
+    return executeString(cmd);
+  }
+}

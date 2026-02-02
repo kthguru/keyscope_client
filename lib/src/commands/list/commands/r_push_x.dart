@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension RPushXCommand on ListCommands {
   /// RPUSHX key element [element ...]

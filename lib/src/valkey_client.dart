@@ -37,6 +37,7 @@ import 'cluster_slots_parser.dart' show parseClusterSlotsResponse;
 import 'commands/bitmap/commands.dart' show BitmapCommands;
 import 'commands/bloom_filter/commands.dart' show BloomFilterCommands;
 import 'commands/cluster/commands.dart' show ClusterCommands;
+import 'commands/commands.dart' show Commands;
 import 'commands/connection/commands.dart' show ConnectionCommands;
 import 'commands/count_min_sketch/commands.dart' show CountMinSketchCommands;
 import 'commands/cuckoo_filter/commands.dart' show CuckooFilterCommands;
@@ -154,9 +155,10 @@ class _IncompleteDataException implements Exception {
   String toString() => message;
 }
 
-/// The main client implementation for communicating with a Valkey server.
-class ValkeyClient
+/// The main client implementation for communicating with a Redis/Valkey server.
+class ValkeyClient // FYI. extends ValkeyConnection
     with
+        Commands, // `Commands` should take precedence over other mixins.
         BitmapCommands,
         BloomFilterCommands,
         ClusterCommands,
@@ -181,12 +183,9 @@ class ValkeyClient
         HyperLogLogCommands,
         GeospatialIndicesCommands,
         CuckooFilterCommands,
-        CountMinSketchCommands,
-        ConnectionCommands,
-        ClusterCommands,
-        BloomFilterCommands,
-        BitmapCommands
-    implements ValkeyClientBase {
+        CountMinSketchCommands
+    implements
+        ValkeyClientBase {
   static final _log = ValkeyLogger('ValkeyClient');
 
   /// JSON.MERGE

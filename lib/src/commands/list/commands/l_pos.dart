@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension LPosCommand on ListCommands {
   /// LPOS key element [RANK rank] [COUNT num-matches] [MAXLEN len]

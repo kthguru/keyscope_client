@@ -17,25 +17,13 @@
 import 'dart:collection' show Queue;
 
 import '../../annotations.dart' show protected;
+import '../commands.dart' show Commands;
 
 export 'extensions.dart';
 
 /// This mixin ensures compatibility with the existing `execute` method
 /// by converting all parameters to Strings before sending.
-mixin TransactionsCommands {
-  // [Interface Definition]
-  // The class using this mixin must implement these methods and getters.
-
-  /// Sends a command to the server.
-  /// The interface for sending commands to the Redis/Valkey server.
-  Future<dynamic> execute(List<String> command);
-
-  /// Checks if the connected server is Redis.
-  Future<bool> isRedisServer();
-
-  /// Checks if the connected server is Valkey.
-  Future<bool> isValkeyServer();
-
+mixin TransactionsCommands on Commands {
   @protected
   bool _isInTransaction = false;
 

@@ -14,18 +14,8 @@
  * limitations under the License.
  */
 
+import '../commands.dart' show Commands;
+
 export 'extensions.dart';
 
-mixin ServerCommands {
-  // COMMAND
-
-  /// Sends a command to the server.
-  /// The interface for sending commands to the Redis/Valkey server.
-  Future<dynamic> execute(List<String> command);
-
-  /// Checks if the connected server is Redis.
-  Future<bool> isRedisServer();
-
-  /// Checks if the connected server is Valkey.
-  Future<bool> isValkeyServer();
-}
+mixin ServerCommands on Commands {}

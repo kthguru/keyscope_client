@@ -24,8 +24,7 @@ void main() {
     setUp(() async {
       client = ValkeyClient(host: 'localhost', port: 6379);
       await client.connect();
-      // await client.flushAll(); // TODO: add flushAll()
-      await client.execute(['FLUSHALL']);
+      await client.flushAll();
 
       // Setup: Complex JSON data for testing
       const key = 'test:debug:data';

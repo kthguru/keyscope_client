@@ -32,9 +32,8 @@ void main() {
       await client1.connect();
       await client2.connect();
 
-      // TODO: v3.2.0 - flushDb(), flushAll()
-      // await client1.flushAll(); // Clean start
-      await client1.execute(['FLUSHALL']);
+      // Clean start
+      await client1.flushAll();
     });
 
     tearDown(() async {

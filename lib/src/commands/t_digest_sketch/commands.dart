@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import '../commands.dart' show Commands;
+
 export 'extensions.dart';
 
-mixin TDigestSketchCommands {
-  Future<dynamic> execute(List<String> command);
-}
+mixin TDigestSketchCommands on Commands {}

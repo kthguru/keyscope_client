@@ -24,9 +24,7 @@ void main() {
     setUp(() async {
       client = ValkeyClient(host: 'localhost', port: 6379);
       await client.connect();
-      // TODO: v3.2.0 - flushDb(), flushAll()
-      // await client.flushAll();
-      await client.execute(['FLUSHALL']);
+      await client.flushAll();
     });
 
     tearDown(() async {

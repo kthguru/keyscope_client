@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import '../commands.dart' show Commands;
 
-export 'extensions.dart';
+import '../commands.dart' show ServerCommands;
 
-mixin CuckooFilterCommands on Commands {}
+// CONFIG GET
+extension ConfigGetCommand on ServerCommands {}

@@ -16,4 +16,24 @@
 
 import '../commands.dart' show ServerCommands;
 
-extension FlushDbCommand on ServerCommands {}
+extension FlushDbCommand on ServerCommands {
+  /// FLUSHDB [ASYNC | SYNC]
+  ///
+  /// Delete all the keys of the currently selected DB.
+  /// By default, FlushDb will synchronously flush the database.
+  ///
+  /// Options:
+  /// - [async]: If true, the flush will be done asynchronously (non-blocking).
+  ///
+  /// Complexity: O(N) where N is the number of keys in the database.
+  ///
+  /// Returns:
+  /// - 'OK'.
+  Future<String> flushDb({bool async = false}) async {
+    final cmd = <String>['FLUSHDB'];
+    if (async) {
+      cmd.add('ASYNC');
+    }
+    return executeString(cmd);
+  }
+}

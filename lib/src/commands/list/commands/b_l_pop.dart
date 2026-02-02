@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension BLPopCommand on ListCommands {
   /// BLPOP key [key ...] timeout

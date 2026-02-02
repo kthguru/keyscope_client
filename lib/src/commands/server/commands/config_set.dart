@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-mixin ServerGeneralCommands {
-  // MONITOR
-  // FLUSHALL
-  // FLUSHDB
-  // INFO
-}
+import '../commands.dart' show ServerCommands;
+
+// CONFIG SET appendonly no
+extension ConfigSetCommand on ServerCommands {}

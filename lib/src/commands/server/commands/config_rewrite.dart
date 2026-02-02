@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-mixin ServerConfigCommands {
-  // CONFIG GET
-  // CONFIG SET appendonly no
-  // CONFIG REWRITE
-}
+import '../commands.dart' show ServerCommands;
+
+// CONFIG REWRITE
+extension ConfigRewriteCommand on ServerCommands {}

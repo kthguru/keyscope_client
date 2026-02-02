@@ -24,9 +24,7 @@ void main() {
     setUp(() async {
       client = ValkeyClient(host: 'localhost', port: 6379);
       await client.connect();
-      // TODO: v3.2.0 - flushDb(), flushAll()
-      // await client.flushAll();
-      await client.execute(['FLUSHALL']);
+      await client.flushAll();
     });
 
     tearDown(() async {
@@ -62,8 +60,14 @@ void main() {
       expect(await client.hGet('config', 'volume'), equals('50'));
     });
 
-    test('HMSET (Deprecated but supported) & HMGET', () async {
-      await client.hMSet('vehicle:1', {'type': 'car', 'brand': 'Tesla'});
+    test('HMSET & HMGET', () async {
+      if (await client.isRedisServer()) {
+        await client.hMSet('vehicle:1', {'type': 'car', 'brand': 'Tesla'});
+        //
+      }
+      if (await client.isValkeyServer()) {
+        await client.hMSet('vehicle:1', {'type': 'car', 'brand': 'Tesla'});
+      }
 
       final values = await client.hMGet('vehicle:1', ['type', 'brand', 'year']);
       expect(values, equals(['car', 'Tesla', null]));

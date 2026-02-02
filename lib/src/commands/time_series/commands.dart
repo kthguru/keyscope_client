@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import '../commands.dart' show Commands;
+
 export 'extensions.dart';
 
-mixin TimeSeriesCommands {
-  Future<dynamic> execute(List<String> command);
-}
+mixin TimeSeriesCommands on Commands {}

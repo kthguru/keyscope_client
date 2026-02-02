@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart';
+import '../commands.dart' show ListCommands;
 
 extension BRPopLPushCommand on ListCommands {
   /// BRPOPLPUSH source destination timeout

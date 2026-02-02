@@ -14,21 +14,8 @@
  * limitations under the License.
  */
 
+import '../commands.dart' show Commands;
+
 export 'extensions.dart';
 
-mixin CustomCommands {
-  /// Sends a command to the server.
-  /// The interface for sending commands to the Redis/Valkey server.
-  Future<dynamic> execute(List<String> command);
-
-  Future<String> info({List<String>? section}) async {
-    final cmd = <String>['INFO'];
-    if (section != null) {
-      cmd.addAll(section);
-    }
-
-    // The INFO command returns a Bulk String.
-    final result = await execute(cmd);
-    return result.toString();
-  }
-}
+mixin CustomCommands on Commands {}
