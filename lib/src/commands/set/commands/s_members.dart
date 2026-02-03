@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-export 'commands/s_add.dart';
-export 'commands/s_card.dart';
-export 'commands/s_diff.dart';
-export 'commands/s_diff_store.dart';
-export 'commands/s_inter.dart';
-export 'commands/s_inter_card.dart';
-export 'commands/s_inter_store.dart';
-export 'commands/s_is_member.dart';
-export 'commands/s_m_is_member.dart';
-export 'commands/s_members.dart';
-export 'commands/s_move.dart';
-export 'commands/s_pop.dart';
-export 'commands/s_rand_member.dart';
-export 'commands/s_rem.dart';
-export 'commands/s_scan.dart';
-export 'commands/s_union.dart';
-export 'commands/s_union_store.dart';
+import '../commands.dart';
+
+extension SMembersCommand on SetCommands {
+  /// SMEMBERS key
+  ///
+  /// Returns all the members of the set value stored at [key].
+  ///
+  /// Complexity: O(N) where N is the set cardinality.
+  ///
+  /// Returns:
+  /// - [List<String>]: All elements of the set.
+  Future<List<String>> sMembers(String key) async {
+    final cmd = <String>['SMEMBERS', key];
+    final result = await execute(cmd);
+    return (result as List).cast<String>();
+  }
+}

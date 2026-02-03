@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-export 'commands/s_add.dart';
-export 'commands/s_card.dart';
-export 'commands/s_diff.dart';
-export 'commands/s_diff_store.dart';
-export 'commands/s_inter.dart';
-export 'commands/s_inter_card.dart';
-export 'commands/s_inter_store.dart';
-export 'commands/s_is_member.dart';
-export 'commands/s_m_is_member.dart';
-export 'commands/s_members.dart';
-export 'commands/s_move.dart';
-export 'commands/s_pop.dart';
-export 'commands/s_rand_member.dart';
-export 'commands/s_rem.dart';
-export 'commands/s_scan.dart';
-export 'commands/s_union.dart';
-export 'commands/s_union_store.dart';
+import '../commands.dart';
+
+extension SIsMemberCommand on SetCommands {
+  /// SISMEMBER key member
+  ///
+  /// Returns if [member] is a member of the set stored at [key].
+  ///
+  /// Complexity: O(1)
+  ///
+  /// Returns:
+  /// - [bool]: true if the element is a member of the set, false otherwise.
+  Future<bool> sIsMember(String key, String member) async {
+    final cmd = <String>['SISMEMBER', key, member];
+    final result = await executeInt(cmd);
+    return result == 1;
+  }
+}

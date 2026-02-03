@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-export 'commands/s_add.dart';
-export 'commands/s_card.dart';
-export 'commands/s_diff.dart';
-export 'commands/s_diff_store.dart';
-export 'commands/s_inter.dart';
-export 'commands/s_inter_card.dart';
-export 'commands/s_inter_store.dart';
-export 'commands/s_is_member.dart';
-export 'commands/s_m_is_member.dart';
-export 'commands/s_members.dart';
-export 'commands/s_move.dart';
-export 'commands/s_pop.dart';
-export 'commands/s_rand_member.dart';
-export 'commands/s_rem.dart';
-export 'commands/s_scan.dart';
-export 'commands/s_union.dart';
-export 'commands/s_union_store.dart';
+import '../commands.dart';
+
+extension SUnionCommand on SetCommands {
+  /// SUNION key [key ...]
+  ///
+  /// Returns the members of the set resulting from the union of
+  ///  all the given sets.
+  ///
+  /// Complexity: O(N) where N is the total number of elements in
+  /// all given sets.
+  ///
+  /// Returns:
+  /// - [List<String>]: List with members of the resulting set.
+  Future<List<String>> sUnion(List<String> keys) async {
+    final cmd = <String>['SUNION', ...keys];
+    final result = await execute(cmd);
+    return (result as List).cast<String>();
+  }
+}
