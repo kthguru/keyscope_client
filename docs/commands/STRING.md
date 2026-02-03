@@ -16,8 +16,6 @@ limitations under the License.
 
 # STRING
 
-`get`, `set`, `mget`, `incr`, `decr`, `incrBy`, `decrBy`
-
 | valkey_client | Redis                                                             | Valkey                                                 |
 |---------------|-------------------------------------------------------------------|--------------------------------------------------------|
 | `append`      | [APPEND](https://redis.io/docs/latest/commands/append/)           | [APPEND](https://valkey.io/commands/append/)           |
@@ -33,6 +31,7 @@ limitations under the License.
 | `incrBy`      | [INCRBY](https://redis.io/docs/latest/commands/incrby/)           | [INCRBY](https://valkey.io/commands/incrby/)           |
 | `incrByFloat` | [INCRBYFLOAT](https://redis.io/docs/latest/commands/incrbyfloat/) | [INCRBYFLOAT](https://valkey.io/commands/incrbyfloat/) |
 | `lcs`         | [LCS](https://redis.io/docs/latest/commands/lcs/)                 | [LCS](https://valkey.io/commands/lcs/)                 |
+| ~~`mget`~~    |                                                                   |                                                        |
 | `mGet`        | [MGET](https://redis.io/docs/latest/commands/mget/)               | [MGET](https://valkey.io/commands/mget/)               |
 | `mSet`        | [MSET](https://redis.io/docs/latest/commands/mset/)               | [MSET](https://valkey.io/commands/mset/)               |
 | `mSetNx`      | [MSETNX](https://redis.io/docs/latest/commands/msetnx/)           | [MSETNX](https://valkey.io/commands/msetnx/)           |

@@ -14,4 +14,26 @@
  * limitations under the License.
  */
 
-export 'commands/template.dart';
+export 'commands/append.dart';
+export 'commands/decr.dart';
+export 'commands/decr_by.dart';
+export 'commands/del_if_eq.dart';
+export 'commands/get.dart';
+export 'commands/get_del.dart';
+export 'commands/get_ex.dart';
+export 'commands/get_range.dart';
+export 'commands/get_set.dart';
+export 'commands/incr.dart';
+export 'commands/incr_by.dart';
+export 'commands/incr_by_float.dart';
+export 'commands/lcs.dart';
+export 'commands/m_get.dart';
+export 'commands/m_set.dart';
+export 'commands/m_set_nx.dart';
+export 'commands/p_set_ex.dart';
+export 'commands/set.dart';
+export 'commands/set_ex.dart';
+export 'commands/set_nx.dart';
+export 'commands/set_range.dart';
+export 'commands/str_len.dart';
+export 'commands/sub_str.dart';

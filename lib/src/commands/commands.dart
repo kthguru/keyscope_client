@@ -28,9 +28,6 @@ mixin Commands {
   ///
   /// Sends a command to the server.
   /// The interface for sending commands to the Redis/Valkey server.
-  ///
-  /// TODO: REFACTOR REQUIRED. Must be implemented by the connection class.
-  ///
   Future<dynamic> execute(List<String> command);
 
   /// Checks if the connected server is Redis.

@@ -16,4 +16,21 @@
 
 import '../commands.dart' show StringCommands;
 
-extension StringTemplateCommand on StringCommands {}
+extension GetCommand on StringCommands {
+  /// GET key
+  ///
+  /// Get the value of [key].
+  /// If the key does not exist the special value nil is returned.
+  /// An error is returned if the value stored at key is not a string.
+  ///
+  /// Complexity: O(1)
+  ///
+  /// Returns:
+  /// - [String]: The value of key.
+  /// - [`null`]: If key does not exist.
+  Future<String?> get(String key) async {
+    final cmd = <String>['GET', key];
+    final result = await execute(cmd);
+    return result as String?;
+  }
+}
