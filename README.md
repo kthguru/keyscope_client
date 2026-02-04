@@ -20,8 +20,7 @@
   <p>
     <a href="#supported-commands">Supported Commands</a> •
     <a href="#usage">Usage</a> •
-    <a href="#need-help">Need help?</a> •
-    <a href="#features">Features</a>
+    <a href="#features">Features</a></a>
   </p>
 
 </div>
@@ -53,7 +52,7 @@ Server management, connection handling, and flow control.
 
 ## Usage
 
-Refer to the [Wiki](https://github.com/infradise/valkey_client/wiki) page in our GitHub repository to see more examples.
+Check out [Developer Experience Improvements](https://github.com/infradise/valkey_client/wiki/Developer-Experience-Improvements).
 
 ### 1\. Example for Standalone or Sentinel environment 
 
@@ -185,14 +184,6 @@ void main() async {
 </td>
 </tr>
 </table>
-
-## Need help?
-
-1. Still using Redis instead of Valkey? Check out [Developer Experience Improvements](https://github.com/infradise/valkey_client/wiki/Developer-Experience-Improvements)
-2. No GUI for Redis/Valkey? Try [Keyscope Jet](https://keyscope.dev)
-3. Looking for a GUI built with `valkey_client`? Try [Keyscope](https://pub.dev/packages/keyscope)
-4. Need real‑time watch for Redis/Valkey pods and services across multiple K8s clusters? Try [Visualkube Jet](https://jet.visualkube.com)
-
 
 ## Features
 
