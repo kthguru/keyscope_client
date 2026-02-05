@@ -18,7 +18,7 @@ limitations under the License.
 
 `clusterSlots`, `asking`
 
-| valkey_client                 | Redis                                                                                                 | Valkey                                                                                     |
+| TypeRedis                 | Redis                                                                                                 | Valkey                                                                                     |
 |-------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
 | `asking`                      | [ASKING](https://redis.io/docs/latest/commands/asking/)                                               | [ASKING](https://valkey.io/commands/asking/)                                               |
 | `cluster`                     | [CLUSTER](https://redis.io/docs/latest/commands/cluster/)                                             | [CLUSTER](https://valkey.io/commands/cluster/)                                             |

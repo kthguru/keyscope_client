@@ -16,7 +16,7 @@ limitations under the License.
 
 # JSON
 
-| valkey_client                   | Redis                                                                         | Valkey                                                                     |
+| TypeRedis                   | Redis                                                                         | Valkey                                                                     |
 |---------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------|
 | `jsonArrAppend`                 | [JSON.ARRAPPEND](https://redis.io/docs/latest/commands/json.arrappend/)       | [JSON.ARRAPPEND](https://valkey.io/commands/json.arrappend/)               |
 | `jsonArrAppendEnhanced`         |                                                                               |                                                                            |

@@ -16,7 +16,7 @@ limitations under the License.
 
 # SEARCH
 
-| valkey_client   | Redis                                                                   | Valkey                                                   |
+| TypeRedis   | Redis                                                                   | Valkey                                                   |
 |-----------------|-------------------------------------------------------------------------|----------------------------------------------------------|
 | `ftAggregate`   | [FT.AGGREGATE](https://redis.io/docs/latest/commands/ft.aggregate/)     |                                                          |
 | `ftAliasAdd`    | [FT.ALIASADD](https://redis.io/docs/latest/commands/ft.aliasadd/)       |                                                          |

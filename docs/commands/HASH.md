@@ -16,7 +16,7 @@ limitations under the License.
 
 # HASH
 
-| valkey_client  | Redis                                                               | Valkey                                                  |
+| TypeRedis  | Redis                                                               | Valkey                                                  |
 |----------------|---------------------------------------------------------------------|---------------------------------------------------------|
 | `hDel`         | [HDEL](https://redis.io/docs/latest/commands/hdel/)                 | [HDEL](https://valkey.io/commands/hdel/)                |
 | `hExists`      | [HEXISTS](https://redis.io/docs/latest/commands/hexists/)           | [HEXISTS](https://valkey.io/commands/hexists/)          |

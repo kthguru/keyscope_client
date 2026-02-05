@@ -16,7 +16,7 @@ limitations under the License.
 
 # CUCKOO FILTER
 
-| valkey_client | Redis                                                               | Valkey |
+| TypeRedis | Redis                                                               | Valkey |
 |---------------|---------------------------------------------------------------------|--------|
 | `cfAdd`       | [CF.ADD](https://redis.io/docs/latest/commands/cf.add/)             |        |
 | `cfAddNx`     | [CF.ADDNX](https://redis.io/docs/latest/commands/cf.addnx/)         |        |

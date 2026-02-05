@@ -16,7 +16,7 @@ limitations under the License.
 
 # VECTOR SET
 
-| valkey_client | Redis                                                             | Valkey |
+| TypeRedis | Redis                                                             | Valkey |
 |---------------|-------------------------------------------------------------------|--------|
 | `vAdd`        | [VADD](https://redis.io/docs/latest/commands/vadd/)               |        |
 | `vCard`       | [VCARD](https://redis.io/docs/latest/commands/vcard/)             |        |

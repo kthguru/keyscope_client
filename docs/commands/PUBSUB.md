@@ -18,7 +18,7 @@ limitations under the License.
 
 `psubscribe`, `publish`, `pubsubChannels`, `pubsubNumPat`, `pubsubNumSub`, `punsubscribe`, `spublish`, `ssubscribe`, `subscribe`, `sunsubscribe`, `unsubscribe`
 
-| valkey_client         | Redis                                                                               | Valkey                                                                   |
+| TypeRedis         | Redis                                                                               | Valkey                                                                   |
 |-----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
 | `pSubscribe`          | [PSUBSCRIBE](https://redis.io/docs/latest/commands/psubscribe/)                     | [PSUBSCRIBE](https://valkey.io/commands/psubscribe/)                     |
 | `publish`             | [PUBLISH](https://redis.io/docs/latest/commands/publish/)                           | [PUBLISH](https://valkey.io/commands/publish/)                           |

@@ -16,7 +16,7 @@ limitations under the License.
 
 # SCRIPTING AND FUNCTIONS
 
-| valkey_client     | Redis                                                                       | Valkey                                                           |
+| TypeRedis     | Redis                                                                       | Valkey                                                           |
 |-------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------|
 | `eval`            | [EVAL](https://redis.io/docs/latest/commands/eval/)                         | [EVAL](https://valkey.io/commands/eval/)                         |
 | `evalSha`         | [EVALSHA](https://redis.io/docs/latest/commands/evalsha/)                   | [EVALSHA](https://valkey.io/commands/evalsha/)                   |
