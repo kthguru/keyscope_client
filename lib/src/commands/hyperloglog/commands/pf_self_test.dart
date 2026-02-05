@@ -14,4 +14,17 @@
  * limitations under the License.
  */
 
-export 'commands/template.dart';
+import '../commands.dart' show HyperLogLogCommands;
+
+extension PfSelfTestCommand on HyperLogLogCommands {
+  /// PFSELFTEST
+  ///
+  /// Internal command to perform a self-test of the HyperLogLog implementation.
+  ///
+  /// Returns:
+  /// - [String]: "OK" if the test passed.
+  Future<String> pfSelfTest() async {
+    final cmd = <String>['PFSELFTEST'];
+    return executeString(cmd);
+  }
+}

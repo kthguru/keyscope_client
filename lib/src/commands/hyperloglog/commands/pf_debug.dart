@@ -16,4 +16,22 @@
 
 import '../commands.dart' show HyperLogLogCommands;
 
-extension HyperLogLogTemplateCommand on HyperLogLogCommands {}
+extension PfDebugCommand on HyperLogLogCommands {
+  /// PFDEBUG `<subcommand> <key>`
+  ///
+  /// Internal command for debugging HyperLogLog values.
+  ///
+  /// Subcommands:
+  /// - DIGEST: Returns the internal digest.
+  /// - ENCODING: Returns the internal encoding.
+  /// - TODENSE: Converts the HLL to dense representation (returns 0 or 1).
+  ///
+  /// Note: This is an internal command and may change behavior.
+  ///
+  /// Returns:
+  /// - [dynamic]: Depends on the subcommand (String, List, or Integer).
+  Future<dynamic> pfDebug(String subcommand, String key) async {
+    final cmd = <String>['PFDEBUG', subcommand, key];
+    return execute(cmd);
+  }
+}

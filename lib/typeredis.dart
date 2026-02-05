@@ -30,7 +30,7 @@ export 'src/commands/generic/commands/scan.dart' show ScanResult;
 export 'src/commands/generic/extensions.dart';
 export 'src/commands/geospatial_indices/extensions.dart';
 export 'src/commands/hash/extensions.dart';
-export 'src/commands/hyper_log_log/extensions.dart';
+export 'src/commands/hyperloglog/extensions.dart';
 export 'src/commands/json/commands.dart'
     show Config, JsonCommands, JsonMSetEntry;
 export 'src/commands/json/extensions.dart';

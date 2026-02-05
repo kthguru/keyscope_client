@@ -20,7 +20,11 @@ void main() async {
   // -------------------------------------------------------
   // 1-1. Redis/Valkey Standalone (Basic)
   // -------------------------------------------------------
-  final client = TRClient(host: 'localhost', port: 6379);
+  final client = TRClient(
+    host: 'localhost',
+    port: 6379,
+    //  password: '',
+  );
   try {
     await client.connect();
     await client.set('Hello', 'Welcome to TypeRedis');
@@ -72,7 +76,13 @@ void main() async {
   // -------------------------------------------------------
   // 3. Redis/Valkey Cluster
   // -------------------------------------------------------
-  final nodes = [TRConnectionSettings(host: 'localhost', port: 7001)];
+  final nodes = [
+    TRConnectionSettings(
+      host: 'localhost',
+      port: 7001,
+      // password: '',
+    )
+  ];
   final sClient = TRClusterClient(nodes);
   try {
     await sClient.connect();

@@ -49,7 +49,7 @@ import 'commands/hash/commands.dart' show HashCommands;
 import 'commands/hash/commands/h_get.dart' show HGetCommand;
 import 'commands/hash/commands/h_get_all.dart' show HGetAllCommand;
 import 'commands/hash/commands/h_set.dart' show HSetCommand;
-import 'commands/hyper_log_log/commands.dart' show HyperLogLogCommands;
+import 'commands/hyperloglog/commands.dart' show HyperLogLogCommands;
 import 'commands/json/commands.dart' show JsonCommands;
 import 'commands/list/commands.dart' show ListCommands;
 import 'commands/pubsub/commands.dart' show PubsubCommands;
@@ -489,6 +489,8 @@ class TRClient // FYI. extends TRConnection
     String? username,
     String? password,
   }) async {
+    // TODO: Investigate that these parameters are not used currently.
+
     // Prevent multiple concurrent connection attempts
     if (_connectionCompleter != null && !_connectionCompleter!.isCompleted) {
       return onConnected;
@@ -882,6 +884,7 @@ class TRClient // FYI. extends TRConnection
 
       // Perform SELECT
       await execute(['SELECT', _config.database.toString()]);
+      // TODO: change to TypeRedis.infoSelect()
       // Use _executeInternal to bypass routing during initialization
       // await _executeInternal(['SELECT', _config.database.toString()]);
     }
