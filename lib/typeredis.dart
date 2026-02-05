@@ -28,6 +28,8 @@ export 'src/commands/cuckoo_filter/extensions.dart';
 export 'src/commands/generic/commands.dart' show ScanResult;
 export 'src/commands/generic/commands/scan.dart' show ScanResult;
 export 'src/commands/generic/extensions.dart';
+export 'src/commands/geospatial_indices/commands.dart'
+    show GeoLocation, GeoRadiusOptions, GeoSearchOptions;
 export 'src/commands/geospatial_indices/extensions.dart';
 export 'src/commands/hash/extensions.dart';
 export 'src/commands/hyperloglog/extensions.dart';

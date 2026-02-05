@@ -16,4 +16,21 @@
 
 import '../commands.dart' show GeospatialIndicesCommands;
 
-extension GeoTemplateCommand on GeospatialIndicesCommands {}
+extension GeoHashCommand on GeospatialIndicesCommands {
+  /// GEOHASH key member [member ...]
+  ///
+  /// Returns valid Geohash strings representing the position of
+  /// one or more elements.
+  ///
+  /// Returns:
+  /// - [List<String?>]: Array of Geohash strings, or null if
+  /// a member doesn't exist.
+  Future<List<String?>> geoHash(String key, List<String> members) async {
+    final cmd = <String>['GEOHASH', key, ...members];
+    final result = await execute(cmd);
+    if (result is List) {
+      return result.map((e) => e?.toString()).toList();
+    }
+    return [];
+  }
+}

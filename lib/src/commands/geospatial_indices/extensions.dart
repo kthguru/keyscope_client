@@ -14,4 +14,13 @@
  * limitations under the License.
  */
 
-export 'commands/template.dart';
+export 'commands/geo_add.dart';
+export 'commands/geo_dist.dart';
+export 'commands/geo_hash.dart';
+export 'commands/geo_pos.dart';
+export 'commands/geo_radius.dart';
+export 'commands/geo_radius_by_member.dart';
+export 'commands/geo_radius_by_member_ro.dart';
+export 'commands/geo_radius_ro.dart';
+export 'commands/geo_search.dart';
+export 'commands/geo_search_store.dart';

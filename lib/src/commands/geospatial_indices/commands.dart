@@ -19,3 +19,37 @@ import '../commands.dart' show Commands;
 export 'extensions.dart';
 
 mixin GeospatialIndicesCommands on Commands {}
+
+/// Helper class for GeoLocation points
+class GeoLocation {
+  final double longitude;
+  final double latitude;
+  final String member;
+
+  GeoLocation({
+    required this.longitude,
+    required this.latitude,
+    required this.member,
+  });
+}
+
+typedef GeoRadiusOptions = GeoSearchOptions;
+
+/// Helper class for GeoSearch (R620+, and legacy GeoRadius) options
+class GeoSearchOptions {
+  final bool withCoord;
+  final bool withDist;
+  final bool withHash;
+  final int? count;
+  final bool? any; // Used with count
+  final String? sort; // ASC or DESC
+
+  const GeoSearchOptions({
+    this.withCoord = false,
+    this.withDist = false,
+    this.withHash = false,
+    this.count,
+    this.any,
+    this.sort,
+  });
+}
