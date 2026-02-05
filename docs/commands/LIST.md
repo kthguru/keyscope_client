@@ -16,7 +16,7 @@ limitations under the License.
 
 # LIST
 
-| TypeRedis | Redis                                                               | Valkey                                               |
+| TypeRedis     | Redis                                                               | Valkey                                               |
 |---------------|---------------------------------------------------------------------|------------------------------------------------------|
 | `bLMove`      | [BLMOVE](https://redis.io/docs/latest/commands/blmove/)             | [BLMOVE](https://valkey.io/commands/blmove/)         |
 | `bLMPop`      | [BLMPOP](https://redis.io/docs/latest/commands/blmpop/)             | [BLMPOP](https://valkey.io/commands/blmpop/)         |

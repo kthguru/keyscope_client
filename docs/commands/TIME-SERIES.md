@@ -16,7 +16,7 @@ limitations under the License.
 
 # TIME SERIES
 
-| TypeRedis  | Redis                                                                 | Valkey |
+| TypeRedis      | Redis                                                                 | Valkey |
 |----------------|-----------------------------------------------------------------------|--------|
 | `tsAdd`        | [TS.ADD](https://redis.io/docs/latest/commands/ts.add/)               |        |
 | `tsAlter`      | [TS.ALTER](https://redis.io/docs/latest/commands/ts.alter/)           |        |

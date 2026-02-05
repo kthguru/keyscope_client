@@ -16,7 +16,7 @@ limitations under the License.
 
 # HYPERLOGLOG
 
-| TypeRedis | Redis                                                           | Valkey                                               |
+| TypeRedis     | Redis                                                           | Valkey                                               |
 |---------------|-----------------------------------------------------------------|------------------------------------------------------|
 | `pfAdd`       | [PFADD](https://redis.io/docs/latest/commands/pfadd/)           | [PFADD](https://valkey.io/commands/pfadd/)           |
 | `pfCount`     | [PFCOUNT](https://redis.io/docs/latest/commands/pfcount/)       | [PFCOUNT](https://valkey.io/commands/pfcount/)       |

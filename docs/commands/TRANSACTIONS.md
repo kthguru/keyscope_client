@@ -16,7 +16,7 @@ limitations under the License.
 
 # TRANSACTIONS
 
-| TypeRedis | Redis                                                     | Valkey                                         |
+| TypeRedis     | Redis                                                     | Valkey                                         |
 |---------------|-----------------------------------------------------------|------------------------------------------------|
 | `discard`     | [DISCARD](https://redis.io/docs/latest/commands/discard/) | [DISCARD](https://valkey.io/commands/discard/) |
 | `exec`        | [EXEC](https://redis.io/docs/latest/commands/exec/)       | [EXEC](https://valkey.io/commands/exec/)       |

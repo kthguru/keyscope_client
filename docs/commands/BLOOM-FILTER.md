@@ -16,7 +16,7 @@ limitations under the License.
 
 # BLOOM FILTER
 
-| TypeRedis | Redis                                                           | Valkey                                               |
+| TypeRedis     | Redis                                                           | Valkey                                               |
 |---------------|-----------------------------------------------------------------|------------------------------------------------------|
 | `bfAdd`       | [BF.ADD](https://redis.io/docs/latest/commands/bf.add/)         | [BF.ADD](https://valkey.io/commands/bf.add/)         |
 | `bfCard`      | [BF.CARD](https://redis.io/docs/latest/commands/bf.card/)       | [BF.CARD](https://valkey.io/commands/bf.card/)       |

@@ -16,7 +16,7 @@ limitations under the License.
 
 # STRING
 
-| TypeRedis | Redis                                                             | Valkey                                                 |
+| TypeRedis     | Redis                                                             | Valkey                                                 |
 |---------------|-------------------------------------------------------------------|--------------------------------------------------------|
 | `append`      | [APPEND](https://redis.io/docs/latest/commands/append/)           | [APPEND](https://valkey.io/commands/append/)           |
 | `decr`        | [DECR](https://redis.io/docs/latest/commands/decr/)               | [DECR](https://valkey.io/commands/decr/)               |

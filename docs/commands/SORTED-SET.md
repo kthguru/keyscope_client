@@ -18,7 +18,7 @@ limitations under the License.
 
 `zadd`, `zrem`, `zrange`
 
-| TypeRedis      | Redis                                                                       | Valkey                                                           |
+| TypeRedis          | Redis                                                                       | Valkey                                                           |
 |--------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------|
 | `bzMPop`           | [BZMPOP](https://redis.io/docs/latest/commands/bzmpop/)                     | [BZMPOP](https://valkey.io/commands/bzmpop/)                     |
 | `bzPopMax`         | [BZPOPMAX](https://redis.io/docs/latest/commands/bzpopmax/)                 | [BZPOPMAX](https://valkey.io/commands/bzpopmax/)                 |

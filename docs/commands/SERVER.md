@@ -18,7 +18,7 @@ limitations under the License.
 
 `flushAll`, `flushDb`, `info`, `infoServerMetadata`
 
-| TypeRedis            | Redis                                                                                     | Valkey                                                                         |
+| TypeRedis                | Redis                                                                                     | Valkey                                                                         |
 |--------------------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | `acl`                    | [ACL](https://redis.io/docs/latest/commands/acl/)                                         | [ACL](https://valkey.io/commands/acl/)                                         |
 | `aclCat`                 | [ACL CAT](https://redis.io/docs/latest/commands/acl-cat/)                                 | [ACL CAT](https://valkey.io/commands/acl-cat/)                                 |

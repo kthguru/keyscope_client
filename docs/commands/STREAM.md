@@ -16,7 +16,7 @@ limitations under the License.
 
 # STREAM
 
-| TypeRedis          | Redis                                                                                 | Valkey                                                                     |
+| TypeRedis              | Redis                                                                                 | Valkey                                                                     |
 |------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
 | `xAck`                 | [XACK](https://redis.io/docs/latest/commands/xack/)                                   | [XACK](https://valkey.io/commands/xack/)                                   |
 | `xAdd`                 | [XADD](https://redis.io/docs/latest/commands/xadd/)                                   | [XADD](https://valkey.io/commands/xadd/)                                   |

@@ -16,7 +16,7 @@ limitations under the License.
 
 # COUNT-MIN SKETCH
 
-| TypeRedis   | Redis                                                                   | Valkey |
+| TypeRedis       | Redis                                                                   | Valkey |
 |-----------------|-------------------------------------------------------------------------|--------|
 | `cmsIncrBy`     | [CMS.INCRBY](https://redis.io/docs/latest/commands/cms.incrby/)         |        |
 | `cmsInfo`       | [CMS.INFO](https://redis.io/docs/latest/commands/cms.info/)             |        |

@@ -16,7 +16,7 @@ limitations under the License.
 
 # TOP-K SKETCH
 
-| TypeRedis | Redis                                                               | Valkey |
+| TypeRedis     | Redis                                                               | Valkey |
 |---------------|---------------------------------------------------------------------|--------|
 | `topkAdd`     | [TOPK.ADD](https://redis.io/docs/latest/commands/topk.add/)         |        |
 | `topkCount`   | [TOPK.COUNT](https://redis.io/docs/latest/commands/topk.count/)     |        |

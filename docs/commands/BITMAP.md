@@ -16,7 +16,7 @@ limitations under the License.
 
 # BITMAP
 
-| TypeRedis | Redis                                                             | Valkey                                                 |
+| TypeRedis     | Redis                                                             | Valkey                                                 |
 |---------------|-------------------------------------------------------------------|--------------------------------------------------------|
 | `bitCount`    | [BITCOUNT](https://redis.io/docs/latest/commands/bitcount/)       | [BITCOUNT](https://valkey.io/commands/bitcount/)       |
 | `bitField`    | [BITFIELD](https://redis.io/docs/latest/commands/bitfield/)       | [BITFIELD](https://valkey.io/commands/bitfield/)       |

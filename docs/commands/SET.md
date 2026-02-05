@@ -18,7 +18,7 @@ limitations under the License.
 
 `sadd`, `srem`, `smembers`
 
-| TypeRedis | Redis                                                             | Valkey                                                 |
+| TypeRedis     | Redis                                                             | Valkey                                                 |
 |---------------|-------------------------------------------------------------------|--------------------------------------------------------|
 | `sAdd`        | [SADD](https://redis.io/docs/latest/commands/sadd/)               | [SADD](https://valkey.io/commands/sadd/)               |
 | `sCard`       | [SCARD](https://redis.io/docs/latest/commands/scard/)             | [SCARD](https://valkey.io/commands/scard/)             |
