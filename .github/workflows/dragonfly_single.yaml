@@ -1,0 +1,69 @@
+name: DragonflyDB Integration Test
+
+# on: [ push, pull_request ]
+on:
+  push:
+    branches: [ "xmain" ]
+
+jobs:
+  test-dragonfly:
+    runs-on: ubuntu-latest
+
+    # Service container configuration
+    services:
+      dragonfly:
+        image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
+        ports:
+          - 6379:6379
+        # Dragonfly is wire-compatible with Redis, so we reuse redis-cli for health checks
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Checkout specific paths (sparse)
+        uses: actions/checkout@v6
+        with:
+          repository: infradise/keyscope
+          ref: main
+          path: keyscope
+          sparse-checkout: |
+            bin/keyscope.dart
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+
+     # Install redis-tools to simulate a client connection
+      - name: Install Redis Tools
+        run: sudo apt-get update && sudo apt-get install -y redis-tools
+
+      # Verification: Proving 'Drop-in replacement' capability
+      - name: Check Connection & Server Info
+        run: |
+          echo ">>> 1. Connectivity Test (PING)"
+          redis-cli -h localhost -p 6379 ping
+
+          echo ">>> 2. Verify Server Identity"
+          # Check if the server identifies itself as Dragonfly
+          redis-cli -h localhost -p 6379 info server | grep -i dragonfly
+
+# >>> 1. Connectivity Test (PING)
+# PONG
+# >>> 2. Verify Server Identity
+# dragonfly_version:df-v1.36.0
+# executable:dragonfly
+
+      - name: Run Unit Tests
+        run: dart test --exclude-tags example
+
+      - name: Run Example Tests
+        run: dart test --tags example        

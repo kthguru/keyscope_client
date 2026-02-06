@@ -1,0 +1,69 @@
+name: DragonflyDB Cluster Mode Test
+
+# on: [push, pull_request]
+on:
+  push:
+    branches: [ "test" ]
+
+jobs:
+  test-dragonfly-cluster:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Checkout specific paths (sparse)
+        uses: actions/checkout@v6
+        with:
+          repository: infradise/keyscope
+          ref: main
+          path: keyscope
+          sparse-checkout: |
+            bin/keyscope.dart
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+
+      # 1. Run Dragonfly in Cluster Emulation Mode
+      # We use 'docker run' directly to pass the '--cluster_mode=emulated' flag.
+      # Added '--lock_on_hashtags' to fully support Redis Cluster atomic operations.
+      - name: Start Dragonfly (Cluster Mode)
+        run: |
+          docker run -d -p 6379:6379 --name dragonfly-cluster \
+          docker.dragonflydb.io/dragonflydb/dragonfly:latest \
+          --cluster_mode=emulated \
+          --lock_on_hashtags
+
+      # 2. Wait for the container to be ready
+      - name: Wait for Dragonfly
+        run: |
+          echo "Waiting for Dragonfly to accept connections..."
+          timeout 30s bash -c 'until echo > /dev/tcp/localhost/6379; do sleep 1; done'
+          echo "Dragonfly is up!"
+
+      # 3. Install Redis Tools for verification
+      - name: Install Redis Tools
+        run: sudo apt-get update && sudo apt-get install -y redis-tools
+
+      # 4. Verify Cluster Mode
+      # We use 'redis-cli -c' (cluster mode) to connect.
+      # The command 'cluster nodes' proves that the server is speaking the Cluster protocol.
+      - name: Verify Cluster Topology
+        run: |
+          echo ">>> Check Cluster Info"
+          redis-cli -c -p 6379 cluster info
+
+          echo ">>> Check Cluster Nodes (Topology)"
+          redis-cli -c -p 6379 cluster nodes
+
+
+      - name: Run Unit Tests
+        run: dart test --exclude-tags example
+
+      - name: Run Example Tests
+        run: dart test --tags example
