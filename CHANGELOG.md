@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.8.0
+* **Modular Architecture**
+    * **New STREAM Commands** 
+        * Added full suite of STREAM commands: `xAck`, `xAdd`, `xAutoClaim`, `xClaim`, `xDel`, `xGroup`, `xGroupCreate`, `xGroupCreateConsumer`, `xGroupDelConsumer`, `xGroupDestroy`, `xGroupHelp`, `xGroupSetId`, `xInfo`, `xInfoConsumers`, `xInfoGroups`, `xInfoHelp`, `xInfoStream`, `xLen`, `xPending`, `xRange`, `xRead`, `xReadGroup`, `xRevRange`, `xSetId`, `xTrim`.
+
 ## 3.7.0
 * **Modular Architecture**
     * **New HYPERLOGLOG Commands** 
