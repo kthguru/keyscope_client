@@ -44,16 +44,24 @@ Server management, connection handling, and flow control.
 
 ## Usage
 
+**TypeRedis** provides full alias sets for `Redis` and `Valkey`, including Client, ClusterClient, Pool, Exceptions, Configuration, and Data Models. (Check out [Developer Experience Improvements](https://github.com/infradise/valkey_client/wiki/Developer-Experience-Improvements)).
+
 ### 1\-1\. Redis/Valkey Standalone (Basic)
+
+<table>
+<tr>
+<td>
+
+**`For Redis users`**
 
 ```dart
 import 'package:typeredis/typeredis.dart';
 
 void main() async {
-  final client = TRClient(host: 'localhost', port: 6379);
+  final client = RedisClient(host: 'localhost', port: 6379);
   try {
     await client.connect();
-    await client.set('Hello', 'Welcome to TypeRedis');
+    await client.set('Hello', 'Welcome to Redis!');
     print(await client.get('Hello'));
   } catch (e) {
     print('Error: $e');
@@ -63,76 +71,214 @@ void main() async {
 }
 ```
 
-### 1\-2\. Redis/Valkey Standalone (Advanced)
+</td>
+<td>
+
+**`For Valkey users`**
 
 ```dart
 import 'package:typeredis/typeredis.dart';
 
 void main() async {
-  final settings = TRConnectionSettings(
+  final client = ValkeyClient(host: 'localhost', port: 6379);
+  try {
+    await client.connect();
+    await client.set('Hello', 'Welcome to Valkey!');
+    print(await client.get('Hello'));
+  } catch (e) {
+    print('Error: $e');
+  } finally {
+    await client.close();
+  }
+}
+```
+
+</td>
+</tr>
+</table>
+
+
+### 1\-2\. Redis/Valkey Standalone (Advanced)
+
+<table>
+<tr>
+<td>
+
+**`For Redis users`**
+
+```dart
+import 'package:typeredis/typeredis.dart';
+
+void main() async {
+  final settings = RedisConnectionSettings(
     host: 'localhost',
     port: 6379,
     // useSsl: false,
     // database: 0,
   );
-  final aClient = TRClient.fromSettings(settings);
+  final client = RedisClient.fromSettings(settings);
   try {
-    await aClient.connect();
-    await aClient.set('Hello', 'Welcome to TypeRedis');
-    print(await aClient.get('Hello'));
+    await client.connect();
+    await client.set('Hello', 'Welcome to Redis!');
+    print(await client.get('Hello'));
   } catch (e) {
     print('Error: $e');
   } finally {
-    await aClient.close();
+    await client.close();
   }
 }
 ```
 
-### 2\. Redis/Valkey Sentinel
+</td>
+<td>
+
+**`For Valkey users`**
 
 ```dart
 import 'package:typeredis/typeredis.dart';
 
 void main() async {
-  final rSettings = TRConnectionSettings(
+  final settings = ValkeyConnectionSettings(
     host: 'localhost',
     port: 6379,
-    readPreference: ReadPreference.preferReplica
+    // useSsl: false,
+    // database: 0,
   );
-  final rClient = TRClient.fromSettings(rSettings);
+  final client = ValkeyClient.fromSettings(settings);
   try {
-    await rClient.connect();
-    await rClient.set('Hello', 'Welcome to TypeRedis');
-    print(await rClient.get('Hello'));
+    await client.connect();
+    await client.set('Hello', 'Welcome to Valkey!');
+    print(await client.get('Hello'));
   } catch (e) {
     print('Error: $e');
   } finally {
-    await rClient.close();
+    await client.close();
   }
 }
 ```
 
+</td>
+</tr>
+</table>
+
+### 2\. Redis/Valkey Sentinel
+
+<table>
+<tr>
+<td>
+
+**`For Redis users`**
+
+```dart
+import 'package:typeredis/typeredis.dart';
+
+void main() async {
+  final settings = RedisConnectionSettings(
+    host: 'localhost',
+    port: 6379,
+    readPreference: ReadPreference.preferReplica
+  );
+  final client = RedisClient.fromSettings(settings);
+  try {
+    await client.connect();
+    await client.set('Hello', 'Welcome to Redis!');
+    print(await client.get('Hello'));
+  } catch (e) {
+    print('Error: $e');
+  } finally {
+    await client.close();
+  }
+}
+```
+
+</td>
+<td>
+
+**`For Valkey users`**
+
+```dart
+import 'package:typeredis/typeredis.dart';
+
+void main() async {
+  final settings = ValkeyConnectionSettings(
+    host: 'localhost',
+    port: 6379,
+    readPreference: ReadPreference.preferReplica
+  );
+  final client = ValkeyClient.fromSettings(settings);
+  try {
+    await client.connect();
+    await client.set('Hello', 'Welcome to Valkey!');
+    print(await client.get('Hello'));
+  } catch (e) {
+    print('Error: $e');
+  } finally {
+    await client.close();
+  }
+}
+```
+
+</td>
+</tr>
+</table>
+
 ### 3\. Redis/Valkey Cluster
+
+<table>
+<tr>
+<td>
+
+**`For Redis users`**
 
 ```dart
 import 'package:typeredis/typeredis.dart';
 
 void main() async {
   final nodes = [
-    TRConnectionSettings(host: 'localhost', port: 7001)
+    RedisConnectionSettings(host: 'localhost', port: 7001)
   ];
-  final sClient = TRClusterClient(nodes);
+  final client = RedisClusterClient(nodes);
   try {
-    await sClient.connect();
-    await sClient.set('Hello', 'Welcome to TypeRedis');
-    print(await sClient.get('Hello'));
+    await client.connect();
+    await client.set('Hello', 'Welcome to Redis!');
+    print(await client.get('Hello'));
   } catch (e) {
     print('Error: $e');
   } finally {
-    await sClient.close();
+    await client.close();
   }
 }
 ```
+
+</td>
+<td>
+
+**`For Valkey users`**
+
+```dart
+import 'package:typeredis/typeredis.dart';
+
+void main() async {
+  final nodes = [
+    ValkeyConnectionSettings(host: 'localhost', port: 7001)
+  ];
+  final client = ValkeyClusterClient(nodes);
+  try {
+    await client.connect();
+    await client.set('Hello', 'Welcome to Valkey!');
+    print(await client.get('Hello'));
+  } catch (e) {
+    print('Error: $e');
+  } finally {
+    await client.close();
+  }
+}
+```
+
+</td>
+</tr>
+</table>
+
 
 ## Features
 
@@ -161,6 +307,8 @@ void main() async {
 | **Redis/Valkey Module Detector** | Retrieves module metadata to identify installed extensions <br>(e.g., `json`, `search`, `ldap`, `bf`). |
 | **JSON Module Checker** | Pre-validates JSON module availability before execution. |
 | **Server Metadata Discovery** | Access server details via `client.metadata` (Version, Mode, Server Name, <br>Max Databases) to write adaptive logic for Valkey vs. Redis. |
+| **Enhanced Developer Experience** | Provides full alias sets for `Redis` and `Valkey`—including Exceptions, Configuration, and Data Models <br>(e.g., `RedisException`, `RedisMessage`, `ValkeyException`, `ValkeyMessage`)—to ensure API consistency and simplify backend migration. |
+| **Developer Experience** | Added `RedisClient` and `ValkeyClient` alias and smart redirection handling for better usability and stability. |
 | **Type-Safe Exceptions** | Clear distinction between connection errors (`TRConnectionException`), <br>server errors (`TRServerException`), and client errors (`TRClientException`). |
 | **Observability** | Built-in logging. |
 
