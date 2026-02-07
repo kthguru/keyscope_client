@@ -2643,4 +2643,7 @@ class TRClient // FYI. extends TRConnection
     final response = await execute(['ECHO', message]);
     return response as String;
   }
+
+  @override
+  Future<dynamic> send(List<String> command) async => execute(command);
 }
