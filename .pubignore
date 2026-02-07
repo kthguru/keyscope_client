@@ -31,3 +31,7 @@ lib/src/utils/module_printer_deprecated.dart
 docker-compose-cluster-tls.yaml
 docker-compose-cluster.yaml
 docker-compose-sentinel.yaml
+
+# Tool
+tool/
+tools/
