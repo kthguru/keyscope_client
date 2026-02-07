@@ -3,7 +3,7 @@ name: DragonflyDB Integration Test
 # on: [ push, pull_request ]
 on:
   push:
-    branches: [ "xmain" ]
+    branches: [ "test" ]
 
 jobs:
   test-dragonfly:
@@ -15,7 +15,7 @@ jobs:
         image: docker.dragonflydb.io/dragonflydb/dragonfly:latest
         ports:
           - 6379:6379
-        # Dragonfly is wire-compatible with Redis, so we reuse redis-cli for health checks
+        # Dragonfly is wire-compatible with Redis, so we reuse redis-cli for health checks for now
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
@@ -66,4 +66,4 @@ jobs:
         run: dart test --exclude-tags example
 
       - name: Run Example Tests
-        run: dart test --tags example        
+        run: dart test --tags example
