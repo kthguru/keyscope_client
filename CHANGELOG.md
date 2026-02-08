@@ -4,13 +4,14 @@
 * **Modular Architecture**
     * **New GENERIC Commands** 
         * Added full suite of GENERIC commands: `copy`, `del`, `dump`, `exists`, `expire`, `expireAt`, `expireTime`, `keys`, `migrate`, `move`, `objectEncoding`, `objectFreq`, `objectHelp`, `objectIdleTime`, `objectRefCount`, `persist`, `pExpire`, `pExpireAt`, `pExpireTime`, `pTtl`, `randomKey`, `rename`, `renameNx`, `restore`, `scan`, `sort`, `sortRo`, `touch`, `ttl`, `type`, `unlink`, `wait`, `waitAof`.
+* **New APIs**: Added `disconnect()` as a alternative name for `close()`. Internally calls `close()`.
 
 ## 3.8.1
 * **Dragonfly support**
     * **New aliases**: Added complete alias set for Dragonfly.
       * **Dragonfly**: `DragonflyClient`, `DragonflyClusterClient`, `DragonflyPool`, `DragonflyConnectionSettings`, `DragonflyLogLevel`, `DragonflyMessage`, `DragonflyException`, `DragonflyConnectionException`, `DragonflyServerException`, `DragonflyClientException`, `DragonflyParsingException`.
     * **Metadata Checker**: provides server version extractor and information, etc.
-* **New commands**: Added `send()` as a shorter name for `execute()`. Internally calls `execute()`.
+* **New APIs**: Added `send()` as a shorter name for `execute()`. Internally calls `execute()`.
 
 ## 3.8.0
 * **New aliases**: Added complete alias sets for **Valkey** and **Redis** — `Client`, `ClusterClient`, `Pool`, **Exceptions**, **Configuration**, and **Data Models**.  
