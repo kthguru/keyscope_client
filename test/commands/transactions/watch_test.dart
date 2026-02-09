@@ -17,18 +17,18 @@
 // @Tags(['transaction'])
 // library;
 
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   group('WATCH / UNWATCH Commands', () {
-    late TRClient client1;
-    late TRClient client2;
+    late KeyscopeClient client1;
+    late KeyscopeClient client2;
 
     setUp(() async {
       // Initialize two clients to simulate concurrency
-      client1 = TRClient(host: 'localhost', port: 6379);
-      client2 = TRClient(host: 'localhost', port: 6379);
+      client1 = KeyscopeClient(host: 'localhost', port: 6379);
+      client2 = KeyscopeClient(host: 'localhost', port: 6379);
       await client1.connect();
       await client2.connect();
 

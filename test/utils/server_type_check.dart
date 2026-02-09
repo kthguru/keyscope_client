@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
-extension ServerTypeCheck on TRClient {
+extension ServerTypeCheck on KeyscopeClient {
   /// Checks if the connected server is a Redis server or a Valkey server.
   ///
   /// This method parses the output of the 'INFO server' command.

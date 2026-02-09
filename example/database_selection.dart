@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   print('🗄️ Starting Database Selection Example...');
 
   // Configure connection to use Database 1 (default is 0)
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379, // for standalone
     // port: 7002, // for cluster
@@ -28,7 +28,7 @@ void main() async {
     commandTimeout: const Duration(seconds: 2),
   );
 
-  final client = TRClient.fromSettings(settings);
+  final client = KeyscopeClient.fromSettings(settings);
 
   try {
     await client.connect();

@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   group('String Commands (Redis Only Feature) - Extra (MSETEX, DIGEST, DELEX)',
       () {
-    late TRClient client;
+    late KeyscopeClient client;
     var isRedis = false;
     const port = 6379;
 
     setUpAll(() async {
-      final tempClient = TRClient(host: 'localhost', port: port);
+      final tempClient = KeyscopeClient(host: 'localhost', port: port);
       try {
         await tempClient.connect();
         isRedis = await tempClient.isRedisServer();
@@ -39,7 +39,7 @@ void main() {
     setUp(() async {
       if (!isRedis) return;
 
-      client = TRClient(host: 'localhost', port: port);
+      client = KeyscopeClient(host: 'localhost', port: port);
       await client.connect();
       await client.flushAll();
     });

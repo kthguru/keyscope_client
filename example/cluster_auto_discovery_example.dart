@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   // 1. Configure the client to connect to ONE node of the cluster.
   // We assume a cluster node is running on port 7001.
-  final client = TRClient(
+  final client = KeyscopeClient(
     host: '127.0.0.1',
     port: 7001,
   );
@@ -49,16 +49,16 @@ void main() async {
         print('  Replicas: None');
       }
     }
-  } on TRConnectionException catch (e) {
+  } on KeyscopeConnectionException catch (e) {
     print('\n❌ Connection Failed: $e');
     print('Ensure a Valkey CLUSTER node is running on 127.0.0.1:7001.');
-  } on TRServerException catch (e) {
+  } on KeyscopeServerException catch (e) {
     print('\n❌ Server Error: $e');
     print('Did you run this against a standalone (non-cluster) server?');
-  } on TRParsingException catch (e) {
+  } on KeyscopeParsingException catch (e) {
     print('\n❌ Parsing Error: $e');
     print('Failed to parse the server response.');
-  } on TRClientException catch (e) {
+  } on KeyscopeClientException catch (e) {
     print('\n❌ Client Error: $e');
   } catch (e) {
     print('\n❌ Unknown Error: $e');

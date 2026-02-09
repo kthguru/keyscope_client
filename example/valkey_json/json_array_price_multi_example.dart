@@ -16,19 +16,19 @@
 
 import 'dart:convert';
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
-TRLogger logger = TRLogger('JSON Array Price and Multi Example');
+KeyscopeLogger logger = KeyscopeLogger('JSON Array Price and Multi Example');
 
 void main() async {
-  logger.setEnableTRLog(true); // Enable all log levels (default: false)
+  logger.setEnableKeyscopeLog(true); // Enable all log levels (default: false)
 
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
   );
 
-  final client = TRClient.fromSettings(settings);
+  final client = KeyscopeClient.fromSettings(settings);
 
   try {
     await client.connect();
@@ -44,12 +44,12 @@ void main() async {
 
     await runArrayPriceExamples(client);
     await runArrayMultiExamples(client);
-  } on TRConnectionException catch (e) {
+  } on KeyscopeConnectionException catch (e) {
     logger.error('❌ Connection Failed: $e');
     logger.error('Ensure a Redis or Valkey CLUSTER node is running.');
-  } on TRServerException catch (e) {
+  } on KeyscopeServerException catch (e) {
     logger.error('❌ Server Error: $e');
-  } on TRClientException catch (e) {
+  } on KeyscopeClientException catch (e) {
     logger.error('❌ Client Error: $e');
   } on FeatureNotImplementedException catch (e) {
     logger.error('❌ Feature Not Implemented: $e');
@@ -62,7 +62,7 @@ void main() async {
   }
 }
 
-Future<void> runArrayPriceExamples(TRClient client) async {
+Future<void> runArrayPriceExamples(KeyscopeClient client) async {
   const productKey1 = 'product:1';
   const productKey2 = 'product:2';
   const rootPath = r'$';
@@ -128,7 +128,7 @@ Future<void> runArrayPriceExamples(TRClient client) async {
   logger.info('$productKey2 $pricePath = $currentPrice');
 }
 
-Future<void> runArrayMultiExamples(TRClient client) async {
+Future<void> runArrayMultiExamples(KeyscopeClient client) async {
   await client.jsonMSet(entries: [
     // Using Helper Class
     const JsonMSetEntry(key: 'doc:1', path: r'$', value: {'a': 1}),

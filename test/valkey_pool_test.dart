@@ -15,9 +15,10 @@
  */
 
 import 'dart:async';
+
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
-// import 'package:typeredis/src/exceptions.dart';
+// import 'package:keyscope_client/src/exceptions.dart';
 
 const noAuthHost = 'localhost'; // or 127.0.0.1
 const noAuthPort = 6379;
@@ -26,7 +27,7 @@ const noAuthPort = 6379;
 
 /// Helper function to check server status *before* tests are defined.
 Future<bool> checkServerStatus(String host, int port) async {
-  final client = TRClient(host: host, port: port);
+  final client = KeyscopeClient(host: host, port: port);
   try {
     await client.connect();
     await client.close();
@@ -39,9 +40,9 @@ Future<bool> checkServerStatus(String host, int port) async {
 Future<void> main() async {
   final isServerRunning = await checkServerStatus(noAuthHost, noAuthPort);
 
-  group('TRPool', () {
-    late TRPool pool;
-    final settings = TRConnectionSettings(
+  group('KeyscopePool', () {
+    late KeyscopePool pool;
+    final settings = KeyscopeConnectionSettings(
       host: noAuthHost,
       port: noAuthPort,
     );
@@ -52,12 +53,12 @@ Future<void> main() async {
     });
 
     test('can acquire and release a connection', () async {
-      pool = TRPool(connectionSettings: settings, maxConnections: 5);
+      pool = KeyscopePool(connectionSettings: settings, maxConnections: 5);
 
-      TRClient? client;
+      KeyscopeClient? client;
       try {
         client = await pool.acquire();
-        expect(client, isA<TRClient>());
+        expect(client, isA<KeyscopeClient>());
 
         // Check if connection is alive
         final response = await client.ping();
@@ -73,9 +74,9 @@ Future<void> main() async {
 
     test('pool respects maxConnections limit', () async {
       const max = 3;
-      pool = TRPool(connectionSettings: settings, maxConnections: max);
+      pool = KeyscopePool(connectionSettings: settings, maxConnections: max);
 
-      final clients = <TRClient>[];
+      final clients = <KeyscopeClient>[];
 
       // 1. Acquire all connections
       for (var i = 0; i < max; i++) {
@@ -94,10 +95,10 @@ Future<void> main() async {
       pool.release(clients.removeLast());
 
       // 4. Acquiring should now succeed
-      TRClient? newClient;
+      KeyscopeClient? newClient;
       try {
         newClient = await acquireFuture; // The pending future should complete
-        expect(newClient, isA<TRClient>());
+        expect(newClient, isA<KeyscopeClient>());
       } finally {
         if (newClient != null) pool.release(newClient);
         // Release remaining
@@ -109,7 +110,7 @@ Future<void> main() async {
       // This test is tricky because we can't easily make a client "unhealthy"
       // without mocking. We'll simulate a closed client.
 
-      pool = TRPool(connectionSettings: settings, maxConnections: 2);
+      pool = KeyscopePool(connectionSettings: settings, maxConnections: 2);
 
       final client1 = await pool.acquire();
       final client2 = await pool.acquire(); // Pool is now full
@@ -125,7 +126,7 @@ Future<void> main() async {
       pool.release(client2);
 
       // Acquire should now get client2 (or a new healthy one)
-      TRClient? client3;
+      KeyscopeClient? client3;
       try {
         client3 = await pool.acquire().timeout(const Duration(seconds: 1));
         final response = await client3.ping();
@@ -136,18 +137,18 @@ Future<void> main() async {
     });
 
     test('close() rejects new acquires', () async {
-      pool = TRPool(connectionSettings: settings, maxConnections: 2);
+      pool = KeyscopePool(connectionSettings: settings, maxConnections: 2);
       await pool.close();
 
       await expectLater(
           pool.acquire(),
-          throwsA(isA<TRClientException>().having(
+          throwsA(isA<KeyscopeClientException>().having(
               (e) => e.message, 'message', contains('Pool is closing'))));
     });
 
     test('release() automatically discards stateful clients (Smart Release)',
         () async {
-      pool = TRPool(connectionSettings: settings, maxConnections: 2);
+      pool = KeyscopePool(connectionSettings: settings, maxConnections: 2);
 
       // 1. Acquire and make stateful
       final client = await pool.acquire();
@@ -174,7 +175,7 @@ Future<void> main() async {
     test(
         'release() and discard() are safe to call multiple times (Idempotency)',
         () async {
-      pool = TRPool(connectionSettings: settings, maxConnections: 5);
+      pool = KeyscopePool(connectionSettings: settings, maxConnections: 5);
       final client = await pool.acquire();
 
       // 1. Call release multiple times
@@ -192,7 +193,7 @@ Future<void> main() async {
 
       // Pool should be healthy and allow new acquires
       final client2 = await pool.acquire();
-      expect(client2, isA<TRClient>());
+      expect(client2, isA<KeyscopeClient>());
       pool.release(client2);
     });
   },

@@ -14,12 +14,28 @@
  * limitations under the License.
  */
 
-/// A modern, production-ready Dart client for Valkey (7.x/8.x/9.0.0+).
-/// Fully Redis 7.x/8.* compatible.
+/// The ultimate multi-engine client for Redis, Valkey, and Dragonfly.
+///
+/// A high-performance, cluster-aware SDK with seamless polymorphic aliases.
+/// Switch identities seamlessly with built-in polymorphic aliases.
 library;
 
-export 'dragonfly_client.dart';
-export 'redis_client.dart';
+export 'engines/dragonfly_client.dart';
+export 'engines/redis_client.dart';
+export 'engines/valkey_client.dart';
+export 'keyscope_client_base.dart'
+    show
+        KeyscopeClientBase,
+        KeyscopeConnectionSettings,
+        KeyscopeMessage,
+        LoadBalancingStrategy,
+        ReadPreference,
+        RunningMode,
+        ServerMetadata,
+        Subscription;
+export 'keyscope_client_pool.dart';
+export 'keyscope_cluster_client_base.dart';
+export 'keyscope_commands_base.dart';
 export 'src/cluster_info.dart';
 export 'src/commands/bitmap/extensions.dart';
 export 'src/commands/bloom_filter/extensions.dart';
@@ -28,7 +44,7 @@ export 'src/commands/connection/extensions.dart';
 export 'src/commands/count_min_sketch/extensions.dart';
 export 'src/commands/cuckoo_filter/extensions.dart';
 export 'src/commands/generic/commands.dart' show ScanResult;
-export 'src/commands/generic/commands/scan.dart' show ScanResult;
+export 'src/commands/generic/commands/scan_cli.dart' show ScanResult;
 export 'src/commands/generic/extensions.dart';
 export 'src/commands/geospatial_indices/commands.dart'
     show GeoLocation, GeoRadiusOptions, GeoSearchOptions;
@@ -54,20 +70,6 @@ export 'src/commands/top_k_sketch/extensions.dart';
 export 'src/commands/transactions/extensions.dart';
 export 'src/commands/vector_set/extensions.dart';
 export 'src/exceptions.dart';
-export 'src/logging.dart' show TRLogLevel, TRLogger;
-export 'src/typeredis_client.dart';
-export 'src/typeredis_cluster_client.dart';
-export 'typeredis_base.dart'
-    show
-        LoadBalancingStrategy,
-        ReadPreference,
-        RunningMode,
-        ServerMetadata,
-        Subscription,
-        TRClientBase,
-        TRConnectionSettings,
-        TRMessage;
-export 'typeredis_cluster_client_base.dart';
-export 'typeredis_commands_base.dart';
-export 'typeredis_pool.dart';
-export 'valkey_client.dart';
+export 'src/keyscope_client.dart';
+export 'src/keyscope_cluster_client.dart';
+export 'src/logging.dart' show KeyscopeLogLevel, KeyscopeLogger;

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   // 1. Configure the client
-  final client = TRClient(
+  final client = KeyscopeClient(
     host: '127.0.0.1',
     port: 6379,
     // password: 'my-super-secret-password',
@@ -32,9 +32,9 @@ void main() async {
     await client.set('greeting', 'Hello, Valkey!');
     final value = await client.get('greeting');
     print(value); // Output: Hello, Valkey!
-  } on TRConnectionException catch (e) {
+  } on KeyscopeConnectionException catch (e) {
     print('Connection failed: $e');
-  } on TRServerException catch (e) {
+  } on KeyscopeServerException catch (e) {
     print('Server returned an error: $e');
   } finally {
     // 4. Close the connection

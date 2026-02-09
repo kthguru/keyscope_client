@@ -15,12 +15,12 @@
  */
 
 import 'dart:async';
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   // 1. Connect to the cluster
   final initialNodes = [
-    TRConnectionSettings(
+    KeyscopeConnectionSettings(
       host: '127.0.0.1',
       port: 7001,
       commandTimeout:
@@ -29,7 +29,7 @@ void main() async {
   ];
 
   // Create client with Auto-NAT logic
-  final client = TRClusterClient(initialNodes, maxRedirects: 3);
+  final client = KeyscopeClusterClient(initialNodes, maxRedirects: 3);
 
   try {
     print('Connecting to cluster...');
@@ -75,10 +75,10 @@ void main() async {
           print('[FAILURE $count] Node $nodeStr | Value mismatch! '
               'Expected $value, got $result');
         }
-      } on TRClientException catch (e) {
+      } on KeyscopeClientException catch (e) {
         // Client-side errors (e.g. pool exhausted during failover)
         print('[RETRY $count] Client error: $e');
-      } on TRServerException catch (e) {
+      } on KeyscopeServerException catch (e) {
         // Server errors (e.g. CLUSTERDOWN)
         print('[RETRY $count] Server error: $e');
       } catch (e) {

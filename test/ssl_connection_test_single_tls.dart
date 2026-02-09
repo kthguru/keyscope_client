@@ -17,9 +17,9 @@
 @TestOn('vm')
 library;
 
+import 'package:keyscope_client/keyscope_client.dart';
 // import 'dart:io';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   group('SSL/TLS Connection Tests', () {
@@ -28,7 +28,7 @@ void main() {
     const sslPort = 6380;
 
     test('Should connect using SSL with onBadCertificate callback', () async {
-      final client = TRClient(
+      final client = KeyscopeClient(
         host: host,
         port: sslPort,
         useSsl: true,
@@ -50,7 +50,7 @@ void main() {
         expect(pong, equals('PONG'));
       } catch (e) {
         // Fail gracefully if no SSL server is running (to avoid breaking CI)
-        if (e is TRConnectionException) {
+        if (e is KeyscopeConnectionException) {
           print('⚠️ SKIPPING SSL TEST: Server not reachable at $host:$sslPort');
           return;
         }
@@ -63,7 +63,7 @@ void main() {
     test('Should fail if useSsl is true but server is not SSL', () async {
       // Connecting to a non-SSL port (e.g., standard 6379) with SSL enabled
       // should fail
-      final client = TRClient(
+      final client = KeyscopeClient(
         host: host,
         // port: 6379, // Standard non-SSL port
         port: 6380, // TODO: change to 6379

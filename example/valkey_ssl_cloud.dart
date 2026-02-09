@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 // ---------------------------------------------------------
 // Scenario 2: Connecting to a Cloud Provider (Prod)
@@ -24,7 +24,7 @@ import 'package:typeredis/typeredis.dart';
 void main() async {
   print('☁️ [Prod] Connecting to Cloud Provider SSL (Trusted CA)...');
 
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     // Example endpoint for AWS ElastiCache or Azure Redis
     host: 'master.my-cluster.cache.amazonaws.com',
     // host: 'my-redis.region.cache.amazonaws.com',
@@ -35,7 +35,7 @@ void main() async {
     password: 'your_auth_token', // or auth-token-here
   );
 
-  final client = TRClient.fromSettings(settings);
+  final client = KeyscopeClient.fromSettings(settings);
 
   try {
     await client.connect();

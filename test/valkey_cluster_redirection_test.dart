@@ -17,12 +17,12 @@
 @Tags(['cluster'])
 library;
 
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
-// import 'package:typeredis/src/cluster_hash.dart'; // Need getHashSlot
+// import 'package:keyscope_client/src/cluster_hash.dart'; // Need getHashSlot
 
 Future<bool> checkServerStatus(String host, int port) async {
-  final client = TRClient(host: host, port: port);
+  final client = KeyscopeClient(host: host, port: port);
   try {
     await client.connect();
     await client.close();
@@ -38,14 +38,14 @@ void main() async {
 
   final isClusterRunning = await checkServerStatus(clusterHost, clusterPort);
 
-  group('TRClusterClient Redirection', () {
-    late TRClusterClient client;
+  group('KeyscopeClusterClient Redirection', () {
+    late KeyscopeClusterClient client;
 
     setUp(() async {
       final initialNodes = [
-        TRConnectionSettings(host: clusterHost, port: clusterPort),
+        KeyscopeConnectionSettings(host: clusterHost, port: clusterPort),
       ];
-      client = TRClusterClient(initialNodes);
+      client = KeyscopeClusterClient(initialNodes);
       await client.connect();
     });
 

@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-import 'package:test/test.dart';
-import 'package:typeredis/src/utils/module_printer.dart'
+import 'package:keyscope_client/keyscope_client.dart';
+import 'package:keyscope_client/src/utils/module_printer.dart'
     show printPrettyModuleList;
-import 'package:typeredis/typeredis.dart';
+import 'package:test/test.dart';
 
 void main() async {
   // (Standalone: 6379 / Cluster: 7001)
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
   );
 
-  // final client = TRClient(host: '127.0.0.1', port: 6379);
-  final client = TRClient.fromSettings(settings);
+  // final client = KeyscopeClient(host: '127.0.0.1', port: 6379);
+  final client = KeyscopeClient.fromSettings(settings);
 
   setUpAll(() async {
     await client.connect();
@@ -54,7 +54,7 @@ void main() async {
     await client.jsonSet(key: 'json:notarray2', path: '.', data: '{"a":1}');
     expect(() async {
       await client.jsonArrIndex(key: 'json:notarray2', path: '.', value: 'a');
-    }, throwsA(isA<TRException>()));
+    }, throwsA(isA<KeyscopeException>()));
 
     await client.jsonSet(key: 'json:arr', path: '.', data: '["a","b","c"]');
     final idx1 =
@@ -73,8 +73,8 @@ void main() async {
           key: 'json:notarray2', path: '.', value: 'a');
       expect(result, isNull);
     } catch (e) {
-      expect(e, isA<TRException>());
-      expect((e as TRException).message,
+      expect(e, isA<KeyscopeException>());
+      expect((e as KeyscopeException).message,
           equals('WRONGTYPE JSON element is not an array'));
     }
   });

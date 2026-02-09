@@ -16,24 +16,33 @@
 
 import 'dart:async';
 
+import 'keyscope_client.dart'
+    show
+        KeyscopeClientException,
+        KeyscopeConnectionException,
+        KeyscopeServerException;
+import 'keyscope_cluster_client_base.dart'
+    show
+        KeyscopeClientException,
+        KeyscopeConnectionException,
+        KeyscopeServerException;
+import 'keyscope_commands_base.dart';
 import 'src/cluster_info.dart';
 import 'src/exceptions.dart'
-    show TRClientException, TRConnectionException, TRServerException;
-import 'typeredis.dart'
-    show TRClientException, TRConnectionException, TRServerException;
-import 'typeredis_cluster_client_base.dart'
-    show TRClientException, TRConnectionException, TRServerException;
-import 'typeredis_commands_base.dart';
+    show
+        KeyscopeClientException,
+        KeyscopeConnectionException,
+        KeyscopeServerException;
 
-export 'package:typeredis/src/cluster_info.dart'
+export 'package:keyscope_client/src/cluster_info.dart'
     show ClusterNodeInfo, ClusterSlotRange;
-export 'package:typeredis/src/connection_settings.dart'
-    show TRConnectionSettings;
-export 'package:typeredis/src/connection_settings.dart';
-export 'package:typeredis/src/server_metadata.dart';
+export 'package:keyscope_client/src/connection_settings.dart'
+    show KeyscopeConnectionSettings;
+export 'package:keyscope_client/src/connection_settings.dart';
+export 'package:keyscope_client/src/server_metadata.dart';
 
 /// Represents a message received from a subscribed channel or pattern.
-class TRMessage {
+class KeyscopeMessage {
   /// The channel the message was sent to.
   ///
   /// This is `null` if the message was received via a pattern subscription
@@ -49,12 +58,12 @@ class TRMessage {
   /// (`message`).
   final String? pattern;
 
-  TRMessage({this.channel, required this.message, this.pattern});
+  KeyscopeMessage({this.channel, required this.message, this.pattern});
 
   @override
   String toString() {
     if (pattern != null) {
-      return 'TRMessage{pattern: $pattern, channel: $channel, '
+      return 'KeyscopeMessage{pattern: $pattern, channel: $channel, '
           'message: $message}';
     } else {
       return 'Message{channel: $channel, message: $message}';
@@ -68,8 +77,8 @@ class TRMessage {
 class Subscription {
   /// A broadcast stream that emits messages received on the subscribed channels/patterns.
   ///
-  /// Listen to this stream to receive `TRMessage` objects.
-  final Stream<TRMessage> messages;
+  /// Listen to this stream to receive `KeyscopeMessage` objects.
+  final Stream<KeyscopeMessage> messages;
 
   /// A [Future] that completes when the initial subscription to all requested
   /// channels/patterns is confirmed by the server.
@@ -110,7 +119,7 @@ class Subscription {
 ///
 /// This interface defines the public API for interacting with a Redis/Valkey server.
 /// It covers core commands, key management, transactions, and Pub/Sub.
-abstract class TRClientBase implements TRCommandsBase {
+abstract class KeyscopeClientBase implements KeyscopeCommandsBase {
   // --- Connection & Admin ---
 
   /// A [Future] that completes once the connection and authentication
@@ -124,8 +133,8 @@ abstract class TRClientBase implements TRCommandsBase {
   /// print('Client is connected!');
   /// ```
   ///
-  /// Throws a [TRClientException] if accessed before `connect()` is called
-  /// or if the connection attempt failed.
+  /// Throws a [KeyscopeClientException] if accessed before `connect()` is
+  /// called or if the connection attempt failed.
   Future<void> get onConnected;
 
   /// Connects to the Redis/Valkey server.
@@ -133,7 +142,7 @@ abstract class TRClientBase implements TRCommandsBase {
   /// If [host], [port], [username], or [password] are provided,
   /// they will override the default values set in the constructor.
   ///
-  /// Throws a [TRConnectionException] if the socket connection fails
+  /// Throws a [KeyscopeConnectionException] if the socket connection fails
   /// (e.g., connection refused)
   /// or if authentication fails (e.g., wrong password).
   Future<void> connect({
@@ -147,6 +156,10 @@ abstract class TRClientBase implements TRCommandsBase {
   ///
   /// This cancels any active subscriptions and cleans up resources.
   Future<void> close();
+
+  /// Provides a alternative name for `close()`.
+  /// Internally calls `close()`.
+  Future<void> disconnect();
 
   /// Executes a raw command.
   ///
@@ -165,11 +178,11 @@ abstract class TRClientBase implements TRCommandsBase {
   ///
   /// Returns 'PONG' if no [message] is provided,
   /// otherwise returns the [message].
-  /// Throws a [TRServerException] if an error occurs.
+  /// Throws a [KeyscopeServerException] if an error occurs.
   Future<String> ping([String? message]);
 
   // ---
-  // Common Commands (See `TRCommandsBase`)
+  // Common Commands (See `KeyscopeCommandsBase`)
   // ---
 
   // --- Pub/Sub ---
@@ -182,14 +195,15 @@ abstract class TRClientBase implements TRCommandsBase {
   /// Subscribes the client to the specified [channels].
   ///
   /// Returns a [Subscription] object containing:
-  /// 1. `messages`: A `Stream<TRMessage>` to listen for incoming messages.
+  /// 1. `messages`: A `Stream<KeyscopeMessage>` to listen for incoming
+  ///    messages.
   /// 2. `ready`: A `Future<void>` that completes when the server confirms
   ///    subscription to all requested channels.
   ///
   /// You MUST `await subscription.ready` before assuming the subscription
   /// is active.
   ///
-  /// Throws a [TRClientException] if mixing channel and
+  /// Throws a [KeyscopeClientException] if mixing channel and
   /// pattern subscriptions.
   Subscription subscribe(List<String> channels);
 
@@ -205,7 +219,7 @@ abstract class TRClientBase implements TRCommandsBase {
   /// You MUST `await subscription.ready` before assuming the subscription is
   /// active.
   ///
-  /// Throws a [TRClientException] if mixing channel and pattern
+  /// Throws a [KeyscopeClientException] if mixing channel and pattern
   /// subscriptions.
   Subscription psubscribe(List<String> patterns);
 
@@ -251,7 +265,7 @@ abstract class TRClientBase implements TRCommandsBase {
   /// Returns a `List<dynamic>` of replies for each command in the transaction.
   /// Returns `null` if the transaction was aborted (e.g., due to a `WATCH`
   /// failure).
-  /// Throws a [TRServerException] (e.g., `EXECABORT`) if the transaction
+  /// Throws a [KeyscopeServerException] (e.g., `EXECABORT`) if the transaction
   /// was discarded due to a command syntax error within the `MULTI` block.
   Future<List<dynamic>?> exec();
 

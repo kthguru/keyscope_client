@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   print('☁️ [Prod] Connecting to Cloud Cluster SSL...');
 
   final initialNodes = [
-    TRConnectionSettings(
+    KeyscopeConnectionSettings(
       host: 'clustercfg.my-cluster.cache.amazonaws.com',
       port: 6379,
       useSsl: true,
@@ -29,7 +29,7 @@ void main() async {
     ),
   ];
 
-  final cluster = TRClusterClient(initialNodes);
+  final cluster = KeyscopeClusterClient(initialNodes);
 
   try {
     await cluster.connect();

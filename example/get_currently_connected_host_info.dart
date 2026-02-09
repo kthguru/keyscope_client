@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
-TRLogger logger = TRLogger('Get Currently Connected Host Info Example');
+KeyscopeLogger logger =
+    KeyscopeLogger('Get Currently Connected Host Info Example');
 
 void main() async {
-  logger.setEnableTRLog(true); // Enable all log levels (default: false)
+  logger.setEnableKeyscopeLog(true); // Enable all log levels (default: false)
 
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
   );
 
-  final client = TRClient.fromSettings(settings);
+  final client = KeyscopeClient.fromSettings(settings);
 
   try {
     await client.connect();
@@ -37,12 +38,12 @@ void main() async {
       logger.info('Connected host: ${config.host}');
       logger.info('Connected port: ${config.port}');
     }
-  } on TRConnectionException catch (e) {
+  } on KeyscopeConnectionException catch (e) {
     logger.error('❌ Connection Failed: $e');
     logger.error('Ensure a Redis or Valkey CLUSTER node is running.');
-  } on TRServerException catch (e) {
+  } on KeyscopeServerException catch (e) {
     logger.error('❌ Server Error: $e');
-  } on TRClientException catch (e) {
+  } on KeyscopeClientException catch (e) {
     logger.error('❌ Client Error: $e');
   } on FeatureNotImplementedException catch (e) {
     logger.error('❌ Feature Not Implemented: $e');

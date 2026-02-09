@@ -16,12 +16,12 @@
 
 import 'dart:io' show File, SecurityContext, X509Certificate;
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   print('🔒 [Dev] Connecting to Cluster SSL (Self-Signed)...');
 
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     sslContext: setupSecurityContext(),
     // [CRITICAL] Trust self-signed certificates for development
@@ -53,8 +53,9 @@ void main() async {
   await connectServer(initialNodesWithSSL);
 }
 
-Future<void> connectServer(List<TRConnectionSettings> initialNodes) async {
-  final cluster = TRClusterClient(initialNodes);
+Future<void> connectServer(
+    List<KeyscopeConnectionSettings> initialNodes) async {
+  final cluster = KeyscopeClusterClient(initialNodes);
 
   try {
     await cluster.connect();

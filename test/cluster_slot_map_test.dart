@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
+import 'package:keyscope_client/keyscope_client.dart';
+import 'package:keyscope_client/src/cluster_slot_map.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/src/cluster_slot_map.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   // Enable detailed logging
-  TRClient.setLogLevel(TRLogLevel.info);
+  KeyscopeClient.setLogLevel(KeyscopeLogLevel.info);
 
   group('ClusterSlotMap', () {
     test('updateSlot should correctly modify the node for a specific slot', () {

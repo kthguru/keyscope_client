@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../../typeredis.dart' show ServerMetadata;
+import '../../keyscope_client.dart' show ServerMetadata;
 
 /// The base mixin for all command groups.
 mixin Commands {
@@ -102,7 +102,7 @@ mixin Commands {
   /// __________
   ///  Method 1. `Abstract Getter`
   ///
-  /// The implementing class (e.g., TRClient) must override this.
+  /// The implementing class (e.g., KeyscopeClient) must override this.
   /// ```dart
   /// ServerMetadata? get serverMetadata;
   /// ```

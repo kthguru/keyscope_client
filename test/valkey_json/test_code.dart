@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-import 'package:test/test.dart';
-import 'package:typeredis/src/utils/module_printer.dart'
+import 'package:keyscope_client/keyscope_client.dart';
+import 'package:keyscope_client/src/utils/module_printer.dart'
     show printPrettyModuleList;
-import 'package:typeredis/typeredis.dart';
+import 'package:test/test.dart';
 
 void main() async {
   // (Standalone: 6379 / Cluster: 7001)
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
   );
 
-  // final client = TRClient(host: '127.0.0.1', port: 6379);
-  final client = TRClient.fromSettings(settings);
+  // final client = KeyscopeClient(host: '127.0.0.1', port: 6379);
+  final client = KeyscopeClient.fromSettings(settings);
 
   setUpAll(() async {
     await client.connect();
@@ -121,8 +121,8 @@ void main() async {
           values: ['b']);
       fail('Should throw an error');
     } catch (e) {
-      expect(e, isA<TRException>());
-      expect((e as TRException).message,
+      expect(e, isA<KeyscopeException>());
+      expect((e as KeyscopeException).message,
           equals('WRONGTYPE JSON element is not an array'));
     }
   });
@@ -176,8 +176,8 @@ void main() async {
           stop: null);
       fail('Should throw an error');
     } catch (e) {
-      expect(e, isA<TRException>());
-      expect((e as TRException).message,
+      expect(e, isA<KeyscopeException>());
+      expect((e as KeyscopeException).message,
           equals('WRONGTYPE JSON element is not an array'));
     }
   });
@@ -223,8 +223,8 @@ void main() async {
       await client.jsonArrPop(key: 'json:notarray3', path: '.', index: 0);
       fail('Should throw an error');
     } catch (e) {
-      expect(e, isA<TRException>());
-      expect((e as TRException).message,
+      expect(e, isA<KeyscopeException>());
+      expect((e as KeyscopeException).message,
           equals('WRONGTYPE JSON element is not an array'));
     }
   });
@@ -241,8 +241,8 @@ void main() async {
       await client.jsonArrLen(key: 'json:notarray4', path: '.');
       fail('Should throw an error');
     } catch (e) {
-      expect(e, isA<TRException>());
-      expect((e as TRException).message,
+      expect(e, isA<KeyscopeException>());
+      expect((e as KeyscopeException).message,
           equals('WRONGTYPE JSON element is not an array'));
     }
   });
@@ -273,8 +273,8 @@ void main() async {
           key: 'json:notarray5', path: '.', start: 0, stop: 1);
       fail('Should throw an error');
     } catch (e) {
-      expect(e, isA<TRException>());
-      expect((e as TRException).message,
+      expect(e, isA<KeyscopeException>());
+      expect((e as KeyscopeException).message,
           equals('WRONGTYPE JSON element is not an array'));
     }
   });
@@ -529,8 +529,8 @@ void main() async {
       await client.jsonStrAppend(key: 'json:str2', path: '.', value: '"baz"');
       fail('Should throw');
     } catch (e) {
-      expect(e, isA<TRException>());
-      expect((e as TRException).message,
+      expect(e, isA<KeyscopeException>());
+      expect((e as KeyscopeException).message,
           equals('WRONGTYPE JSON element is not a string'));
     }
   });

@@ -15,8 +15,9 @@
  */
 
 import 'dart:async';
+
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 /// Standalone Sharded Pub/Sub Test: Protocol compliance check
 ///
@@ -36,13 +37,13 @@ void main() {
   // that owns the slot.
   // const port = 7002; // Cluster master node port
 
-  group('TRClient Sharded Pub/Sub', () {
-    late TRClient subscriber;
-    late TRClient publisher;
+  group('KeyscopeClient Sharded Pub/Sub', () {
+    late KeyscopeClient subscriber;
+    late KeyscopeClient publisher;
 
     setUp(() async {
-      subscriber = TRClient(host: host, port: port);
-      publisher = TRClient(host: host, port: port);
+      subscriber = KeyscopeClient(host: host, port: port);
+      publisher = KeyscopeClient(host: host, port: port);
       await subscriber.connect();
       await publisher.connect();
     });
@@ -62,7 +63,7 @@ void main() {
       await sub.ready; // Wait for confirmation
 
       // 2. Setup listener
-      final completer = Completer<TRMessage>();
+      final completer = Completer<KeyscopeMessage>();
       sub.messages.listen((msg) {
         print('Received message on ${msg.channel}: ${msg.message}');
         if (!completer.isCompleted) completer.complete(msg);

@@ -16,16 +16,16 @@
 
 import 'dart:async';
 import 'dart:io';
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   // Configure with a known cluster entry point
   final initialNodes = [
-    TRConnectionSettings(host: '127.0.0.1', port: 7001),
+    KeyscopeConnectionSettings(host: '127.0.0.1', port: 7001),
   ];
 
   // Enable retries for failover
-  final client = TRClusterClient(initialNodes, maxRedirects: 10);
+  final client = KeyscopeClusterClient(initialNodes, maxRedirects: 10);
 
   var successCount = 0;
   var failCount = 0;

@@ -18,8 +18,9 @@
 library;
 
 import 'dart:async';
+
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() async {
   const host = '127.0.0.1';
@@ -28,7 +29,7 @@ void main() async {
   // Helper to check server status
   Future<bool> isServerUp() async {
     try {
-      final client = TRClient(host: host, port: port);
+      final client = KeyscopeClient(host: host, port: port);
       await client.connect();
       await client.close();
       return true;
@@ -39,11 +40,12 @@ void main() async {
 
   final serverUp = await isServerUp();
 
-  group('TRClusterClient Sharded Pub/Sub', () {
-    late TRClusterClient client;
+  group('KeyscopeClusterClient Sharded Pub/Sub', () {
+    late KeyscopeClusterClient client;
 
     setUp(() {
-      client = TRClusterClient([TRConnectionSettings(host: host, port: port)]);
+      client = KeyscopeClusterClient(
+          [KeyscopeConnectionSettings(host: host, port: port)]);
     });
 
     tearDown(() async {

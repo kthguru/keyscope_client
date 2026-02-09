@@ -16,29 +16,30 @@
 
 import 'dart:async';
 
-import 'typeredis.dart' show TRClusterClientBase, TRServerException;
-import 'typeredis_base.dart';
-import 'typeredis_cluster_client_base.dart'
-    show TRClusterClientBase, TRServerException;
+import 'keyscope_client.dart'
+    show KeyscopeClusterClientBase, KeyscopeServerException;
+import 'keyscope_client_base.dart';
+import 'keyscope_cluster_client_base.dart'
+    show KeyscopeClusterClientBase, KeyscopeServerException;
 
 /// The abstract base class for all common Redis/Valkey data commands.
 ///
-/// Both the standalone client ([TRClientBase]) and the cluster client
-/// ([TRClusterClientBase]) implement this interface.
-abstract class TRCommandsBase {
+/// Both the standalone client ([KeyscopeClientBase]) and the cluster client
+/// ([KeyscopeClusterClientBase]) implement this interface.
+abstract class KeyscopeCommandsBase {
   // --- Strings ---
 
   /// Gets the value of [key].
   ///
   /// Returns the string value if the key exists, or `null` if the key does
   /// not exist.
-  /// Throws a [TRServerException] if the key holds a non-string value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-string value.
   Future<String?> get(String key);
 
   /// Sets [key] to [value].
   ///
   /// Returns 'OK' if successful.
-  /// Throws a [TRServerException] if an error occurs.
+  /// Throws a [KeyscopeServerException] if an error occurs.
   // Future<String> set(String key, String value);
   Future<String?> set(
     String key,
@@ -64,7 +65,7 @@ abstract class TRCommandsBase {
   /// Gets the value of [field] in the hash stored at [key].
   ///
   /// Returns `null` if the field or key does not exist.
-  /// Throws a [TRServerException] if the key holds a non-hash value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-hash value.
   Future<dynamic> hGet(String key, String field);
   @Deprecated('Use [hGet] instead. This method will be removed in v4.0.0.')
   Future<dynamic> hget(String key, String field);
@@ -73,7 +74,7 @@ abstract class TRCommandsBase {
   ///
   /// Returns `1` if field is a new field and was set,
   /// or `0` if field already existed and was updated.
-  /// Throws a [TRServerException] if the key holds a non-hash value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-hash value.
   ///
   /// Adds a field-value pair to the hash stored at key.
   /// Returns the number of fields that were added.
@@ -98,7 +99,7 @@ abstract class TRCommandsBase {
   ///
   /// Returns a `Map<String, String>`.
   /// Returns an empty map if the key does not exist.
-  /// Throws a [TRServerException] if the key holds a non-hash value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-hash value.
   Future<Map<String, String>> hGetAll(String key);
   @Deprecated('Use [hGetAll] instead. This method will be removed in v4.0.0.')
   Future<Map<String, String>> hgetall(String key);
@@ -108,25 +109,25 @@ abstract class TRCommandsBase {
   /// Prepends [value] to the list stored at [key].
   ///
   /// Returns the length of the list after the push operation.
-  /// Throws a [TRServerException] if the key holds a non-list value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-list value.
   Future<int> lpush(String key, String value);
 
   /// Appends [value] to the list stored at [key].
   ///
   /// Returns the length of the list after the push operation.
-  /// Throws a [TRServerException] if the key holds a non-list value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-list value.
   Future<int> rpush(String key, String value);
 
   /// Removes and returns the first element of the list stored at [key].
   ///
   /// Returns `null` if the key does not exist or the list is empty.
-  /// Throws a [TRServerException] if the key holds a non-list value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-list value.
   Future<String?> lpop(String key);
 
   /// Removes and returns the last element of the list stored at [key].
   ///
   /// Returns `null` if the key does not exist or the list is empty.
-  /// Throws a [TRServerException] if the key holds a non-list value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-list value.
   Future<String?> rpop(String key);
 
   /// Returns the specified elements of the list stored at [key].
@@ -134,7 +135,7 @@ abstract class TRCommandsBase {
   /// [start] and [stop] are zero-based indexes.
   /// Use `0` and `-1` to get all elements.
   /// Returns an empty list if the key does not exist.
-  /// Throws a [TRServerException] if the key holds a non-list value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-list value.
   Future<List<String?>> lrange(String key, int start, int stop);
 
   // --- Sets ---
@@ -142,19 +143,19 @@ abstract class TRCommandsBase {
   /// Adds [member] to the set stored at [key].
   ///
   /// Returns `1` if the member was added, `0` if it already existed.
-  /// Throws a [TRServerException] if the key holds a non-set value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-set value.
   Future<int> sadd(String key, String member);
 
   /// Removes [member] from the set stored at [key].
   ///
   /// Returns `1` if the member was removed, `0` if it did not exist.
-  /// Throws a [TRServerException] if the key holds a non-set value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-set value.
   Future<int> srem(String key, String member);
 
   /// Returns all members of the set stored at [key].
   ///
   /// Returns an empty list if the key does not exist.
-  /// Throws a [TRServerException] if the key holds a non-set value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-set value.
   Future<List<String?>> smembers(String key);
 
   // --- Sorted Sets ---
@@ -163,13 +164,15 @@ abstract class TRCommandsBase {
   /// [key].
   ///
   /// Returns `1` if the member was added, `0` if it was updated.
-  /// Throws a [TRServerException] if the key holds a non-sorted-set value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-sorted-set
+  /// value.
   Future<int> zadd(String key, double score, String member);
 
   /// Removes [member] from the sorted set stored at [key].
   ///
   /// Returns `1` if the member was removed, `0` if it did not exist.
-  /// Throws a [TRServerException] if the key holds a non-sorted-set value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-sorted-set
+  /// value.
   Future<int> zrem(String key, String member);
 
   /// Returns the specified range of members in the sorted set stored at [key],
@@ -177,7 +180,8 @@ abstract class TRCommandsBase {
   ///
   /// [start] and [stop] are zero-based indexes. Use `0` and `-1` for all.
   /// Returns an empty list if the key does not exist.
-  /// Throws a [TRServerException] if the key holds a non-sorted-set value.
+  /// Throws a [KeyscopeServerException] if the key holds a non-sorted-set
+  /// value.
   Future<List<String?>> zrange(String key, int start, int stop);
 
   // --- Key Management ---
@@ -187,15 +191,23 @@ abstract class TRCommandsBase {
   /// Returns the number of keys that were removed (0 or 1).
   Future<int> del(List<String> keys);
 
-  /// Checks if [key] exists.
+  /// Checks if [keys] exists.
   ///
   /// Returns `1` if the key exists, `0` otherwise.
-  Future<int> exists(String key);
+  // Future<int> exists(List<String> keys);
+  Future<int> exists(dynamic keys);
 
   /// Sets a timeout on [key] in seconds.
   ///
   /// Returns `1` if the timeout was set, `0` if the key doesn't exist.
-  Future<int> expire(String key, int seconds);
+  Future<int> expire(
+    String key,
+    int seconds, {
+    bool nx = false,
+    bool xx = false,
+    bool gt = false,
+    bool lt = false,
+  });
 
   /// Gets the remaining time to live of a [key] in seconds.
   ///

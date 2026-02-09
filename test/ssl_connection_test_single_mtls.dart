@@ -18,8 +18,9 @@
 library;
 
 import 'dart:io';
+
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   group('SSL/TLS Connection Tests', () {
@@ -38,7 +39,7 @@ void main() {
       context.useCertificateChain('tests/tls/valkey.crt');
       context.usePrivateKey('tests/tls/valkey.key');
 
-      final client = TRClient(
+      final client = KeyscopeClient(
         host: host,
         port: sslPort,
         useSsl: true,

@@ -15,9 +15,9 @@
  */
 
 import 'dart:io';
-import '../typeredis.dart' show TRPool;
+import '../keyscope_client.dart' show KeyscopePool;
 
-import '../typeredis_pool.dart' show TRPool;
+import '../keyscope_client_pool.dart' show KeyscopePool;
 
 /// Defines which node to select for read operations.
 enum ReadPreference {
@@ -48,8 +48,8 @@ typedef AddressMapper = ({String host, int port}) Function(
 /// Configuration for a Valkey connection.
 /// Holds all configuration options for creating a new connection.
 ///
-/// Used by [TRPool] to create new client instances.
-class TRConnectionSettings {
+/// Used by [KeyscopePool] to create new client instances.
+class KeyscopeConnectionSettings {
   /// The host of the Valkey server.
   final String host;
 
@@ -95,13 +95,13 @@ class TRConnectionSettings {
   final LoadBalancingStrategy loadBalancingStrategy;
 
   // [v2.2.0] Manual Replica Configuration
-  final List<TRConnectionSettings>? explicitReplicas;
+  final List<KeyscopeConnectionSettings>? explicitReplicas;
 
   // [v2.2.0] Address Mapper for NAT/Docker
   // Discovered IP (e.g. 172.xxx) -> External IP (e.g. 127.0.0.1)
   final AddressMapper? addressMapper;
 
-  TRConnectionSettings({
+  KeyscopeConnectionSettings({
     // required this.host, // '127.0.0.1'
     // required this.port, // 6379
     this.host = '127.0.0.1',
@@ -122,7 +122,7 @@ class TRConnectionSettings {
   });
 
   /// Creates a copy of this settings object with the given fields replaced.
-  TRConnectionSettings copyWith({
+  KeyscopeConnectionSettings copyWith({
     String? host,
     int? port,
     String? username,
@@ -135,10 +135,10 @@ class TRConnectionSettings {
     int? database,
     ReadPreference? readPreference,
     LoadBalancingStrategy? loadBalancingStrategy,
-    List<TRConnectionSettings>? explicitReplicas,
+    List<KeyscopeConnectionSettings>? explicitReplicas,
     AddressMapper? addressMapper,
   }) =>
-      TRConnectionSettings(
+      KeyscopeConnectionSettings(
         host: host ?? this.host,
         port: port ?? this.port,
         username: username ?? this.username,

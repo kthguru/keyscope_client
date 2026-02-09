@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart' show TRLogger;
+import 'package:keyscope_client/keyscope_client.dart' show KeyscopeLogger;
 
-TRLogger logger = TRLogger('Built-in Logger Example');
+KeyscopeLogger logger = KeyscopeLogger('Built-in Logger Example');
 
 void main() {
   print('--- PART I. SHOW ALL MESSAGES ---');
 
   // This assures enabling all log levels (default: false)
-  logger
-      .setEnableTRLog(true); // Or use logger.setLogLevelFine() instead of this.
+  logger.setEnableKeyscopeLog(
+      true); // Or use logger.setLogLevelFine() instead of this.
 
   showAllLogs(); // Show all messages regardless of log level.
-  logger.setEnableTRLog(false);
+  logger.setEnableKeyscopeLog(false);
 
   print('');
 

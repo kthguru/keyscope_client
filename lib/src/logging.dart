@@ -19,93 +19,94 @@
 /// Defines logging severity levels.
 ///
 /// Follows the levels from `package:logging`.
-class TRLogLevel {
+class KeyscopeLogLevel {
   final String name;
   final int value;
 
-  const TRLogLevel(this.name, this.value);
+  const KeyscopeLogLevel(this.name, this.value);
 
   /// Fine-grained tracing
-  static const TRLogLevel fine = TRLogLevel('FINE', 500);
+  static const KeyscopeLogLevel fine = KeyscopeLogLevel('FINE', 500);
 
   /// Informational messages
-  static const TRLogLevel info = TRLogLevel('INFO', 700);
+  static const KeyscopeLogLevel info = KeyscopeLogLevel('INFO', 700);
 
   /// Potential problems
-  static const TRLogLevel warning = TRLogLevel('WARNING', 800);
+  static const KeyscopeLogLevel warning = KeyscopeLogLevel('WARNING', 800);
 
   /// Serious failures
-  static const TRLogLevel severe = TRLogLevel('SEVERE', 1000);
+  static const KeyscopeLogLevel severe = KeyscopeLogLevel('SEVERE', 1000);
 
   /// Error messages
-  static const TRLogLevel error = TRLogLevel('ERROR', 1400);
+  static const KeyscopeLogLevel error = KeyscopeLogLevel('ERROR', 1400);
 
   /// Disables logging.
-  static const TRLogLevel off = TRLogLevel('OFF', 2000);
+  static const KeyscopeLogLevel off = KeyscopeLogLevel('OFF', 2000);
 
   /// Enables logging.
-  static const EnableTRLog = false;
+  static const EnableKeyscopeLog = false;
 
-  bool operator <(TRLogLevel other) => value < other.value;
-  bool operator <=(TRLogLevel other) => value <= other.value;
+  bool operator <(KeyscopeLogLevel other) => value < other.value;
+  bool operator <=(KeyscopeLogLevel other) => value <= other.value;
 
   // Legacy identifiers kept for backward compatibility (deprecated)
   @Deprecated('Since 1.1.0: Use "severe" instead')
-  static const TRLogLevel SEVERE = severe;
+  static const KeyscopeLogLevel SEVERE = severe;
 
   @Deprecated('Since 1.1.0: Use "warning" instead')
-  static const TRLogLevel WARNING = warning;
+  static const KeyscopeLogLevel WARNING = warning;
 
   @Deprecated('Since 1.1.0: Use "info" instead')
-  static const TRLogLevel INFO = info;
+  static const KeyscopeLogLevel INFO = info;
 
   @Deprecated('Since 1.1.0: Use "fine" instead')
-  static const TRLogLevel FINE = fine;
+  static const KeyscopeLogLevel FINE = fine;
 
   @Deprecated('Since 1.1.0: Use "off" instead')
-  static const TRLogLevel OFF = off;
+  static const KeyscopeLogLevel OFF = off;
 }
 
-/// A simple internal logger for the typeredis.
+/// A simple internal logger for the keyscope_client.
 ///
 /// This avoids adding an external dependency on `package:logging`.
-class TRLogger {
+class KeyscopeLogger {
   final String name;
-  static TRLogLevel level = TRLogLevel.off; // Logging is off by default
-  bool _enableTRLog = TRLogLevel.EnableTRLog;
-  void setEnableTRLog(bool status) => _enableTRLog = status;
+  static KeyscopeLogLevel level =
+      KeyscopeLogLevel.off; // Logging is off by default
+  bool _enableKeyscopeLog = KeyscopeLogLevel.EnableKeyscopeLog;
+  void setEnableKeyscopeLog(bool status) => _enableKeyscopeLog = status;
 
-  TRLogger(this.name);
+  KeyscopeLogger(this.name);
 
   void setLogLevelFine() {
-    level = TRLogLevel.fine;
+    level = KeyscopeLogLevel.fine;
   }
 
   void setLogLevelInfo() {
-    level = TRLogLevel.info;
+    level = KeyscopeLogLevel.info;
   }
 
   void setLogLevelWarning() {
-    level = TRLogLevel.warning;
+    level = KeyscopeLogLevel.warning;
   }
 
   void setLogLevelSevere() {
-    level = TRLogLevel.severe;
+    level = KeyscopeLogLevel.severe;
   }
 
   void setLogLevelError() {
-    level = TRLogLevel.error;
+    level = KeyscopeLogLevel.error;
   }
 
   void setLogLevelOff() {
-    level = TRLogLevel.off;
+    level = KeyscopeLogLevel.off;
   }
 
   /// Logs a message if [messageLevel] is at or above the current [level].
-  void _log(TRLogLevel messageLevel, String message,
+  void _log(KeyscopeLogLevel messageLevel, String message,
       [Object? error, StackTrace? stackTrace]) {
-    if (!_enableTRLog) {
-      if (messageLevel.value < TRLogger.level.value) {
+    if (!_enableKeyscopeLog) {
+      if (messageLevel.value < KeyscopeLogger.level.value) {
         return; // Log level is too low, ignore.
       }
     }
@@ -122,22 +123,22 @@ class TRLogger {
   }
 
   void fine(String message) {
-    _log(TRLogLevel.fine, message);
+    _log(KeyscopeLogLevel.fine, message);
   }
 
   void info(String message) {
-    _log(TRLogLevel.info, message);
+    _log(KeyscopeLogLevel.info, message);
   }
 
   void warning(String message, [Object? error]) {
-    _log(TRLogLevel.warning, message, error);
+    _log(KeyscopeLogLevel.warning, message, error);
   }
 
   void severe(String message, [Object? error, StackTrace? stackTrace]) {
-    _log(TRLogLevel.severe, message, error, stackTrace);
+    _log(KeyscopeLogLevel.severe, message, error, stackTrace);
   }
 
   void error(String message) {
-    _log(TRLogLevel.error, message);
+    _log(KeyscopeLogLevel.error, message);
   }
 }

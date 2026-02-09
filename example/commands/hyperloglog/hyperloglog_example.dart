@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 Future<void> main() async {
-  // Initialize TypeRedis client
-  final client = TRClient(host: 'localhost', port: 6379);
+  // Initialize keyscope_client client
+  final client = KeyscopeClient(host: 'localhost', port: 6379);
   await client.connect();
   await client.flushAll();
 
-  print('--- 📊 TypeRedis HyperLogLog Example ---\n');
+  print('--- 📊 keyscope_client HyperLogLog Example ---\n');
 
   // Scenario: Tracking Unique Website Visitors
   // HLL is perfect for this because it uses constant small memory (~12kb)

@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   group('Geospatial Commands', () {
-    late TRClient client;
+    late KeyscopeClient client;
 
     setUp(() async {
-      // Changed from ValkeyClient to TRClient
-      client = TRClient(host: 'localhost', port: 6379);
+      // Changed from ValkeyClient to KeyscopeClient
+      client = KeyscopeClient(host: 'localhost', port: 6379);
       await client.connect();
       await client.flushAll();
     });

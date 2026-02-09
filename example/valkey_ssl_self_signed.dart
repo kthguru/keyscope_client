@@ -16,7 +16,7 @@
 
 import 'dart:io' show X509Certificate;
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 // ---------------------------------------------------------
 // Scenario 1: Connecting to a Self-Signed Local Server (Dev)
@@ -25,7 +25,7 @@ import 'package:typeredis/typeredis.dart';
 void main() async {
   print('🔒 [Dev] Connecting to Standalone SSL (Self-Signed)...');
 
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6380, // SSL Port
     useSsl: true,
@@ -38,7 +38,7 @@ void main() async {
     // password: 'your_password',
   );
 
-  final client = TRClient.fromSettings(settings);
+  final client = KeyscopeClient.fromSettings(settings);
 
   try {
     await client.connect();

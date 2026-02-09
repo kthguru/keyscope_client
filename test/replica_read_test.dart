@@ -17,9 +17,9 @@
 @TestOn('vm')
 library;
 
+import 'package:keyscope_client/keyscope_client.dart';
 // import 'dart:io';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   // Assumes Docker Compose setup is running:
@@ -30,13 +30,13 @@ void main() {
   group('v2.2.0 Replica Read & Load Balancing', () {
     test('Should discover replicas and read data from them', () async {
       // Setup: Prefer Replicas with Round-Robin
-      final settings = TRConnectionSettings(
+      final settings = KeyscopeConnectionSettings(
         host: masterHost,
         port: masterPort,
         readPreference: ReadPreference.preferReplica,
         loadBalancingStrategy: LoadBalancingStrategy.roundRobin,
       );
-      final client = TRClient.fromSettings(settings);
+      final client = KeyscopeClient.fromSettings(settings);
 
       try {
         await client.connect();
@@ -69,12 +69,12 @@ void main() {
       // If the environment HAS replicas, this tests that 'preferReplica' works
       // generally.
 
-      final settings = TRConnectionSettings(
+      final settings = KeyscopeConnectionSettings(
         host: masterHost,
         port: masterPort,
         readPreference: ReadPreference.preferReplica,
       );
-      final client = TRClient.fromSettings(settings);
+      final client = KeyscopeClient.fromSettings(settings);
 
       await client.connect();
       await client.set('test:fallback', 'fallback_val');
@@ -95,18 +95,18 @@ void main() {
 
       // print('⚠️ Skipping replicaOnly test (requires standalone instance
       // without replicas)');
-      final settings = TRConnectionSettings(
+      final settings = KeyscopeConnectionSettings(
         host: masterHost,
         port: 6399, // Hypothetical standalone port
         readPreference: ReadPreference.replicaOnly,
       );
-      final client = TRClient.fromSettings(settings);
+      final client = KeyscopeClient.fromSettings(settings);
 
       try {
         await client.connect();
         fail('Should have thrown exception');
       } catch (e) {
-        expect(e, isA<TRConnectionException>());
+        expect(e, isA<KeyscopeConnectionException>());
       }
     });
   });

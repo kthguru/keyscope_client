@@ -15,21 +15,21 @@
  */
 
 import 'dart:async';
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   // Standalone Pub/Sub Best Practice:
   // Use separate connections for Subscribing and Publishing.
 
   // 1. Setup Subscriber Client (Listens for messages)
-  final subscriber = TRClient(
+  final subscriber = KeyscopeClient(
     host: '127.0.0.1',
     port: 6379,
     commandTimeout: const Duration(seconds: 5),
   );
 
   // 2. Setup Publisher Client (Sends messages)
-  final publisher = TRClient(
+  final publisher = KeyscopeClient(
     host: '127.0.0.1',
     port: 6379,
     commandTimeout: const Duration(seconds: 5),
@@ -79,7 +79,7 @@ void main() async {
     // 6. Unsubscribe
     await sub.unsubscribe();
     print('Unsubscribed.');
-  } on TRException catch (e) {
+  } on KeyscopeException catch (e) {
     print('❌ Error: $e');
     print(
         '👉 Note: Ensure your server version supports Sharded Pub/Sub (Redis 7.0+ / Valkey 9.0+)');

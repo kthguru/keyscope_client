@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
-TRLogger logger = TRLogger('JSON Debug Memory Example');
+KeyscopeLogger logger = KeyscopeLogger('JSON Debug Memory Example');
 
 void main() async {
-  logger.setEnableTRLog(true);
+  logger.setEnableKeyscopeLog(true);
 
-  final client = TRClient(host: '127.0.0.1', port: 6379);
+  final client = KeyscopeClient(host: '127.0.0.1', port: 6379);
 
   try {
     await client.connect();

@@ -16,9 +16,10 @@
 
 import 'dart:async';
 import 'dart:collection';
-import 'typeredis.dart';
+import 'keyscope_client.dart';
 
-/// Manages a pool of [TRClient] connections with robust resource tracking.
+/// Manages a pool of [KeyscopeClient] connections with robust resource
+/// tracking.
 ///
 /// This is the recommended class for high-concurrency applications
 /// as it avoids the overhead of creating new connections for every request.
@@ -27,24 +28,24 @@ import 'typeredis.dart';
 /// - **Smart Release:** Automatically discards stateful (dirty) connections.
 /// - **Idempotency:** Safe to call release/discard multiple times.
 /// - **Leak Prevention:** Tracks all created connections to prevent leaks.
-class TRPool {
-  final TRConnectionSettings _connectionSettings;
+class KeyscopePool {
+  final KeyscopeConnectionSettings _connectionSettings;
   final int _maxConnections;
 
   // --- Pool State (Robust Tracking) ---
 
   /// All connections managed by this pool (Leased + Idle).
   /// Used to verify ownership and prevent leaks.
-  final Set<TRClient> _allClients = {};
+  final Set<KeyscopeClient> _allClients = {};
 
   /// Connections currently waiting to be reused.
-  final Queue<TRClient> _idleClients = Queue();
+  final Queue<KeyscopeClient> _idleClients = Queue();
 
   /// Connections currently leased out to users.
-  final Set<TRClient> _leasedClients = {};
+  final Set<KeyscopeClient> _leasedClients = {};
 
   /// Requests waiting for a connection to become available.
-  final Queue<Completer<TRClient>> _waitQueue = Queue();
+  final Queue<Completer<KeyscopeClient>> _waitQueue = Queue();
 
   /// Flag to prevent new acquires after close() is called.
   bool _isClosing = false;
@@ -63,8 +64,8 @@ class TRPool {
   /// [connectionSettings]: The settings used to create new connections.
   /// [maxConnections]: The maximum number of concurrent connections allowed.
   /// Default to 10 max connections.
-  TRPool({
-    required TRConnectionSettings connectionSettings,
+  KeyscopePool({
+    required KeyscopeConnectionSettings connectionSettings,
     int maxConnections = 10,
   })  : _connectionSettings = connectionSettings,
         _maxConnections = maxConnections {
@@ -80,9 +81,9 @@ class TRPool {
   ///
   /// (The acquired client **MUST** be returned using [release]
   /// when done.)
-  Future<TRClient> acquire() async {
+  Future<KeyscopeClient> acquire() async {
     if (_isClosing) {
-      throw TRClientException(
+      throw KeyscopeClientException(
           'Pool is closing, cannot acquire new connections.');
     }
 
@@ -107,15 +108,15 @@ class TRPool {
     }
 
     // 3. Pool is full, wait for a connection
-    final completer = Completer<TRClient>();
+    final completer = Completer<KeyscopeClient>();
     _waitQueue.add(completer);
     return completer.future;
   }
 
   /// Helper to create, track, and lease a new client.
-  Future<TRClient> _createNewClientAndLease() async {
+  Future<KeyscopeClient> _createNewClientAndLease() async {
     try {
-      final client = TRClient(
+      final client = KeyscopeClient(
         host: _connectionSettings.host,
         port: _connectionSettings.port,
         username: _connectionSettings.username,
@@ -135,7 +136,7 @@ class TRPool {
       return client;
     } catch (e) {
       // Creation failed, no tracking needed as it wasn't added
-      throw TRConnectionException(
+      throw KeyscopeConnectionException(
           'Failed to create new pool connection: $e', e);
     }
   }
@@ -156,7 +157,7 @@ class TRPool {
   /// - If the client is **stateful** (e.g., Pub/Sub mode), it is automatically **discarded**.
   /// - If the client does not belong to this pool or was already released,
   ///   this does nothing (Safe).
-  void release(TRClient client) {
+  void release(KeyscopeClient client) {
     // 1. Ownership & State Check
     if (!_allClients.contains(client)) {
       // Already discarded or foreign client. Ignore safely.
@@ -199,7 +200,7 @@ class TRPool {
   ///
   /// Use this if the connection is broken or no longer needed.
   /// Safe to call multiple times.
-  Future<void> discard(TRClient client) async {
+  Future<void> discard(KeyscopeClient client) async {
     // 1. Ownership Check
     if (!_allClients.contains(client)) {
       return; // Already gone. Safe.
@@ -240,7 +241,7 @@ class TRPool {
     // 1. Cancel waiters
     while (_waitQueue.isNotEmpty) {
       _waitQueue.removeFirst().completeError(
-          TRClientException('Pool is closing, request cancelled.'));
+          KeyscopeClientException('Pool is closing, request cancelled.'));
     }
 
     // 2. Close all clients (Idle + Leased)

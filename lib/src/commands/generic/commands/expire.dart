@@ -19,13 +19,19 @@ import '../commands.dart' show GenericCommands;
 extension ExpireCommand on GenericCommands {
   /// EXPIRE key seconds [NX|XX|GT|LT]
   ///
+  /// Integer reply: 0 if the timeout was not set.
+  /// (e.g., the key doesn't exist, or the operation was skipped because of
+  /// the provided arguments.)
+  ///
+  /// Integer reply: 1 if the timeout was set.
+  ///
   /// Set a timeout on key.
   /// Options (Redis 7.0+):
   /// - [nx]: Set expiry only when the key has no expiry.
   /// - [xx]: Set expiry only when the key has an existing expiry.
   /// - [gt]: Set expiry only when the new expiry is greater than current one.
   /// - [lt]: Set expiry only when the new expiry is less than current one.
-  Future<bool> expire(
+  Future<int> expire(
     String key,
     int seconds, {
     bool nx = false,
@@ -41,6 +47,9 @@ extension ExpireCommand on GenericCommands {
     if (xx) cmd.add('XX');
     if (gt) cmd.add('GT');
     if (lt) cmd.add('LT');
-    return (await executeInt(cmd)) == 1;
+
+    // return (await executeInt(cmd)) == 1;
+
+    return executeInt(cmd);
   }
 }

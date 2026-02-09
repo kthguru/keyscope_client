@@ -15,21 +15,21 @@
  */
 
 import 'dart:async';
-import 'typeredis.dart'; // Export exceptions
-// import 'package:typeredis/valkey_commands_base.dart';
+import 'keyscope_client.dart'; // Export exceptions
+// import 'package:keyscope_client/valkey_commands_base.dart';
 
-export 'package:typeredis/typeredis.dart'
+export 'package:keyscope_client/keyscope_client.dart'
     show
-        TRClientException,
-        TRConnectionException,
-        TRParsingException,
-        TRServerException;
+        KeyscopeClientException,
+        KeyscopeConnectionException,
+        KeyscopeParsingException,
+        KeyscopeServerException;
 
 /// The abstract base class for a **cluster-aware** Redis/Valkey client.
 ///
 /// This interface automatically routes commands to the correct node
 /// based on the key's hash slot.
-abstract class TRClusterClientBase implements TRCommandsBase {
+abstract class KeyscopeClusterClientBase implements KeyscopeCommandsBase {
   /// Connects to the cluster using the provided initial node(s).
   ///
   /// This method will perform the following steps:
@@ -37,7 +37,7 @@ abstract class TRClusterClientBase implements TRCommandsBase {
   /// 2. Call `CLUSTER SLOTS` to fetch the topology.
   /// 3. Create connection pools for each discovered master node.
   ///
-  /// Throws [TRConnectionException] if it fails to connect or
+  /// Throws [KeyscopeConnectionException] if it fails to connect or
   /// fetch the cluster topology.
   Future<void> connect();
 
@@ -45,9 +45,9 @@ abstract class TRClusterClientBase implements TRCommandsBase {
   Future<void> close();
 
   // ---
-  // Key-based Commands (See `TRCommandsBase`)
+  // Key-based Commands (See `KeyscopeCommandsBase`)
   // All commands like get, set, hget are now inherited
-  // from the TRCommandsBase interface.
+  // from the KeyscopeCommandsBase interface.
   // NO DUPLICATION NEEDED.
   // ---
 

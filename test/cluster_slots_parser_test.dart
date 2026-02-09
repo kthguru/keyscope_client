@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
+import 'package:keyscope_client/src/cluster_info.dart';
+import 'package:keyscope_client/src/cluster_slots_parser.dart';
+import 'package:keyscope_client/src/exceptions.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/src/cluster_info.dart';
-import 'package:typeredis/src/cluster_slots_parser.dart';
-import 'package:typeredis/src/exceptions.dart';
 
 void main() {
   group('parseClusterSlotsResponse (top-level)', () {
@@ -113,18 +113,18 @@ void main() {
       expect(result[0].replicas, isEmpty);
     });
 
-    test('should throw TRParsingException on invalid response type', () {
+    test('should throw KeyscopeParsingException on invalid response type', () {
       // Check for string
       expect(() => parseClusterSlotsResponse('not a list'),
-          throwsA(isA<TRParsingException>()));
+          throwsA(isA<KeyscopeParsingException>()));
 
       // Check for map
       expect(() => parseClusterSlotsResponse({'key': 'value'}),
-          throwsA(isA<TRParsingException>()));
+          throwsA(isA<KeyscopeParsingException>()));
 
       // Check for integer
       expect(() => parseClusterSlotsResponse(123),
-          throwsA(isA<TRParsingException>()));
+          throwsA(isA<KeyscopeParsingException>()));
     });
 
     test('should skip invalid slot entry format', () {
@@ -135,7 +135,8 @@ void main() {
       expect(parseClusterSlotsResponse(invalidSlotEntry), isEmpty);
     });
 
-    test('should throw TRParsingException on invalid node info format', () {
+    test('should throw KeyscopeParsingException on invalid node info format',
+        () {
       final invalidNodeInfo = [
         [
           0,
@@ -144,7 +145,7 @@ void main() {
         ]
       ];
       expect(() => parseClusterSlotsResponse(invalidNodeInfo),
-          throwsA(isA<TRParsingException>()));
+          throwsA(isA<KeyscopeParsingException>()));
     });
   });
 }

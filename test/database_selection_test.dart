@@ -17,8 +17,8 @@
 @TestOn('vm')
 library;
 
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   const host = '127.0.0.1';
@@ -27,7 +27,7 @@ void main() {
   group('Database Selection & Metadata', () {
     test('Should connect to specific DB and verify data isolation', () async {
       // 1. Connect to DB 0 and clear key
-      final clientDb0 = TRClient(
+      final clientDb0 = KeyscopeClient(
         host: host,
         port: port,
         database: 0,
@@ -36,7 +36,7 @@ void main() {
       await clientDb0.del(['test_isolation_key']);
 
       // 2. Connect to DB 2 and set key
-      final clientDb2 = TRClient(
+      final clientDb2 = KeyscopeClient(
         host: host,
         port: port,
         database: 2,
@@ -62,7 +62,7 @@ void main() {
 
     test('Should throw exception when requesting invalid DB index', () async {
       // Requesting DB 9999 (assuming default config has 16 DBs)
-      final client = TRClient(
+      final client = KeyscopeClient(
         host: host,
         port: port,
         database: 9999,
@@ -70,11 +70,11 @@ void main() {
 
       try {
         await client.connect();
-        // fail('Should have thrown TRClientException');
-        fail('Should have thrown TRConnectionException');
+        // fail('Should have thrown KeyscopeClientException');
+        fail('Should have thrown KeyscopeConnectionException');
       } catch (e) {
-        // expect(e, isA<TRClientException>());
-        expect(e, isA<TRConnectionException>());
+        // expect(e, isA<KeyscopeClientException>());
+        expect(e, isA<KeyscopeConnectionException>());
         expect(e.toString(), contains('out of range'));
       } finally {
         await client.close();
@@ -82,7 +82,7 @@ void main() {
     });
 
     test('Should correctly identify server metadata', () async {
-      final client = TRClient(host: host, port: port);
+      final client = KeyscopeClient(host: host, port: port);
       await client.connect();
 
       final meta = client.metadata!;

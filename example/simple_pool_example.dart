@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   // 1. Define connection settings
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
     // password: 'my-super-secret-password',
   );
 
   // 2. Create a pool (e.g., max 10 connections)
-  final pool = TRPool(connectionSettings: settings, maxConnections: 10);
-  TRClient? client;
+  final pool = KeyscopePool(connectionSettings: settings, maxConnections: 10);
+  KeyscopeClient? client;
 
   try {
     // 3. Acquire a client from the pool
     client = await pool.acquire();
 
     // 4. Run commands
-    await client.set('greeting', 'Hello from TRPool!');
+    await client.set('greeting', 'Hello from KeyscopePool!');
     final value = await client.get('greeting');
-    print(value); // Output: Hello from TRPool!
-  } on TRConnectionException catch (e) {
+    print(value); // Output: Hello from KeyscopePool!
+  } on KeyscopeConnectionException catch (e) {
     print('Connection or pool acquisition failed: $e');
-  } on TRServerException catch (e) {
+  } on KeyscopeServerException catch (e) {
     print('Server returned an error: $e');
   } finally {
     // 5. Release the client back to the pool

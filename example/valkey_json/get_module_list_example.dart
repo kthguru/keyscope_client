@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/src/utils/module_printer.dart'
+import 'package:keyscope_client/keyscope_client.dart';
+import 'package:keyscope_client/src/utils/module_printer.dart'
     show printPrettyModuleList;
-import 'package:typeredis/typeredis.dart';
 
-TRLogger logger = TRLogger('Get Module List Example');
+KeyscopeLogger logger = KeyscopeLogger('Get Module List Example');
 
 void main() async {
-  logger.setEnableTRLog(true); // Enable all log levels (default: false)
+  logger.setEnableKeyscopeLog(true); // Enable all log levels (default: false)
 
   // ... Initialize client ...
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
   );
 
-  final client = TRClient.fromSettings(settings);
+  final client = KeyscopeClient.fromSettings(settings);
 
   try {
     await client.connect();
@@ -50,12 +50,12 @@ void main() async {
       // Error: JSON module is NOT loaded on this server.
       print('❌ JSON Module is missing.');
     }
-  } on TRConnectionException catch (e) {
+  } on KeyscopeConnectionException catch (e) {
     logger.error('❌ Connection Failed: $e');
     logger.error('Ensure a Redis or Valkey CLUSTER node is running.');
-  } on TRServerException catch (e) {
+  } on KeyscopeServerException catch (e) {
     logger.error('❌ Server Error: $e');
-  } on TRClientException catch (e) {
+  } on KeyscopeClientException catch (e) {
     logger.error('❌ Client Error: $e');
   } on FeatureNotImplementedException catch (e) {
     logger.error('❌ Feature Not Implemented: $e');

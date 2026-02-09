@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
   // Enable detailed logging
-  // TRClient.setLogLevel(TRLogLevel.info);
+  // KeyscopeClient.setLogLevel(KeyscopeLogLevel.info);
 
   print('🚀 Starting Replica Read & Load Balancing Example...');
 
@@ -27,7 +27,7 @@ void main() async {
   // final portReplica2 = 6381;
 
   // Base settings for Master
-  final masterSettings = TRConnectionSettings(
+  final masterSettings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: portMaster,
 
@@ -61,9 +61,9 @@ void main() async {
   //     masterSettings.copyWith(port: portReplica2),
   //   ],
   // );
-  // final client = TRClient.fromSettings(settings);
+  // final client = KeyscopeClient.fromSettings(settings);
 
-  final client = TRClient.fromSettings(masterSettings);
+  final client = KeyscopeClient.fromSettings(masterSettings);
 
   try {
     // 2. Connect

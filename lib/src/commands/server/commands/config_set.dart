@@ -17,4 +17,13 @@
 import '../commands.dart' show ServerCommands;
 
 // CONFIG SET appendonly no
-extension ConfigSetCommand on ServerCommands {}
+extension ConfigSetCommand on ServerCommands {
+  /// CONFIG SET parameter value
+  ///
+  /// Reconfigure the server at run time.
+  /// Returns 'OK' when the configuration was set properly.
+  Future<String> configSet(String parameter, String value) async {
+    final cmd = <String>['CONFIG', 'SET', parameter, value];
+    return executeString(cmd);
+  }
+}

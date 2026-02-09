@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 void main() async {
-  // TRClient.setLogLevel(TRLogLevel.off); // default
+  // KeyscopeClient.setLogLevel(KeyscopeLogLevel.off); // default
 
   // 1. Configure cluster connection
   // We use 127.0.0.1:7001 as the entry point (based on your Docker setup)
   final initialNodes = [
-    TRConnectionSettings(
+    KeyscopeConnectionSettings(
       host: '127.0.0.1',
       port: 7001,
       commandTimeout: const Duration(seconds: 5),
     ),
   ];
-  final client = TRClusterClient(initialNodes);
+  final client = KeyscopeClusterClient(initialNodes);
 
   try {
     print('Connecting to cluster...');
@@ -70,7 +70,7 @@ void main() async {
     await client.del(['key:A']);
     await client.del(['key:B']);
     await client.del(['key:C']);
-  } on TRException catch (e) {
+  } on KeyscopeException catch (e) {
     print('❌ Error: $e');
   } finally {
     await client.close();

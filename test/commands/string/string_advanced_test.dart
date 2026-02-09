@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   group('String Commands - Advanced', () {
-    late TRClient client;
+    late KeyscopeClient client;
 
     setUp(() async {
-      client = TRClient(host: 'localhost', port: 6379);
+      client = KeyscopeClient(host: 'localhost', port: 6379);
       await client.connect();
       await client.flushAll();
     });

@@ -16,11 +16,11 @@
 
 import 'dart:async';
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 /// Helper function to simulate a web request using the pool.
-Future<void> handleRequest(TRPool pool, String userId) async {
-  TRClient? client;
+Future<void> handleRequest(KeyscopePool pool, String userId) async {
+  KeyscopeClient? client;
   try {
     // 1. Acquire connection
     print('[$userId] Acquiring connection...');
@@ -33,7 +33,7 @@ Future<void> handleRequest(TRPool pool, String userId) async {
 
     // Simulate some work
     await Future<void>.delayed(const Duration(milliseconds: 500));
-  } on TRException catch (e) {
+  } on KeyscopeException catch (e) {
     print('[$userId] Valkey Error: $e');
   } on TimeoutException {
     print('[$userId] Timed out waiting for a connection!');
@@ -54,14 +54,14 @@ Future<void> main() async {
   // ---
 
   // 1. Define connection settings
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379, // or 7001
     // password: 'my-password',
   );
 
   // 2. Create a pool with a max of 3 connections
-  final pool = TRPool(
+  final pool = KeyscopePool(
     connectionSettings: settings,
     maxConnections: 3,
   );

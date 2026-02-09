@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() async {
   // (Standalone: 6379 / Cluster: 7001)
-  final client = TRClient(host: '127.0.0.1', port: 6379);
+  final client = KeyscopeClient(host: '127.0.0.1', port: 6379);
 
   setUpAll(() async {
     await client.connect();

@@ -15,7 +15,7 @@
  */
 
 // import 'dart:async';
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 /// Standalone & Pool Example: The essence of Smart Release
 ///
@@ -27,13 +27,13 @@ import 'package:typeredis/typeredis.dart';
 
 void main() async {
   // 1. Configure the Connection Pool (Standalone)
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
   );
 
   // Create a pool with a limit of 5 connections
-  final pool = TRPool(connectionSettings: settings, maxConnections: 5);
+  final pool = KeyscopePool(connectionSettings: settings, maxConnections: 5);
 
   print('--- Starting v1.7.0 Smart Pool Example ---');
 

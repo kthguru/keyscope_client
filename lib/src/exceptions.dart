@@ -14,45 +14,45 @@
  * limitations under the License.
  */
 
-/// The base class for all exceptions thrown by the typeredis package.
-class TRException implements Exception {
+/// The base class for all exceptions thrown by the keyscope_client package.
+class KeyscopeException implements Exception {
   final String message;
 
-  TRException(this.message);
+  KeyscopeException(this.message);
 
   @override
-  String toString() => 'TRException: $message';
+  String toString() => 'KeyscopeException: $message';
 }
 
 /// Thrown when the client fails to connect to the server (e.g., connection
 /// refused)
 /// or if an established connection is lost.
 /// Corresponds to socket-level or network errors.
-class TRConnectionException extends TRException {
+class KeyscopeConnectionException extends KeyscopeException {
   /// The original socket exception (e.g., `SocketException`) or error, if
   /// available.
   final Object? originalException;
 
-  TRConnectionException(super.message, [this.originalException]);
+  KeyscopeConnectionException(super.message, [this.originalException]);
 
   @override
   String toString() =>
-      'TRConnectionException: $message (Original: $originalException)';
+      'KeyscopeConnectionException: $message (Original: $originalException)';
 }
 
 /// Thrown when the Valkey server returns an error reply
 /// (e.g., -ERR, -WRONGPASS).
 /// These are errors reported by the server itself, indicating a command
 /// could not be processed.
-class TRServerException extends TRException {
+class KeyscopeServerException extends KeyscopeException {
   /// The error code or type returned by the server (e.g., "ERR", "WRONGPASS",
   /// "EXECABORT").
   final String code;
 
-  TRServerException(super.message) : code = message.split(' ').first;
+  KeyscopeServerException(super.message) : code = message.split(' ').first;
 
   @override
-  String toString() => 'TRServerException($code): $message';
+  String toString() => 'KeyscopeServerException($code): $message';
 }
 
 /// Thrown when a command is issued in an invalid client state.
@@ -61,22 +61,22 @@ class TRServerException extends TRException {
 /// * Calling `EXEC` without `MULTI`.
 /// * Calling `PUBLISH` while the client is in Pub/Sub mode.
 /// * Mixing `SUBSCRIBE` and `PSUBSCRIBE` on the same client.
-class TRClientException extends TRException {
-  TRClientException(super.message);
+class KeyscopeClientException extends KeyscopeException {
+  KeyscopeClientException(super.message);
 
   @override
-  String toString() => 'TRClientException: $message';
+  String toString() => 'KeyscopeClientException: $message';
 }
 
 /// Thrown if the client cannot parse the server's response.
 ///
 /// This may indicate corrupted data, a bug in the client,
 /// or an unsupported RESP (Redis Serialization Protocol) version.
-class TRParsingException extends TRException {
-  TRParsingException(super.message);
+class KeyscopeParsingException extends KeyscopeException {
+  KeyscopeParsingException(super.message);
 
   @override
-  String toString() => 'TRParsingException: $message';
+  String toString() => 'KeyscopeParsingException: $message';
 }
 
 /// Simple exception to signal an intentionally unimplemented feature.

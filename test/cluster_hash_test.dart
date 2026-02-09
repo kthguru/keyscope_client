@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
+import 'package:keyscope_client/src/cluster_hash.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/src/cluster_hash.dart';
 
 void main() {
   group('getHashSlot (CRC-16/XMODEM % 16384)', () {

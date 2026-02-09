@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-// TODO: Consider new architecture concept such as `TRConnection` later
+// TODO: Consider new architecture concept such as `KeyscopeConnection` later
 // after feature completeness about full commands for Redis/Valkey.
 
 /// Manages the physical TCP connection and protocol parsing.
-abstract class TRConnection {
+abstract class KeyscopeConnection {
   // The actual socket connection
   // Socket? _socket;
 

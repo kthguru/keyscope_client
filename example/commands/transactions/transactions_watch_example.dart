@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 Future<void> main() async {
   // We use two clients to demonstrate Optimistic Locking (Race Condition)
-  final client1 = TRClient(host: 'localhost', port: 6379);
-  final client2 = TRClient(host: 'localhost', port: 6379);
+  final client1 = KeyscopeClient(host: 'localhost', port: 6379);
+  final client2 = KeyscopeClient(host: 'localhost', port: 6379);
 
   await client1.connect();
   await client2.connect();

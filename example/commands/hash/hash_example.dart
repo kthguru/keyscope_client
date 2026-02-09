@@ -15,10 +15,10 @@
  */
 
 import 'dart:async';
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 Future<void> main() async {
-  final client = TRClient(host: 'localhost', port: 6379);
+  final client = KeyscopeClient(host: 'localhost', port: 6379);
   await client.connect();
 
   print('--- 🚀 Hash Commands Example: User Profile ---\n');

@@ -18,13 +18,14 @@
 library;
 
 import 'dart:async';
+
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 // Helper function (can be shared or duplicated from valkey_client_test.dart)
 // Helper to check if the cluster is reachable
 Future<bool> checkServerStatus(String host, int port) async {
-  final client = TRClient(host: host, port: port);
+  final client = KeyscopeClient(host: host, port: port);
   try {
     await client.connect();
     await client.close();
@@ -45,22 +46,22 @@ Future<void> main() async {
     print('=' * 70);
     print('⚠️  WARNING: Valkey CLUSTER not running on '
         '$clusterHost:$clusterPort.');
-    print('Skipping TRClusterClient tests.');
+    print('Skipping KeyscopeClusterClient tests.');
     print('Please start a cluster (e.g., ports 7001-7006) to run all tests.');
     print('=' * 70);
   }
 
-  group('TRClusterClient', () {
-    late TRClusterClient client;
+  group('KeyscopeClusterClient', () {
+    late KeyscopeClusterClient client;
 
     setUp(() {
       final initialNodes = [
-        TRConnectionSettings(
+        KeyscopeConnectionSettings(
           host: clusterHost,
           port: clusterPort,
         ),
       ];
-      client = TRClusterClient(initialNodes);
+      client = KeyscopeClusterClient(initialNodes);
     });
 
     tearDown(() async {

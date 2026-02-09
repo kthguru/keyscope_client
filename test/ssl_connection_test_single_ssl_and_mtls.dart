@@ -18,8 +18,9 @@
 library;
 
 import 'dart:io';
+
+import 'package:keyscope_client/keyscope_client.dart';
 import 'package:test/test.dart';
-import 'package:typeredis/typeredis.dart';
 
 void main() {
   group('SSL/TLS Connection Tests', () {
@@ -37,7 +38,7 @@ void main() {
 
     test('Standalone: Should connect using Basic SSL (accepting self-signed)',
         () async {
-      final client = TRClient(
+      final client = KeyscopeClient(
         host: host,
         port: tlsPort,
         useSsl: true,
@@ -56,7 +57,7 @@ void main() {
         expect(value, equals('success'));
       } catch (e) {
         // Gracefully fail if the SSL container is not running
-        if (e is SocketException || e is TRConnectionException) {
+        if (e is SocketException || e is KeyscopeConnectionException) {
           print('⚠️ SKIPPING TEST: SSL Server not reachable at $host:$tlsPort');
           return;
         }
@@ -81,7 +82,7 @@ void main() {
       context.useCertificateChain(clientCertPath);
       context.usePrivateKey(clientKeyPath);
 
-      final client = TRClient(
+      final client = KeyscopeClient(
         host: host,
         port: mTlsPort,
         useSsl: true,
@@ -101,7 +102,7 @@ void main() {
         final value = await client.get('test:ssl:mtls');
         expect(value, equals('verified'));
       } catch (e) {
-        if (e is SocketException || e is TRConnectionException) {
+        if (e is SocketException || e is KeyscopeConnectionException) {
           print(
               '⚠️ SKIPPING mTLS TEST: Server not reachable at $host:$mTlsPort');
           return;

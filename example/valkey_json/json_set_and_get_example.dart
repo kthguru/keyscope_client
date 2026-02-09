@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
-TRLogger logger = TRLogger('JSON Set and Get Example');
+KeyscopeLogger logger = KeyscopeLogger('JSON Set and Get Example');
 
 void main() async {
-  logger.setEnableTRLog(true); // Enable all log levels (default: false)
+  logger.setEnableKeyscopeLog(true); // Enable all log levels (default: false)
 
-  final settings = TRConnectionSettings(
+  final settings = KeyscopeConnectionSettings(
     host: '127.0.0.1',
     port: 6379,
   );
 
-  final client = TRClient.fromSettings(settings);
+  final client = KeyscopeClient.fromSettings(settings);
 
   try {
     await client.connect();
@@ -44,12 +44,12 @@ void main() async {
     await runJsonArrayListExample(client);
     await runNestedJsonObjectExample(client);
     await runComplexJsonExample(client);
-  } on TRConnectionException catch (e) {
+  } on KeyscopeConnectionException catch (e) {
     logger.error('❌ Connection Failed: $e');
     logger.error('Ensure a Redis or Valkey CLUSTER node is running.');
-  } on TRServerException catch (e) {
+  } on KeyscopeServerException catch (e) {
     logger.error('❌ Server Error: $e');
-  } on TRClientException catch (e) {
+  } on KeyscopeClientException catch (e) {
     logger.error('❌ Client Error: $e');
   } on FeatureNotImplementedException catch (e) {
     logger.error('❌ Feature Not Implemented: $e');
@@ -63,7 +63,7 @@ void main() async {
 }
 
 // Example: JSON Object (Map)
-Future<void> runJsonObjectMapExample(TRClient client) async {
+Future<void> runJsonObjectMapExample(KeyscopeClient client) async {
   final userMap = {
     'name': 'Alice',
     'age': 30,
@@ -85,7 +85,7 @@ Future<void> runJsonObjectMapExample(TRClient client) async {
 }
 
 // Example: JSON Array (List)
-Future<void> runJsonArrayListExample(TRClient client) async {
+Future<void> runJsonArrayListExample(KeyscopeClient client) async {
   final fruits = [
     'apple',
     'banana',
@@ -104,7 +104,7 @@ Future<void> runJsonArrayListExample(TRClient client) async {
 }
 
 // Example: Nested JSON Object (User Profile with US Address - Miami Beach)
-Future<void> runNestedJsonObjectExample(TRClient client) async {
+Future<void> runNestedJsonObjectExample(KeyscopeClient client) async {
   // Scenario: Storing a developer's profile who lives in a vacation spot
   // (Miami Beach, FL).
   // Giving developers a refreshing vibe with "Ocean Drive" address!
@@ -153,7 +153,7 @@ Future<void> runNestedJsonObjectExample(TRClient client) async {
 }
 
 // Example: Complex JSON Example (Server Cluster Configuration & Status)
-Future<void> runComplexJsonExample(TRClient client) async {
+Future<void> runComplexJsonExample(KeyscopeClient client) async {
   // Scenario: Managing a microservices cluster configuration and node status.
   // This represents a typical backend use case for configuration management.
   final clusterConfig = {

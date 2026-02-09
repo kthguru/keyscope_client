@@ -15,22 +15,22 @@
  */
 
 import 'dart:async';
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 /// Cluster & Sharded Pub/Sub Example: Internal stability check
 ///
-/// This example shows that when TRClusterClient internally uses a Pool,
+/// This example shows that when KeyscopeClusterClient internally uses a Pool,
 /// the enhanced logic in v1.7.0 keeps cluster connections stable
 /// even after large-scale sharded Pub/Sub operations.
 
 void main() async {
   // 1. Configure Cluster
   final initialNodes = [
-    TRConnectionSettings(host: '127.0.0.1', port: 7001),
+    KeyscopeConnectionSettings(host: '127.0.0.1', port: 7001),
   ];
 
-  // Internally, this uses multiple TRPools (one per master node)
-  final cluster = TRClusterClient(initialNodes);
+  // Internally, this uses multiple KeyscopePools (one per master node)
+  final cluster = KeyscopeClusterClient(initialNodes);
 
   try {
     await cluster.connect();

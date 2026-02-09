@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-name: typeredis
-description: A high-performance, cluster-aware, type-safe Dart client for Redis, Valkey, Dragonfly, and compatible servers.
-version: 3.9.0
-repository: https://github.com/infradise/TypeRedis
-homepage: https://github.com/infradise/TypeRedis
-issue_tracker: https://github.com/infradise/TypeRedis/issues
-# documentation: https://github.com/infradise/TypeRedis/wiki
+name: keyscope_client
+description: The ultimate multi-engine client for Redis, Valkey, and Dragonfly. A high-performance, cluster-aware SDK with seamless polymorphic aliases. Switch identities seamlessly with built-in polymorphic aliases.
+version: 4.0.0
+repository: https://github.com/infradise/keyscope_client
+homepage: https://github.com/infradise/keyscope_client
+issue_tracker: https://github.com/infradise/keyscope_client/issues
+documentation: https://github.com/infradise/keyscope_client/wiki
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

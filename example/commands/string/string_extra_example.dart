@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import 'package:typeredis/typeredis.dart';
+import 'package:keyscope_client/keyscope_client.dart';
 
 Future<void> main() async {
-  final client = TRClient(host: 'localhost', port: 6379);
+  final client = KeyscopeClient(host: 'localhost', port: 6379);
   await client.connect();
 
   // Redis Only Feature
