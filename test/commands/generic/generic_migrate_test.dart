@@ -110,7 +110,12 @@ void main() {
     /// targetHost:targetPort.
     test('Real Migration: Success Case (Target 6380)', () async {
       // TODO: Add to test
-      markTestSkipped('Skipping: This feature requires two instances.');
+      if (await client.isValkeyServer() || await client.isRedisServer()
+          // await client.isDragonflyServer()
+          ) {
+        markTestSkipped('Skipping: This feature requires two instances.');
+        return;
+      }
 
       // 1. Check if target instance is running
       var isTargetUp = false;
