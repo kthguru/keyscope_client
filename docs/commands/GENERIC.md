@@ -18,7 +18,7 @@ limitations under the License.
 
 `del`, `exists`, `expire`, `scan`, `ttl`
 
-| keyscope_client        | Redis                                                                     | Valkey                                                         |
+| keyscope_client  | Redis                                                                     | Valkey                                                         |
 |------------------|---------------------------------------------------------------------------|----------------------------------------------------------------|
 | `copy`           | [COPY](https://redis.io/docs/latest/commands/copy/)                       | [COPY](https://valkey.io/commands/copy/)                       |
 | `del`            | [DEL](https://redis.io/docs/latest/commands/del/)                         | [DEL](https://valkey.io/commands/del/)                         |

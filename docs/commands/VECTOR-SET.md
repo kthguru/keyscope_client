@@ -16,18 +16,18 @@ limitations under the License.
 
 # VECTOR SET
 
-| keyscope_client     | Redis                                                             | Valkey |
-|---------------|-------------------------------------------------------------------|--------|
-| `vAdd`        | [VADD](https://redis.io/docs/latest/commands/vadd/)               |        |
-| `vCard`       | [VCARD](https://redis.io/docs/latest/commands/vcard/)             |        |
-| `vDim`        | [VDIM](https://redis.io/docs/latest/commands/vdim/)               |        |
-| `vEmb`        | [VEMB](https://redis.io/docs/latest/commands/vemb/)               |        |
-| `vGetAttr`    | [VGETATTR](https://redis.io/docs/latest/commands/vgetattr/)       |        |
-| `vInfo`       | [VINFO](https://redis.io/docs/latest/commands/vinfo/)             |        |
-| `vIsMember`   | [VISMEMBER](https://redis.io/docs/latest/commands/vismember/)     |        |
-| `vLinks`      | [VLINKS](https://redis.io/docs/latest/commands/vlinks/)           |        |
-| `vRandMember` | [VRANDMEMBER](https://redis.io/docs/latest/commands/vrandmember/) |        |
-| `vRange`      | [VRANGE](https://redis.io/docs/latest/commands/vrange/)           |        |
-| `vRem`        | [VREM](https://redis.io/docs/latest/commands/vrem/)               |        |
-| `vSetAttr`    | [VSETATTR](https://redis.io/docs/latest/commands/vsetattr/)       |        |
-| `vSim`        | [VSIM](https://redis.io/docs/latest/commands/vsim/)               |        |
+| keyscope_client | Redis                                                             | Valkey |
+|-----------------|-------------------------------------------------------------------|--------|
+| `vAdd`          | [VADD](https://redis.io/docs/latest/commands/vadd/)               |        |
+| `vCard`         | [VCARD](https://redis.io/docs/latest/commands/vcard/)             |        |
+| `vDim`          | [VDIM](https://redis.io/docs/latest/commands/vdim/)               |        |
+| `vEmb`          | [VEMB](https://redis.io/docs/latest/commands/vemb/)               |        |
+| `vGetAttr`      | [VGETATTR](https://redis.io/docs/latest/commands/vgetattr/)       |        |
+| `vInfo`         | [VINFO](https://redis.io/docs/latest/commands/vinfo/)             |        |
+| `vIsMember`     | [VISMEMBER](https://redis.io/docs/latest/commands/vismember/)     |        |
+| `vLinks`        | [VLINKS](https://redis.io/docs/latest/commands/vlinks/)           |        |
+| `vRandMember`   | [VRANDMEMBER](https://redis.io/docs/latest/commands/vrandmember/) |        |
+| `vRange`        | [VRANGE](https://redis.io/docs/latest/commands/vrange/)           |        |
+| `vRem`          | [VREM](https://redis.io/docs/latest/commands/vrem/)               |        |
+| `vSetAttr`      | [VSETATTR](https://redis.io/docs/latest/commands/vsetattr/)       |        |
+| `vSim`          | [VSIM](https://redis.io/docs/latest/commands/vsim/)               |        |

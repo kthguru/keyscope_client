@@ -16,12 +16,12 @@ limitations under the License.
 
 # BITMAP
 
-| keyscope_client     | Redis                                                             | Valkey                                                 |
-|---------------|-------------------------------------------------------------------|--------------------------------------------------------|
-| `bitCount`    | [BITCOUNT](https://redis.io/docs/latest/commands/bitcount/)       | [BITCOUNT](https://valkey.io/commands/bitcount/)       |
-| `bitField`    | [BITFIELD](https://redis.io/docs/latest/commands/bitfield/)       | [BITFIELD](https://valkey.io/commands/bitfield/)       |
-| `bitFieldRo`  | [BITFIELD_RO](https://redis.io/docs/latest/commands/bitfield_ro/) | [BITFIELD_RO](https://valkey.io/commands/bitfield_ro/) |
-| `bitOp`       | [BITOP](https://redis.io/docs/latest/commands/bitop/)             | [BITOP](https://valkey.io/commands/bitop/)             |
-| `bitPos`      | [BITPOS](https://redis.io/docs/latest/commands/bitpos/)           | [BITPOS](https://valkey.io/commands/bitpos/)           |
-| `getBit`      | [GETBIT](https://redis.io/docs/latest/commands/getbit/)           | [GETBIT](https://valkey.io/commands/getbit/)           |
-| `setBit`      | [SETBIT](https://redis.io/docs/latest/commands/setbit/)           | [SETBIT](https://valkey.io/commands/setbit/)           |
+| keyscope_client | Redis                                                             | Valkey                                                 |
+|-----------------|-------------------------------------------------------------------|--------------------------------------------------------|
+| `bitCount`      | [BITCOUNT](https://redis.io/docs/latest/commands/bitcount/)       | [BITCOUNT](https://valkey.io/commands/bitcount/)       |
+| `bitField`      | [BITFIELD](https://redis.io/docs/latest/commands/bitfield/)       | [BITFIELD](https://valkey.io/commands/bitfield/)       |
+| `bitFieldRo`    | [BITFIELD_RO](https://redis.io/docs/latest/commands/bitfield_ro/) | [BITFIELD_RO](https://valkey.io/commands/bitfield_ro/) |
+| `bitOp`         | [BITOP](https://redis.io/docs/latest/commands/bitop/)             | [BITOP](https://valkey.io/commands/bitop/)             |
+| `bitPos`        | [BITPOS](https://redis.io/docs/latest/commands/bitpos/)           | [BITPOS](https://valkey.io/commands/bitpos/)           |
+| `getBit`        | [GETBIT](https://redis.io/docs/latest/commands/getbit/)           | [GETBIT](https://valkey.io/commands/getbit/)           |
+| `setBit`        | [SETBIT](https://redis.io/docs/latest/commands/setbit/)           | [SETBIT](https://valkey.io/commands/setbit/)           |

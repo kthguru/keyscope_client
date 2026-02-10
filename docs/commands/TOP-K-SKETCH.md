@@ -16,12 +16,12 @@ limitations under the License.
 
 # TOP-K SKETCH
 
-| keyscope_client     | Redis                                                               | Valkey |
-|---------------|---------------------------------------------------------------------|--------|
-| `topkAdd`     | [TOPK.ADD](https://redis.io/docs/latest/commands/topk.add/)         |        |
-| `topkCount`   | [TOPK.COUNT](https://redis.io/docs/latest/commands/topk.count/)     |        |
-| `topkIncrBy`  | [TOPK.INCRBY](https://redis.io/docs/latest/commands/topk.incrby/)   |        |
-| `topkInfo`    | [TOPK.INFO](https://redis.io/docs/latest/commands/topk.info/)       |        |
-| `topkList`    | [TOPK.LIST](https://redis.io/docs/latest/commands/topk.list/)       |        |
-| `topkQuery`   | [TOPK.QUERY](https://redis.io/docs/latest/commands/topk.query/)     |        |
-| `topkReserve` | [TOPK.RESERVE](https://redis.io/docs/latest/commands/topk.reserve/) |        |
+| keyscope_client | Redis                                                               | Valkey |
+|-----------------|---------------------------------------------------------------------|--------|
+| `topkAdd`       | [TOPK.ADD](https://redis.io/docs/latest/commands/topk.add/)         |        |
+| `topkCount`     | [TOPK.COUNT](https://redis.io/docs/latest/commands/topk.count/)     |        |
+| `topkIncrBy`    | [TOPK.INCRBY](https://redis.io/docs/latest/commands/topk.incrby/)   |        |
+| `topkInfo`      | [TOPK.INFO](https://redis.io/docs/latest/commands/topk.info/)       |        |
+| `topkList`      | [TOPK.LIST](https://redis.io/docs/latest/commands/topk.list/)       |        |
+| `topkQuery`     | [TOPK.QUERY](https://redis.io/docs/latest/commands/topk.query/)     |        |
+| `topkReserve`   | [TOPK.RESERVE](https://redis.io/docs/latest/commands/topk.reserve/) |        |

@@ -18,7 +18,7 @@ limitations under the License.
 
 `flushAll`, `flushDb`, `info`, `infoServerMetadata`
 
-| keyscope_client                | Redis                                                                                     | Valkey                                                                         |
+| keyscope_client          | Redis                                                                                     | Valkey                                                                         |
 |--------------------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
 | `acl`                    | [ACL](https://redis.io/docs/latest/commands/acl/)                                         | [ACL](https://valkey.io/commands/acl/)                                         |
 | `aclCat`                 | [ACL CAT](https://redis.io/docs/latest/commands/acl-cat/)                                 | [ACL CAT](https://valkey.io/commands/acl-cat/)                                 |
@@ -61,7 +61,7 @@ limitations under the License.
 | `flushAll`               | [FLUSHALL](https://redis.io/docs/latest/commands/flushall/)                               | [FLUSHALL](https://valkey.io/commands/flushall/)                               |
 | `flushDb`                | [FLUSHDB](https://redis.io/docs/latest/commands/flushdb/)                                 | [FLUSHDB](https://valkey.io/commands/flushdb/)                                 |
 | `info`                   | [INFO](https://redis.io/docs/latest/commands/info/)                                       | [INFO](https://valkey.io/commands/info/)                                       |
-| `infoServerMetadata`     |                                                                                           | |                                                                              |
+| `infoServerMetadata`     |                                                                                           |                                                                                |                                                                              |
 | `lastSave`               | [LASTSAVE](https://redis.io/docs/latest/commands/lastsave/)                               | [LASTSAVE](https://valkey.io/commands/lastsave/)                               |
 | `latency`                | [LATENCY](https://redis.io/docs/latest/commands/latency/)                                 | [LATENCY](https://valkey.io/commands/latency/)                                 |
 | `latencyDoctor`          | [LATENCY DOCTOR](https://redis.io/docs/latest/commands/latency-doctor/)                   | [LATENCY DOCTOR](https://valkey.io/commands/latency-doctor/)                   |

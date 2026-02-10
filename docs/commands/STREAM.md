@@ -16,7 +16,7 @@ limitations under the License.
 
 # STREAM
 
-| keyscope_client              | Redis                                                                                 | Valkey                                                                     |
+| keyscope_client        | Redis                                                                                 | Valkey                                                                     |
 |------------------------|---------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
 | `xAck`                 | [XACK](https://redis.io/docs/latest/commands/xack/)                                   | [XACK](https://valkey.io/commands/xack/)                                   |
 | `xAdd`                 | [XADD](https://redis.io/docs/latest/commands/xadd/)                                   | [XADD](https://valkey.io/commands/xadd/)                                   |

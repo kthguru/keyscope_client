@@ -16,7 +16,7 @@ limitations under the License.
 
 # SCRIPTING AND FUNCTIONS
 
-| keyscope_client         | Redis                                                                       | Valkey                                                           |
+| keyscope_client   | Redis                                                                       | Valkey                                                           |
 |-------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------|
 | `eval`            | [EVAL](https://redis.io/docs/latest/commands/eval/)                         | [EVAL](https://valkey.io/commands/eval/)                         |
 | `evalSha`         | [EVALSHA](https://redis.io/docs/latest/commands/evalsha/)                   | [EVALSHA](https://valkey.io/commands/evalsha/)                   |

@@ -16,10 +16,10 @@ limitations under the License.
 
 # HYPERLOGLOG
 
-| keyscope_client     | Redis                                                           | Valkey                                               |
-|---------------|-----------------------------------------------------------------|------------------------------------------------------|
-| `pfAdd`       | [PFADD](https://redis.io/docs/latest/commands/pfadd/)           | [PFADD](https://valkey.io/commands/pfadd/)           |
-| `pfCount`     | [PFCOUNT](https://redis.io/docs/latest/commands/pfcount/)       | [PFCOUNT](https://valkey.io/commands/pfcount/)       |
-| `pfDebug`     | [PFDEBUG](https://redis.io/docs/latest/commands/pfdebug/)       | [PFDEBUG](https://valkey.io/commands/pfdebug/)       |
-| `pfMerge`     | [PFMERGE](https://redis.io/docs/latest/commands/pfmerge/)       | [PFMERGE](https://valkey.io/commands/pfmerge/)       |
-| `pfSelfTest`  | [PFSELFTEST](https://redis.io/docs/latest/commands/pfselftest/) | [PFSELFTEST](https://valkey.io/commands/pfselftest/) |
+| keyscope_client | Redis                                                           | Valkey                                               |
+|-----------------|-----------------------------------------------------------------|------------------------------------------------------|
+| `pfAdd`         | [PFADD](https://redis.io/docs/latest/commands/pfadd/)           | [PFADD](https://valkey.io/commands/pfadd/)           |
+| `pfCount`       | [PFCOUNT](https://redis.io/docs/latest/commands/pfcount/)       | [PFCOUNT](https://valkey.io/commands/pfcount/)       |
+| `pfDebug`       | [PFDEBUG](https://redis.io/docs/latest/commands/pfdebug/)       | [PFDEBUG](https://valkey.io/commands/pfdebug/)       |
+| `pfMerge`       | [PFMERGE](https://redis.io/docs/latest/commands/pfmerge/)       | [PFMERGE](https://valkey.io/commands/pfmerge/)       |
+| `pfSelfTest`    | [PFSELFTEST](https://redis.io/docs/latest/commands/pfselftest/) | [PFSELFTEST](https://valkey.io/commands/pfselftest/) |

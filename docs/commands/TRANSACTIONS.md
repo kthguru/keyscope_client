@@ -16,10 +16,10 @@ limitations under the License.
 
 # TRANSACTIONS
 
-| keyscope_client     | Redis                                                     | Valkey                                         |
-|---------------|-----------------------------------------------------------|------------------------------------------------|
-| `discard`     | [DISCARD](https://redis.io/docs/latest/commands/discard/) | [DISCARD](https://valkey.io/commands/discard/) |
-| `exec`        | [EXEC](https://redis.io/docs/latest/commands/exec/)       | [EXEC](https://valkey.io/commands/exec/)       |
-| `multi`       | [MULTI](https://redis.io/docs/latest/commands/multi/)     | [MULTI](https://valkey.io/commands/multi/)     |
-| `unwatch`     | [UNWATCH](https://redis.io/docs/latest/commands/unwatch/) | [UNWATCH](https://valkey.io/commands/unwatch/) |
-| `watch`       | [WATCH](https://redis.io/docs/latest/commands/watch/)     | [WATCH](https://valkey.io/commands/watch/)     |
+| keyscope_client | Redis                                                     | Valkey                                         |
+|-----------------|-----------------------------------------------------------|------------------------------------------------|
+| `discard`       | [DISCARD](https://redis.io/docs/latest/commands/discard/) | [DISCARD](https://valkey.io/commands/discard/) |
+| `exec`          | [EXEC](https://redis.io/docs/latest/commands/exec/)       | [EXEC](https://valkey.io/commands/exec/)       |
+| `multi`         | [MULTI](https://redis.io/docs/latest/commands/multi/)     | [MULTI](https://valkey.io/commands/multi/)     |
+| `unwatch`       | [UNWATCH](https://redis.io/docs/latest/commands/unwatch/) | [UNWATCH](https://valkey.io/commands/unwatch/) |
+| `watch`         | [WATCH](https://redis.io/docs/latest/commands/watch/)     | [WATCH](https://valkey.io/commands/watch/)     |

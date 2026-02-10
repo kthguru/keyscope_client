@@ -18,7 +18,7 @@ limitations under the License.
 
 `ping`, `echo`, `close`
 
-| keyscope_client            | Redis                                                                               | Valkey                                                                   |
+| keyscope_client      | Redis                                                                               | Valkey                                                                   |
 |----------------------|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
 | `auth`               | [AUTH](https://redis.io/docs/latest/commands/auth/)                                 | [AUTH](https://valkey.io/commands/auth/)                                 |
 | `client`             | [CLIENT](https://redis.io/docs/latest/commands/client/)                             | [CLIENT](https://valkey.io/commands/client/)                             |

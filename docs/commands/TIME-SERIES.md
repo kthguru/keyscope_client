@@ -16,22 +16,22 @@ limitations under the License.
 
 # TIME SERIES
 
-| keyscope_client      | Redis                                                                 | Valkey |
-|----------------|-----------------------------------------------------------------------|--------|
-| `tsAdd`        | [TS.ADD](https://redis.io/docs/latest/commands/ts.add/)               |        |
-| `tsAlter`      | [TS.ALTER](https://redis.io/docs/latest/commands/ts.alter/)           |        |
-| `tsCreate`     | [TS.CREATE](https://redis.io/docs/latest/commands/ts.create/)         |        |
-| `tsCreateRule` | [TS.CREATERULE](https://redis.io/docs/latest/commands/ts.createrule/) |        |
-| `tsDecrBy`     | [TS.DECRBY](https://redis.io/docs/latest/commands/ts.decrby/)         |        |
-| `tsDel`        | [TS.DEL](https://redis.io/docs/latest/commands/ts.del/)               |        |
-| `tsDeleteRule` | [TS.DELETERULE](https://redis.io/docs/latest/commands/ts.deleterule/) |        |
-| `tsGet`        | [TS.GET](https://redis.io/docs/latest/commands/ts.get/)               |        |
-| `tsIncrBy`     | [TS.INCRBY](https://redis.io/docs/latest/commands/ts.incrby/)         |        |
-| `tsInfo`       | [TS.INFO](https://redis.io/docs/latest/commands/ts.info/)             |        |
-| `tsMAdd`       | [TS.MADD](https://redis.io/docs/latest/commands/ts.madd/)             |        |
-| `tsMGet`       | [TS.MGET](https://redis.io/docs/latest/commands/ts.mget/)             |        |
-| `tsMRange`     | [TS.MRANGE](https://redis.io/docs/latest/commands/ts.mrange/)         |        |
-| `tsMRevRange`  | [TS.MREVRANGE](https://redis.io/docs/latest/commands/ts.mrevrange/)   |        |
-| `tsQueryIndex` | [TS.QUERYINDEX](https://redis.io/docs/latest/commands/ts.queryindex/) |        |
-| `tsRange`      | [TS.RANGE](https://redis.io/docs/latest/commands/ts.range/)           |        |
-| `tsRevRange`   | [TS.REVRANGE](https://redis.io/docs/latest/commands/ts.revrange/)     |        |
+| keyscope_client | Redis                                                                 | Valkey |
+|-----------------|-----------------------------------------------------------------------|--------|
+| `tsAdd`         | [TS.ADD](https://redis.io/docs/latest/commands/ts.add/)               |        |
+| `tsAlter`       | [TS.ALTER](https://redis.io/docs/latest/commands/ts.alter/)           |        |
+| `tsCreate`      | [TS.CREATE](https://redis.io/docs/latest/commands/ts.create/)         |        |
+| `tsCreateRule`  | [TS.CREATERULE](https://redis.io/docs/latest/commands/ts.createrule/) |        |
+| `tsDecrBy`      | [TS.DECRBY](https://redis.io/docs/latest/commands/ts.decrby/)         |        |
+| `tsDel`         | [TS.DEL](https://redis.io/docs/latest/commands/ts.del/)               |        |
+| `tsDeleteRule`  | [TS.DELETERULE](https://redis.io/docs/latest/commands/ts.deleterule/) |        |
+| `tsGet`         | [TS.GET](https://redis.io/docs/latest/commands/ts.get/)               |        |
+| `tsIncrBy`      | [TS.INCRBY](https://redis.io/docs/latest/commands/ts.incrby/)         |        |
+| `tsInfo`        | [TS.INFO](https://redis.io/docs/latest/commands/ts.info/)             |        |
+| `tsMAdd`        | [TS.MADD](https://redis.io/docs/latest/commands/ts.madd/)             |        |
+| `tsMGet`        | [TS.MGET](https://redis.io/docs/latest/commands/ts.mget/)             |        |
+| `tsMRange`      | [TS.MRANGE](https://redis.io/docs/latest/commands/ts.mrange/)         |        |
+| `tsMRevRange`   | [TS.MREVRANGE](https://redis.io/docs/latest/commands/ts.mrevrange/)   |        |
+| `tsQueryIndex`  | [TS.QUERYINDEX](https://redis.io/docs/latest/commands/ts.queryindex/) |        |
+| `tsRange`       | [TS.RANGE](https://redis.io/docs/latest/commands/ts.range/)           |        |
+| `tsRevRange`    | [TS.REVRANGE](https://redis.io/docs/latest/commands/ts.revrange/)     |        |

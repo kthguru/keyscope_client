@@ -16,7 +16,7 @@ limitations under the License.
 
 # GEOSPATIAL INDICES
 
-| keyscope_client             | Redis                                                                                   | Valkey                                                                   |
+| keyscope_client       | Redis                                                                                   | Valkey                                                                   |
 |-----------------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
 | `geoAdd`              | [GEOADD](https://redis.io/docs/latest/commands/geoadd/)                                 | [GEOADD](https://valkey.io/commands/geoadd/)                             |
 | `geoDist`             | [GEODIST](https://redis.io/docs/latest/commands/geodist/)                               | [GEODIST](https://valkey.io/commands/geodist/)                           |
