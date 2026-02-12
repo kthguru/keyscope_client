@@ -2,8 +2,15 @@
 
 ## 4.2.0
 * **Modular Architecture**
-    * **New TIME SERIES Commands**  
+    * **New TIME SERIES Commands**
         * Added a full suite of TIME SERIES commands: `tsAdd`, `tsAlter`, `tsCreate`, `tsCreateRule`, `tsDecrBy`, `tsDel`, `tsDeleteRule`, `tsGet`, `tsIncrBy`, `tsInfo`, `tsMAdd`, `tsMGet`, `tsMRange`, `tsMRevRange`, `tsQueryIndex`, `tsRange`, `tsRevRange`
+* **Compatibility Guard**
+    * **Enhanced Command & Sub-command Validation**
+        * Enhanced the guard to precisely identify and filter unique commands and sub-commands for `Redis` and `Valkey`, ensuring accurate exception handling.
+        * **Coverage:** This precise filtering extends to all Search and Time Series commands, and selected commands within the Hash, JSON, and String modules.
+        * Fixed the functional issue with the execution flag (formerly `tryAnyway`) and renamed it to `forceRun`, allowing developers to bypass the guard when necessary.
+* **Breaking Changes**
+    * **Function Name Correction**: Fixed a typo by renaming `jsonDebugKeyTableDistribution2` to `jsonDebugKeyTableDistribution`.
 
 ## 4.1.0
 * **Modular Architecture**
