@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+export '../extensions/server_version_check.dart' show ServerVersionCheck;
 export 'commands/append.dart';
 export 'commands/decr.dart';
 export 'commands/decr_by.dart';

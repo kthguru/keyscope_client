@@ -33,7 +33,8 @@ extension DigestCommand on StringCommands {
   /// - [String]: The hexadecimal digest string
   ///             (e.g., SHA-1 or similar hex representation).
   /// - [`null`]: If the key does not exist.
-  Future<String?> digest(String key) async {
+  Future<String?> digest(String key, {bool forceRun = false}) async {
+    await checkValkeySupport('DIGEST', forceRun: forceRun);
     final cmd = <String>['DIGEST', key];
     final result = await execute(cmd);
     return result as String?;

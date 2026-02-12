@@ -25,27 +25,27 @@ enum RunningMode {
 /// Holds metadata about the connected Valkey/Redis server.
 class ServerMetadata {
   /// The server version string (e.g., "7.2.4", "9.0.0").
-  /// Redis    : redis_version:8.4.0
-  /// Valkey   : redis_version:7.2.4, valkey_version:9.0.0
-  /// Dragonfly: redis_version:7.4.0, dragonfly_version:df-v1.36.0
+  /// - Redis    : redis_version:8.4.0
+  /// - Valkey   : redis_version:7.2.4, valkey_version:9.0.0
+  /// - Dragonfly: redis_version:7.4.0, dragonfly_version:df-v1.36.0
   final String version;
 
   /// The server software name
-  /// Redis: redis
-  /// Valkey: valkey
-  /// Dragonfly: dragonfly
+  /// - Redis: redis
+  /// - Valkey: valkey
+  /// - Dragonfly: dragonfly
   final String serverName;
 
   /// The running mode of the server.
-  /// Redis: redis_mode
-  /// Valkey: server_mode
-  /// Dragonfly: redis_mode
+  /// - Redis: redis_mode
+  /// - Valkey: server_mode
+  /// - Dragonfly: redis_mode
   final RunningMode mode;
 
   /// The loaded modules
-  /// Redis: bf, timeseries, search, vectorset, ReJSON
-  /// Valkey: ldap, bf, search, json
-  /// Dragonfly: ReJSON, search
+  /// - Redis: bf, timeseries, search, vectorset, ReJSON
+  /// - Valkey: ldap, bf, search, json
+  /// - Dragonfly: ReJSON, search
   List moduleList = [];
 
   /// The maximum number of databases available for selection.

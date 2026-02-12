@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show StringCommands;
+import '../commands.dart' show ServerVersionCheck, StringCommands;
 
 extension DelIfEqCommand on StringCommands {
   /// DELIFEQ key value
@@ -28,7 +28,9 @@ extension DelIfEqCommand on StringCommands {
   /// Returns:
   /// - [int]: 1 if the key was deleted, 0 if the key did not exist or
   /// the value did not match.
-  Future<int> delIfEq(String key, String value) async {
+  Future<int> delIfEq(String key, String value, {bool forceRun = false}) async {
+    await checkValkeySupport('DELIFEQ', forceRun: forceRun);
+
     final cmd = <String>['DELIFEQ', key, value];
     return executeInt(cmd);
   }

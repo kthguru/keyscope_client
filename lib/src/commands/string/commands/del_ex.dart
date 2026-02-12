@@ -34,13 +34,14 @@ extension DelExCommand on StringCommands {
   ///
   /// Returns:
   /// - [int]: 1 if deleted, 0 if not deleted.
-  Future<int> delEx(
-    String key, {
-    String? ifEq,
-    String? ifNe,
-    String? ifDeq,
-    String? ifDne,
-  }) async {
+  Future<int> delEx(String key,
+      {String? ifEq,
+      String? ifNe,
+      String? ifDeq,
+      String? ifDne,
+      bool forceRun = false}) async {
+    await checkValkeySupport('DELEX', forceRun: forceRun);
+
     final cmd = <String>['DELEX', key];
 
     // Check that at most one option is provided is handled by the server,

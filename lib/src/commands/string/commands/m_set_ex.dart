@@ -38,16 +38,16 @@ extension MSetExCommand on StringCommands {
   ///
   /// Returns:
   /// - [int]: 0 if none of the keys were set; 1 if all of the keys were set.
-  Future<int> mSetEx(
-    Map<String, String> data, {
-    bool nx = false,
-    bool xx = false,
-    int? ex,
-    int? px,
-    int? exAt,
-    int? pxAt,
-    bool keepTtl = false,
-  }) async {
+  Future<int> mSetEx(Map<String, String> data,
+      {bool nx = false,
+      bool xx = false,
+      int? ex,
+      int? px,
+      int? exAt,
+      int? pxAt,
+      bool keepTtl = false,
+      bool forceRun = false}) async {
+    await checkValkeySupport('MSETEX', forceRun: forceRun);
     final cmd = <String>['MSETEX'];
 
     // 1. numkeys
