@@ -175,8 +175,52 @@ extension ServerVersionCheck on Commands {
     }
   }
 
-  Future<bool> isRedisOnlyCommand(String commandName) async {
-    final listRedisOnlyCommands = [
+  /// {@template checkValkeySupport_doc}
+  ///
+  /// Helper to check if the command is supported in Valkey.
+  ///
+  /// The loaded modules
+  /// - Redis: redis (bf, timeseries, search, vectorset, ReJSON)
+  /// - Valkey: valkey-bundle (ldap, bf, search, json)
+  /// - Dragonfly: dragonfly (ReJSON, search)
+  ///
+  /// Time Series
+  /// - Since Time Series commands are typically part of the Redis Stack module,
+  /// they are not supported in standard Valkey unless the module is loaded.
+  ///
+  /// Throws [Exception] if [isValkey] is true and [forceRun] is false.
+  ///
+  /// [commandName]: The name of the command to check
+  /// - Search (e.g., 'FT.AGGREGATE').
+  /// - Time Series (e.g., 'TS.ADD')
+  /// - JSON (e.g., 'JSON.DEBUG')
+  ///
+  /// [subCommandName]: (**Extended only**) The name of the subcommand to check
+  /// - JSON.DEBUG (e.g., 'KEYTABLE-CHECK')
+  ///
+  /// [forceRun]: If true, bypasses the check and allows execution.
+  /// - Force execution for Valkey/Redis compatibility check.
+  ///
+  /// {@endtemplate}
+  Future<void> checkValkeySupport(String commandName, {bool forceRun = false}
+  ) async => checkValkeySupportExtended(commandName, '', forceRun: forceRun);
+
+  /// {@macro checkValkeySupport_doc}
+  Future<void> checkValkeySupportExtended(String commandName, String subCommandName, {bool forceRun = false}
+  ) async {
+    if (await isValkey && await isRedisOnlyCommand(commandName, subCommandName) && !forceRun ||
+    await isRedis && await isRedisOnlyCommand(commandName, subCommandName) && !forceRun) {
+      throw Exception('Command $commandName is not supported in your server. '
+          'Pass `forceRun: true` to execute it for development reason.');
+    }
+    // NOTE: Here are examples:
+    // In Valkey,
+    // Error: KeyscopeServerException(ERR): ERR unknown command 'FT.AGGREGATE',
+    //        with args beginning with: 'index' ''
+  }
+
+  Future<bool> isRedisOnlyCommand(String commandName, String? subCommandName) async {
+    final searchCommands = [
       'FT.AGGREGATE',
       'FT.ALIASADD',
       'FT.ALIASDEL',
@@ -204,6 +248,95 @@ extension ServerVersionCheck on Commands {
       'FT.TAGVALS'
     ];
 
-    return listRedisOnlyCommands.contains(commandName);
+    final timeSeriesCommands = [
+      'TS.ADD',
+      'TS.ALTER',
+      'TS.CREATE',
+      'TS.CREATERULE',
+      'TS.DECRBY',
+      'TS.DEL',
+      'TS.DELETERULE',
+      'TS.GET',
+      'TS.INCRBY',
+      'TS.INFO',
+      'TS.MADD',
+      'TS.MGET',
+      'TS.MRANGE',
+      'TS.MREVRANGE',
+      'TS.QUERYINDEX',
+      'TS.RANGE',
+      'TS.REVRANGE'
+    ];
+
+    final hashCommands = [
+      'HGETDEL',
+    ];
+    // const jsonDebugCommand = 'JSON.DEBUG';
+
+    final jsonCommands = [
+      'JSON.MERGE',
+      // jsonDebugCommand
+    ];
+
+    final stringCommands = [
+      'DELEX',
+      'DIGEST',
+      'MSETEX'
+    ];
+
+    return switch (commandName) {
+      _ when searchCommands.contains(commandName) => true,
+      _ when timeSeriesCommands.contains(commandName) => true,
+      _ when hashCommands.contains(commandName) => true,
+      _ when jsonCommands.contains(commandName) => true,
+      _ when stringCommands.contains(commandName) => true,
+      // _ when jsonCommands.contains(commandName) =>
+      //   switch (subCommandName) {
+      //     _ when jsonSubCommands.contains(subCommandName) => true,
+      //     _ => false,
+      //   },
+      _ => false,
+    };
+  }
+
+  /// [commandName]: if provided, check it.
+  /// [subCommandName]: if provided, check it with [commandName].
+  Future<bool> isValkeyOnlyCommand(String commandName, String? subCommandName) async {
+
+    const jsonDebugCommand = 'JSON.DEBUG';
+
+    // final jsonCommands = [
+    //   jsonDebugCommand,
+    // ];
+
+    final jsonSubCommands = [
+      'DEPTH',
+      'FIELDS',
+      'KEYTABLE-CHECK',
+      'KEYTABLE-CORRUPT',
+      'KEYTABLE-DISTRIBUTION',
+      'MAX-DEPTH-KEY',
+      'MAX-SIZE-KEY',
+      'TEST-SHARED-API'
+    ];
+
+    final stringCommands = [
+      'DELIFEQ',
+    ];
+
+    return switch (commandName) {
+      jsonDebugCommand =>
+        switch (subCommandName) {
+          _ when jsonSubCommands.contains(subCommandName) => true,
+          _ => false,
+        },
+      _ when stringCommands.contains(commandName) => true,
+      // _ when jsonCommands.contains(commandName) =>
+      //   switch (subCommandName) {
+      //     _ when jsonSubCommands.contains(subCommandName) => true,
+      //     _ => false,
+      //   },
+      _ => false,
+    };
   }
 }
