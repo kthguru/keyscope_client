@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.3.1
+* **Compatibility Guard**
+    * **Refined Command & Version Validation**
+        * Refactored the internal validation logic to enable granular version control at the individual command and sub-command level.
+        * Established distinct version requirements for `Redis` and `Valkey`, ensuring precise compatibility checks for specific environments.
+        * **Updates:**Implemented precise version specifications for the recently added **Vector Set** commands and refined validation rules for Search, JSON, TimeSeries, Hash, and String modules.
+
 ## 4.3.0
 * **Modular Architecture**
     * **New VECTOR SET Commands**
