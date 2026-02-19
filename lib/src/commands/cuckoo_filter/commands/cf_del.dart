@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/cf_add.dart';
-export 'commands/cf_add_nx.dart';
-export 'commands/cf_count.dart';
-export 'commands/cf_del.dart';
-export 'commands/cf_exists.dart';
-export 'commands/cf_info.dart';
-export 'commands/cf_insert.dart';
-export 'commands/cf_insert_nx.dart';
-export 'commands/cf_load_chunk.dart';
-export 'commands/cf_m_exists.dart';
-export 'commands/cf_reserve.dart';
-export 'commands/cf_scan_dump.dart';
+import '../commands.dart' show CuckooFilterCommands, ServerVersionCheck;
+
+extension CfDelCommand on CuckooFilterCommands {
+  /// CF.DEL key item
+  Future<bool> cfDel(String key, String item, {bool forceRun = false}) async {
+    await checkValkeySupport('CF.DEL', forceRun: forceRun);
+
+    final result = await executeInt(['CF.DEL', key, item]);
+    return result == 1;
+  }
+}

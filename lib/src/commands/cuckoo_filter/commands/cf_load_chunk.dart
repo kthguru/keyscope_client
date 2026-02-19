@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/cf_add.dart';
-export 'commands/cf_add_nx.dart';
-export 'commands/cf_count.dart';
-export 'commands/cf_del.dart';
-export 'commands/cf_exists.dart';
-export 'commands/cf_info.dart';
-export 'commands/cf_insert.dart';
-export 'commands/cf_insert_nx.dart';
-export 'commands/cf_load_chunk.dart';
-export 'commands/cf_m_exists.dart';
-export 'commands/cf_reserve.dart';
-export 'commands/cf_scan_dump.dart';
+import '../commands.dart' show CuckooFilterCommands, ServerVersionCheck;
+
+extension CfLoadChunkCommand on CuckooFilterCommands {
+  /// CF.LOADCHUNK key iterator data
+  /// (Accepts `data` as an Object to prevent binary corruption, identical to
+  /// Bloom Filter approach)
+  Future<dynamic> cfLoadChunk(
+    String key,
+    int iterator,
+    Object data, {
+    bool forceRun = false,
+  }) async {
+    await checkValkeySupport('CF.LOADCHUNK', forceRun: forceRun);
+    return execute(['CF.LOADCHUNK', key, iterator, data]);
+  }
+}

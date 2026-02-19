@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/cf_add.dart';
-export 'commands/cf_add_nx.dart';
-export 'commands/cf_count.dart';
-export 'commands/cf_del.dart';
-export 'commands/cf_exists.dart';
-export 'commands/cf_info.dart';
-export 'commands/cf_insert.dart';
-export 'commands/cf_insert_nx.dart';
-export 'commands/cf_load_chunk.dart';
-export 'commands/cf_m_exists.dart';
-export 'commands/cf_reserve.dart';
-export 'commands/cf_scan_dump.dart';
+import '../commands.dart' show CuckooFilterCommands, ServerVersionCheck;
+
+extension CfScanDumpCommand on CuckooFilterCommands {
+  /// CF.SCANDUMP key iterator
+  Future<List<dynamic>> cfScanDump(String key, int iterator,
+      {bool forceRun = false}) async {
+    await checkValkeySupport('CF.SCANDUMP', forceRun: forceRun);
+    final result = await execute(['CF.SCANDUMP', key, iterator]);
+    if (result is List) return result;
+    return [];
+  }
+}

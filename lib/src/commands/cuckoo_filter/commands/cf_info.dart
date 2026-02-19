@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
-import '../commands.dart' show CuckooFilterCommands;
+import '../commands.dart' show CuckooFilterCommands, ServerVersionCheck;
 
-extension CFTemplateCommand on CuckooFilterCommands {}
+extension CfInfoCommand on CuckooFilterCommands {
+  /// CF.INFO key
+  Future<dynamic> cfInfo(String key, {bool forceRun = false}) async {
+    await checkValkeySupport('CF.INFO', forceRun: forceRun);
+    return execute(['CF.INFO', key]);
+  }
+}
