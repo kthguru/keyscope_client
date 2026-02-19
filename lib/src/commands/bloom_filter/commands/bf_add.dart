@@ -14,15 +14,21 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/bf_add.dart';
-export 'commands/bf_card.dart';
-export 'commands/bf_exists.dart';
-export 'commands/bf_info.dart';
-export 'commands/bf_insert.dart';
-export 'commands/bf_load.dart';
-export 'commands/bf_load_chunk.dart';
-export 'commands/bf_m_add.dart';
-export 'commands/bf_m_exists.dart';
-export 'commands/bf_reserve.dart';
-export 'commands/bf_scandump.dart';
+import '../commands.dart' show BloomFilterCommands;
+
+extension BfAddCommand on BloomFilterCommands {
+  /// BF.ADD key item
+  ///
+  /// Adds an item to the Bloom Filter.
+  ///
+  /// Returns `true` if the item was newly added, `false` if it may have already
+  /// existed.
+  Future<bool> bfAdd(
+    String key,
+    String item, {
+    bool forceRun = false,
+  }) async {
+    final result = await executeInt(['BF.ADD', key, item]);
+    return result == 1;
+  }
+}

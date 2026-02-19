@@ -16,4 +16,17 @@
 
 import '../commands.dart' show BloomFilterCommands;
 
-extension BloomFilterTemplateCommand on BloomFilterCommands {}
+extension BfExistsCommand on BloomFilterCommands {
+  /// BF.EXISTS key item
+  ///
+  /// Determines whether an item may exist in the Bloom Filter or not.
+  /// Returns `true` if the item may exist, `false` if it definitely does not.
+  Future<bool> bfExists(
+    String key,
+    String item, {
+    bool forceRun = false,
+  }) async {
+    final result = await executeInt(['BF.EXISTS', key, item]);
+    return result == 1;
+  }
+}

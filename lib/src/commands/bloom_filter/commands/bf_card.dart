@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/bf_add.dart';
-export 'commands/bf_card.dart';
-export 'commands/bf_exists.dart';
-export 'commands/bf_info.dart';
-export 'commands/bf_insert.dart';
-export 'commands/bf_load.dart';
-export 'commands/bf_load_chunk.dart';
-export 'commands/bf_m_add.dart';
-export 'commands/bf_m_exists.dart';
-export 'commands/bf_reserve.dart';
-export 'commands/bf_scandump.dart';
+import '../commands.dart' show BloomFilterCommands;
+
+extension BfCardCommand on BloomFilterCommands {
+  /// BF.CARD key
+  ///
+  /// Returns the cardinality (approximate number of items inserted) of
+  /// the Bloom Filter.
+  /// Note: This returns '0' if the key does not exist.
+  Future<int> bfCard(
+    String key, {
+    bool forceRun = false,
+  }) async =>
+      executeInt(['BF.CARD', key]);
+}

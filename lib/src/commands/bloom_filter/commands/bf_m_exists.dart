@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 
-export '../extensions/server_version_check.dart' show ServerVersionCheck;
-export 'commands/bf_add.dart';
-export 'commands/bf_card.dart';
-export 'commands/bf_exists.dart';
-export 'commands/bf_info.dart';
-export 'commands/bf_insert.dart';
-export 'commands/bf_load.dart';
-export 'commands/bf_load_chunk.dart';
-export 'commands/bf_m_add.dart';
-export 'commands/bf_m_exists.dart';
-export 'commands/bf_reserve.dart';
-export 'commands/bf_scandump.dart';
+import '../commands.dart' show BloomFilterCommands;
+
+extension BfMExistsCommand on BloomFilterCommands {
+  /// BF.MEXISTS key item [item ...]
+  ///
+  /// Determines if one or more items may exist in the filter.
+  Future<List<bool>> bfMExists(
+    String key,
+    List<String> items, {
+    bool forceRun = false,
+  }) async {
+    final result = await execute(['BF.MEXISTS', key, ...items]);
+
+    if (result is List) {
+      return result.map((e) => e == 1 || e == true).toList();
+    }
+    return [];
+  }
+}

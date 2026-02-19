@@ -269,7 +269,6 @@ extension ServerVersionCheck on Commands {
       // BLOOM FILTER
       for (var cmd in {
         'BF.ADD',
-        'BF.CARD',
         'BF.EXISTS',
         'BF.INFO',
         'BF.INSERT',
@@ -278,9 +277,12 @@ extension ServerVersionCheck on Commands {
         'BF.RESERVE',
       })
         cmd: {
-          'redis': [],
-          'valkey': [],
+          'redis': [1, 0, 0], // Redis Open Source / Bloom
+          'valkey': [1, 0, 0], // https://github.com/valkey-io/valkey-bloom
         },
+      'BF.CARD': {
+        'redis': [2, 4, 4]
+      }, // Redis Open Source / Bloom
 
       for (var cmd in {'BF.LOADCHUNK', 'BF.SCANDUMP'}) cmd: {'redis': []},
       'BF.LOAD': {'valkey': []},
@@ -300,7 +302,9 @@ extension ServerVersionCheck on Commands {
         'CF.RESERVE',
         'CF.SCANDUMP'
       })
-        cmd: {'redis': []},
+        cmd: {
+          'redis': [1, 0, 0]
+        }, // Redis Open Source / Bloom
 
       // VECTOR SET
       for (var cmd in {
