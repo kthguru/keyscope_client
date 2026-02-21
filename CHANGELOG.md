@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.5.2
+* **Modular Architecture**
+    * **New T-DIGEST SKETCH Commands**
+        * Added a full suite of T-DIGEST SKETCH commands: `tDigestAdd`, `tDigestByRank`, `tDigestByRevRank`, `tDigestCdf`, `tDigestCreate`, `tDigestInfo`, `tDigestMax`, `tDigestMerge`, `tDigestMin`, `tDigestQuantile`, `tDigestRank`, `tDigestReset`, `tDigestRevRank`, `tDigestTrimmedMean`
+
 ## 4.5.1
 * **Modular Architecture**
     * **New TOP-K SKETCH Commands**

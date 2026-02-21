@@ -276,6 +276,27 @@ extension ServerVersionCheck on Commands {
     // (Map<Command, Map<System, Version>>)
     //
     final commandRegistry = <String, Map<String, List<int>>>{
+      // T-DIGEST SKETCH
+      for (var cmd in {
+        'TDIGEST.ADD',
+        'TDIGEST.BYRANK',
+        'TDIGEST.BYREVRANK',
+        'TDIGEST.CDF',
+        'TDIGEST.CREATE',
+        'TDIGEST.INFO',
+        'TDIGEST.MAX',
+        'TDIGEST.MERGE',
+        'TDIGEST.MIN',
+        'TDIGEST.QUANTILE',
+        'TDIGEST.RANK',
+        'TDIGEST.RESET',
+        'TDIGEST.REVRANK',
+        'TDIGEST.TRIMMED_MEAN'
+      })
+        cmd: {
+          'redis': [2, 4, 0], // Redis Open Source / Bloom
+        },
+
       // TOP-K SKETCH
       for (var cmd in {
         'TOPK.ADD',
