@@ -1,5 +1,10 @@
 # Changelog
 
+## 4.5.1
+* **Modular Architecture**
+    * **New TOP-K SKETCH Commands**
+        * Added a full suite of TOP-K SKETCH commands: `topkAdd`, `topkCount`, `topkIncrBy`, `topkInfo`, `topkList`, `topkQuery`, `topkReserve`
+
 ## 4.5.0
 * **Modular Architecture**
     * **New COUNT-MIN SKETCH Commands**
